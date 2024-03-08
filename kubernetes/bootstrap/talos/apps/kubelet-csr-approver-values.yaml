@@ -1,0 +1,3 @@
+---
+providerRegex: ^(mercury)$
+bypassDnsResolution: true
