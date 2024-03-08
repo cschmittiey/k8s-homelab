@@ -14,7 +14,7 @@ clusterSvcNets:
 additionalApiServerCertSans: &sans
   - "10.10.10.25"
   - 127.0.0.1 # KubePrism
-  - "api.earth.cleeb.net"
+  - "kube-api.snail.church"
 additionalMachineCertSans: *sans
 cniConfig:
   name: none
