@@ -8,3 +8,8 @@ spec:
   url: https://github.com/prometheus-operator/kube-prometheus.git
   ref:
     branch: main
+    ignore: |
+      # exclude all
+      /*
+      # include manifests directory
+      !/manifests
