@@ -11,7 +11,8 @@
         "./ansible/**/*.yaml": "ansible",
         "./ansible/**/*.sops.yaml": "yaml",
         "./ansible/**/inventory/**/*.yaml": "yaml",
-        "./kubernetes/**/*.sops.toml": "plaintext"
+        "./kubernetes/**/*.sops.toml": "plaintext",
+        "./kubernetes/bootstrap/talos/clusterconfig/talosconfig": "yaml"
     },
     "sops.defaults.ageKeyFile": "age.key",
     "yaml.schemas": {

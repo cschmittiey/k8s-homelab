@@ -37,6 +37,8 @@ nodes:
             gateway: "10.10.10.1"
         vip:
           ip: "10.10.10.25"
+    patches:
+      - "@./patches/node_mercury.yaml"
 
 patches:
   # Configure containerd
@@ -125,6 +127,8 @@ patches:
         extraKernelArgs:
           - net.ifnames=0
 
+  # User specified global patches
+  - "@./patches/global.yaml"
 
 controlPlane:
   patches:
@@ -166,4 +170,6 @@ controlPlane:
             allowedKubernetesNamespaces:
               - system-upgrade
 
+    # User specified controlPlane patches
+    - "@./patches/controlPlane.yaml"
 
