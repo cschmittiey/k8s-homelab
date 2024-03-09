@@ -1,19 +1,20 @@
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app kube-prometheus-crds
+  name: &app kube-prometheus-crds-app
   namespace: flux-system
 spec:
-  targetNamespace: monitoring
+  targetNamespace: flux-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/monitoring/kube-prometheus-crds/app
+  path: ./manifests/setup
   prune: true
   sourceRef:
     kind: GitRepository
-    name: home-kubernetes
+    name: kube-prometheus
   wait: true
   interval: 30m
   retryInterval: 1m
