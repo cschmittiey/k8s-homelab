@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: kube-prometheus
+    - name: kube-prometheus-crds
   path: ./manifests
   prune: true
   sourceRef:
