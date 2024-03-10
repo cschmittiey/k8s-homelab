@@ -5,3 +5,4 @@ resources:
   - ./namespace.yaml
   - ./fren-bot/ks.yaml
   - ./oceanman4/ks.yaml
+  - ./mc-raul/ks.yaml
