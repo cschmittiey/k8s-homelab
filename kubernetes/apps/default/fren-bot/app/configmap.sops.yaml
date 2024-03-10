@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: fren-bot-configmap
+data:
+    WAIT_DELAY: ENC[AES256_GCM,data:y64/f2Bg,iv:UE13qDG3y4EYBCueSevR9pUswT+igiVACNx1qzaT514=,tag:RyymQk0MjyZwcZ7+rQpmLQ==,type:str]
+    ALERT_COOLDOWN: ENC[AES256_GCM,data:fcuheT9a,iv:NDssf12udqnnKcIopUY38T9HqHkRgJ68LxzH9ovElI8=,tag:92WFnglKPa0AcdhoyixVCA==,type:str]
+    SCREAM_ALLOWANCE: ENC[AES256_GCM,data:YYK8twqq,iv:fj0w1SfQsZ0o3jr+faYgOtXL65Qin/sZyVInXGd2P4c=,tag:qNOzD2zlARnuI9Y9o+SyUA==,type:str]
+    VOICE_CHANNEL_ID: ENC[AES256_GCM,data:DuY47C4b91ZNet6Xwwuq7fQz,iv:lye3IVxLxj9cz9ZXeGfuvqNhd585DhlJjrUrHqhpby8=,tag:/JK2UVnjrV+vND+aHSMn8A==,type:str]
+    PRODUCTIVITY_CHANNEL_ID: ENC[AES256_GCM,data:JOmjR5u5bQQLwXfZKugOxDaSFg==,iv:9GE3yxwFpi1folULYwgVco8RndfvqLp/KKpueQwbrrg=,tag:g9fNAk2/Sbu6GHz7hxBtow==,type:str]
+    GUILD_ID: ENC[AES256_GCM,data:vKEzNha73boMHsH3lAfadxwA,iv:rJZm/PPxjpEkCwLk5hpHeRNMEFvrZzkPKdtRD+ggQSk=,tag:qu0YXCICGEJM/wbrairlYg==,type:str]
+    GAS_GAMER_CHAT: ENC[AES256_GCM,data:qBr5+ZVfFmdqGg==,iv:PF53qpRMrTxTJOyvytwnE7Kj0UURyH9Pu01U8Yqc0g0=,tag:w9DRe7MIaFg+cfkvqb895Q==,type:str]
+    FRENCRAFT_HOST: ENC[AES256_GCM,data:H/1dIT4TLPp5tw==,iv:nJ5BtezYoY1am5KiWMOqQC9d0gxr6mX0Y2yqKVB/X1A=,tag:l+ku+0oevWlIV4zDDxJjDg==,type:str]
+    FRENCRAFT_PORT: ENC[AES256_GCM,data:v0XD83g=,iv:AxPdwCe1WxNgA+tuD0dB+E7eioA+q4ddLEnjZX1wC1c=,tag:5xsE/ylcHl6qa+iT3/9XgA==,type:str]
+    MC_POLL_INTERVAL: ENC[AES256_GCM,data:GeH7EA==,iv:we40zH9DGEUN+iO82opqAauiNBfUvHYKXxcFUi2EkLc=,tag:xB/oFBos5ldHUsHk7exPmg==,type:str]
+    SM_MC_CHANNEL: ENC[AES256_GCM,data:ykewyqSvvzaaGJg=,iv:sbP+gDqvuKMAv/cePnn8JGLQM/ujD9a6M6QHZXqkcXY=,tag:2lHfNiwmuMx2WIampw3GNQ==,type:str]
+    FRENCRAFT_CREATE_HOST: ENC[AES256_GCM,data:dDkvFnEwHqc=,iv:XYciVOwfOfm7hcjeIwO0keh8vt8vqEzRGz/ED8k8vQY=,tag:twL3JASaNPyK5I/rRi9SHw==,type:str]
+    FRENCRAFT_CREATE_PORT: ENC[AES256_GCM,data:22S7iWM=,iv:/KKAMU2JccuP1TvRRHrBf3/LOsWQgxPVv/PsnlBr/PY=,tag:FH2zT07ktm6AvTx3z0qPvg==,type:str]
+    MC_CREATE_POLL_INTERVAL: ENC[AES256_GCM,data:MAE5GA==,iv:a2/N58PMtMlrkY8JKb6Exfj944HiGRwekrHfO1Ag4dA=,tag:ToXiJFHfc/XM+FFL/dOF/w==,type:str]
+    PRODUCTIVITY_RESPONDER_ENABLED: ENC[AES256_GCM,data:z62j+A==,iv:OPj6QgZwe9mv7rDbwjdpYIcIr4vYNkaF8XQi7iW8eAk=,tag:8JlMXqOy5Dywg0iJbkQ49A==,type:str]
+    DISCORD_RESPONDER_ENABLED: ENC[AES256_GCM,data:xZJNHg==,iv:pJNE5CHvffgnKlecW6QIowMA5/Ds8mbPPobArej6ZVk=,tag:wie/elzOyQpgMTYkKr8L1Q==,type:str]
+    FRENCRAFT_RESPONDER_ENABLED: ENC[AES256_GCM,data:qjV0zso=,iv:CwVOq8+I8h3My74XscUm0PBtixW/2B3p61sz7mExWIU=,tag:fHF2fmV1xujn42AZ2KV/pw==,type:str]
+    CREATE_RESPONDER_ENABLED: ENC[AES256_GCM,data:hyaAGLY=,iv:Ar8Dzll/2ur44nqPAB27quIMn2HnARfrjws+ykm+STU=,tag:KII8S4bJnq+bscIDvV3T8Q==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1lsg2agmek2496dy54f0clkk4k2d0sykfv5lt55hrsa8jhq3tgf2qe6dl2c
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0Q3UwQlVIR25ObDV2b0oz
+            dm9YejcydEVZUHFOYUJXVFRNdEpKU0tDNEhrCmhvclNwMXlMMllrZXArNUYzNzNv
+            MzNEY1Zrc1h4OHUybkRlM2I0NFl0Q2sKLS0tIHlsdTlhdk9iMzY5ZTNBeCtIVTB3
+            VXZJOC9rUEtMRkhsMmhUVVhsMDV5REUKceIKUmuXovcMGbNeInKKAaGzAqxCbni4
+            /gWMsgg3gWEQyslQwNL3KbpYsR39yPAnumGQbe2XbTnyGVKE+cTFcQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-03-10T03:31:26Z"
+    mac: ENC[AES256_GCM,data:LUqdi6xEX5/6PKc+QBx29ZS2tetsW5asHAQAxgq7vMu2rT0V23zse6EajcA77owYn730qWJM4yq8JQrMIVph3xZrgpiZh5QCKeBgQ+t0eA67GS4FimjbW450mhVnAQngWE1hKdkcvFjL4x78WFqtB4O4v1Ffdt5rJr/QaMmTQAU=,iv:I+d3f3S79TdQt6sfI2u0H9utXSNvOeZFoqkTgbTHkPc=,tag:KL4DWpZS1PUx8KhInpJYiQ==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1

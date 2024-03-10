@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.32.0 (HEAD)
+  labels:
+    io.kompose.service: fren-bot
+  name: fren-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: fren-bot
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.32.0 (HEAD)
+      labels:
+        io.kompose.network/kube-default: "true"
+        io.kompose.service: fren-bot
+    spec:
+      containers:
+        - image: ghcr.io/cschmittiey/fren-bot:main
+          name: fren-bot
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"
+          envFrom:
+          - configMapRef:
+              name: fren-bot-configmap
+          - secretRef:
+              name: fren-bot-secret
