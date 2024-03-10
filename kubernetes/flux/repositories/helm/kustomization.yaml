@@ -13,3 +13,5 @@ resources:
   - ./postfinance.yaml
   - ./stakater.yaml
   - ./xenitab.yaml
+  - ./prometheus-community.yaml
+  - ./longhorn.yaml
