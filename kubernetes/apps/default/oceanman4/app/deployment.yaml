@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.32.0 (HEAD)
+  labels:
+    io.kompose.service: muse
+  name: muse
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: muse
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.32.0 (HEAD)
+      labels:
+        io.kompose.network/oceanman4-default: "true"
+        io.kompose.service: muse
+        app.kubernetes.io/name: muse
+    spec:
+      containers:
+        - image: codetheweb/muse:latest
+          name: muse
+          volumeMounts:
+            - mountPath: /data
+              name: muse-storage
+          env:
+            - name: DISCORD_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: muse-secrets
+                  key: DISCORD_TOKEN
+            - name: YOUTUBE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: muse-secrets
+                  key: YOUTUBE_API_KEY
+            - name: SPOTIFY_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: muse-secrets
+                  key: SPOTIFY_CLIENT_ID
+            - name: SPOTIFY_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: muse-secrets
+                  key: SPOTIFY_CLIENT_SECRET
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+            requests:
+              memory: "1Gi"
+              cpu: "1"
+      volumes:
+        - name: muse-storage
+          persistentVolumeClaim:
+            claimName: muse-storage
