@@ -177,7 +177,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: local-hostpath
+              storageClassName: longhorn
               resources:
                 requests:
                   storage: 20Gi
