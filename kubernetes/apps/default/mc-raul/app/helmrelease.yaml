@@ -87,7 +87,7 @@ spec:
           minecraft:
             enabled: true
             primary: true
-            port: 61020
+            port: 25565
             protocol: TCP
     persistence:
       data:
