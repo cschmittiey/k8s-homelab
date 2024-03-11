@@ -39,6 +39,23 @@ nodes:
           ip: "10.10.10.25"
     patches:
       - "@./patches/node_mercury.yaml"
+  - hostname: "venus"
+    ipAddress: "10.10.10.101"
+    installDiskSelector:
+      serial: "BTNH00850CA9512A"
+    talosImageURL: factory.talos.dev/installer/1e46839f66e7b7e1dd392f76f0aba18dc5eb4fc68c6cafcb76907d5c6a97e7bd
+    controlPlane: false
+    networkInterfaces:
+      - interface: enp11s0
+        dhcp: false
+        addresses:
+          - "10.10.10.101/24"
+        mtu: 1500
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "10.10.10.1"
+    patches:
+      - "@./patches/node_venus.yaml"
 
 patches:
   # Configure containerd
