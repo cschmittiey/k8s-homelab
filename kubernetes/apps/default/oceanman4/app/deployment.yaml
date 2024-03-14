@@ -23,7 +23,7 @@ spec:
       labels:
         io.kompose.network/oceanman4-default: "true"
         io.kompose.service: muse
-        app.kubernetes.io/name: muse
+        app.kubernetes.io/name: oceanman4
     spec:
       containers:
         - image: codetheweb/muse:latest
