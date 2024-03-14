@@ -61,6 +61,16 @@ spec:
           multicluster:
             etcd:
               enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: internal
+        annotations: []
+        pathType: Prefix
+        hosts:
+          - &host grafana.${SECRET_DOMAIN}
+        tls:
+          - hosts:
+              - *host
     kubeApiServer:
       enabled: true
       serviceMonitor:
