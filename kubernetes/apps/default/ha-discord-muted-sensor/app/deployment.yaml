@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &app ha-discord-muted-sensor
+spec:
+  selector:
+    matchLabels:
+      app: *app
+  template:
+    metadata:
+      labels:
+        app: *app
+    spec:
+      containers:
+      - name: *app
+        image: ghcr.io/cschmittiey/ha-discord-mute-sensor:main@sha256:aae6bd90d5e9071c4bc8cf42fa4953ed3a1c44dbb130298d2e6bd9f93cb5c4c2
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        envFrom:
+        - secretRef:
+          name: ha-discord-muted-sensor-secret
+        # ports:
+        # - containerPort: <Port>
