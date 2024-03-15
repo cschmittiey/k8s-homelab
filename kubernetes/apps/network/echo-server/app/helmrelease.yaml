@@ -98,15 +98,15 @@ spec:
         tls:
           - hosts:
               - *host
-      # internal:
-      #   className: internal
-      #   hosts:
-      #     - host: &host "{{ .Release.Name }}-internal.${SECRET_DOMAIN}"
-      #       paths:
-      #         - path: /
-      #           service:
-      #             identifier: echo-server
-      #             port: http
-      #   tls:
-      #     - hosts:
-      #         - *host
+      internal:
+        className: internal
+        hosts:
+          - host: &host "{{ .Release.Name }}-internal.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: echo-server
+                  port: http
+        tls:
+          - hosts:
+              - *host
