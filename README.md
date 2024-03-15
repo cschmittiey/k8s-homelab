@@ -26,6 +26,8 @@ My Kubernetes cluster is deployed with [Talos](https://www.talos.dev). This is a
 
 ### Core Components
 
+![a screenshot of the output of kubefetch. talos is my k8s distro, 2 nodes for now, longhorn for storage, flux for gitops, and cilium for cni. shoutout to my screen reader users. stay cool out there.](image.png)
+
 - [cert-manager](https://github.com/cert-manager/cert-manager): Creates SSL certificates for services in my cluster.
 - [cilium](https://github.com/cilium/cilium): Internal Kubernetes container networking interface.
 - [cloudflared](https://github.com/cloudflare/cloudflared): Enables Cloudflare secure access to certain ingresses.
@@ -95,6 +97,7 @@ Using cloudflare with cloudflared tunnels for now, and then manually creating pu
 | Device                      | Count | OS Disk Size | Data Disk Size              | Ram  | Operating System | Purpose                |
 |-----------------------------|-------|--------------|-----------------------------|------|------------------|------------------------|
 | Intel NUC7i5BNK             | 1     | 1TB SSD      | TODO                        | 16GB | Talos            | getting started node   |
+| Homebuilt PC (Ryzen 5600G)  | 1     | 512GB SSD    | TODO                        | 32GB | Talos            | the real workhorse     |
 
 
 ---
