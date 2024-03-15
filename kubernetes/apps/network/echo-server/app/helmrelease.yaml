@@ -93,7 +93,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: cloudflared
+                  identifier: echo-server
                   port: http
         tls:
           - hosts:
@@ -105,7 +105,7 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: cloudflared
+                  identifier: echo-server
                   port: http
         tls:
           - hosts:
