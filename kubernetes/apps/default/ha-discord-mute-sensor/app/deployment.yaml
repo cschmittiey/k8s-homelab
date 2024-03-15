@@ -19,7 +19,7 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         envFrom:
-        - secretRef:
-          name: ha-discord-mute-sensor-secret
+          - secretRef:
+              name: ha-discord-mute-sensor-secret
         # ports:
         # - containerPort: <Port>
