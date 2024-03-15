@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.0.3/charts/library/common/values.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -17,11 +18,11 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      main:
+      mc-raul:
         type: "deployment"
         replicas: 1
         containers:
-          main:
+          mc-raul:
             image: &image
               repository: "ghcr.io/itzg/minecraft-server"
               tag: "2024.3.0"
@@ -71,10 +72,10 @@ spec:
                 drop: ["ALL"]
                 add: ["NET_RAW"]
     service:
-      main:
+      mc-raul:
         enabled: true
         primary: true
-        controller: main
+        controller: mc-raul
         type: LoadBalancer
         externalTrafficPolicy: Cluster
         annotations:
