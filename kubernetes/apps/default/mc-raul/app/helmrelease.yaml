@@ -82,8 +82,6 @@ spec:
         labels:
           io.cilium/l2: "true"
         ports:
-          # http:
-          #   enabled: false
           minecraft:
             enabled: true
             primary: true

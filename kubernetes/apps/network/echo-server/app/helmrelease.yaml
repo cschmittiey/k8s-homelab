@@ -69,8 +69,8 @@ spec:
             runAsGroup: 65534
             runAsNonRoot: true
     service:
-      controller: echo-server
       echo-server:
+        controller: echo-server
         ports:
           http:
             port: *port
