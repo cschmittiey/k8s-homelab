@@ -75,7 +75,13 @@ spec:
             port: *port
     serviceMonitor:
       echo-server:
-        enabled: true
+        serviceName: echo-server
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
     ingress:
       external:
         className: external

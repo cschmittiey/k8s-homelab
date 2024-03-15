@@ -73,7 +73,6 @@ spec:
                 add: ["NET_RAW"]
     service:
       mc-raul:
-        enabled: true
         primary: true
         controller: mc-raul
         type: LoadBalancer
@@ -92,13 +91,11 @@ spec:
             protocol: TCP
     persistence:
       data:
-        enabled: true
         existingClaim: "pvc-mc-raul"
         globalMounts:
           - path: "/data"
             readOnly: false
       tmp:
-        enabled: true
         type: emptyDir
         medium: Memory
         globalMounts:
