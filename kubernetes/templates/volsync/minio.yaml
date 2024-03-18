@@ -5,10 +5,10 @@ metadata:
   name: "${APP}-volsync-secret"
 type: Opaque
 stringData:
-  RESTIC_REPOSITORY: '{{ .REPO_TEMPLATE }}/${APP}'
-  RESTIC_PASSWORD: '{{ .RESTIC_PASS }}'
-  AWS_ACCESS_KEY_ID: '{{ .MINIO_ACCESS_KEY }}'
-  AWS_SECRET_ACCESS_KEY: '{{ .MINIO_SECRET_KEY }}'
+  RESTIC_REPOSITORY: '${REPO_TEMPLATE}/${APP}'
+  RESTIC_PASSWORD: '${RESTIC_PASS}'
+  AWS_ACCESS_KEY_ID: '${MINIO_ACCESS_KEY}'
+  AWS_SECRET_ACCESS_KEY: '${MINIO_SECRET_KEY}'
 ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
