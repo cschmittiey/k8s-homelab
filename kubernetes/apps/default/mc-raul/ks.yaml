@@ -17,7 +17,7 @@ spec:
     name: home-kubernetes
   dependsOn:
     - name: longhorn
-    - name: backube
+    - name: volsync
   wait: true
   interval: 30m
   retryInterval: 1m
