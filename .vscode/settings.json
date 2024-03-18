@@ -18,7 +18,10 @@
     "yaml.schemas": {
       "ansible": "./ansible/*.yaml",
       "Kubernetes": "./kubernetes/*.yaml",
-      "https://json.schemastore.org/yamllint.json": "file:///Users/csmith/projects/k8s-homelab/kubernetes/flux/config/cluster.yaml"
+      "https://json.schemastore.org/yamllint.json": [
+        "file:///Users/csmith/projects/k8s-homelab/kubernetes/flux/config/cluster.yaml",
+        "file:///Users/csmith/projects/k8s-homelab/kubernetes/apps/storage/volsync/app/prometheus-rules.yaml"
+      ]
     },
     "vs-kubernetes": {
         "vs-kubernetes.kubeconfig": "./kubeconfig",
