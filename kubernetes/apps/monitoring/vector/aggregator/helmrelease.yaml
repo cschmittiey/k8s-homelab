@@ -67,6 +67,8 @@ spec:
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: 10.10.10.30
+        labels:
+          io.cilium/l2: "true"
         ports:
           http:
             primary: true
