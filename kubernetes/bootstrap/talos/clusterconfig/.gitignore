@@ -1,3 +1,5 @@
 home-kubernetes-mercury.yaml
 talosconfig
 home-kubernetes-venus.yaml
+sol-mercury.yaml
+sol-venus.yaml
