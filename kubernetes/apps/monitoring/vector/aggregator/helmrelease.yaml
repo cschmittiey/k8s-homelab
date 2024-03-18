@@ -62,7 +62,7 @@ spec:
                 matchLabels:
                   app.kubernetes.io/name: *app
     service:
-      app:
+      vector-aggregator:
         controller: vector-aggregator
         type: LoadBalancer
         annotations:
