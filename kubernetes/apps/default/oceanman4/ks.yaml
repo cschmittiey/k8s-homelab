@@ -17,6 +17,7 @@ spec:
     name: home-kubernetes
   dependsOn:
     - name: longhorn
+    - name: volsync
   wait: true
   interval: 30m
   retryInterval: 1m
@@ -27,5 +28,5 @@ spec:
       name: sops-age
   postBuild:
     substitute:
-      APP: oceanman4
+      APP: *app
       VOLSYNC_CAPACITY: 20Gi
