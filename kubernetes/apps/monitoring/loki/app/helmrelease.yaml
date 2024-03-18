@@ -6,7 +6,6 @@ metadata:
   name: loki
   namespace: flux-system
 spec:
-  targetNamespace: monitoring
   interval: 30m
   timeout: 15m
   chart:
