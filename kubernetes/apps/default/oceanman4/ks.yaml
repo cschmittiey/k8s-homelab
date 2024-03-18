@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app oceanman4
+  name: oceanman4
   namespace: flux-system
 spec:
   targetNamespace: default
@@ -27,5 +27,5 @@ spec:
       name: sops-age
   postBuild:
     substitute:
-      APP: *app
+      APP: oceanman4
       VOLSYNC_CAPACITY: 20Gi

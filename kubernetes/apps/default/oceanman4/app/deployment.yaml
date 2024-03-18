@@ -6,7 +6,7 @@ metadata:
     kompose.version: 1.32.0 (HEAD)
   labels:
     io.kompose.service: muse
-  name: &app muse
+  name: muse
   namespace: default
 spec:
   replicas: 1
@@ -60,6 +60,6 @@ spec:
               memory: "1Gi"
               cpu: "1"
       volumes:
-        - name: *app
+        - name: oceanman4
           persistentVolumeClaim:
-            claimName: *app
+            claimName: oceanman4
