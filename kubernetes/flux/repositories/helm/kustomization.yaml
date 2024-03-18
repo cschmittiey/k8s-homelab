@@ -16,3 +16,5 @@ resources:
   - ./xenitab.yaml
   - ./prometheus-community.yaml
   - ./longhorn.yaml
+  - ./piraeus.yaml
+

@@ -5,3 +5,4 @@ resources:
   - ./namespace.yaml
   - ./longhorn/ks.yaml
   - ./volsync/ks.yaml
+  - ./snapshot-controller/ks.yaml
