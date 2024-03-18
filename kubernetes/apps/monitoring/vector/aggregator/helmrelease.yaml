@@ -73,13 +73,13 @@ spec:
           http:
             primary: true
             port: 8686
-          kubernetes_logs:
+          kubernetes-logs:
             port: 6000
           journald:
             port: 6001
-          talos_kernel:
+          talos-kernel:
             port: 6050
-          talos_service:
+          talos-service:
             port: 6051
     persistence:
       config:
