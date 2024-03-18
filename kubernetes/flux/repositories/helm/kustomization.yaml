@@ -17,4 +17,5 @@ resources:
   - ./prometheus-community.yaml
   - ./longhorn.yaml
   - ./piraeus.yaml
+  - ./grafana.yaml
 
