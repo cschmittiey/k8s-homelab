@@ -4,7 +4,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: &app mc-raul
-  namespace: *app
+  namespace: default
 spec:
   interval: 30m
   timeout: 15m
@@ -89,7 +89,7 @@ spec:
             protocol: TCP
     persistence:
       data:
-        existingClaim: "pvc-mc-raul"
+        existingClaim: *app
         globalMounts:
           - path: "/data"
             readOnly: false
