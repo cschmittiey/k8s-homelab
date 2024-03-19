@@ -55,6 +55,14 @@ spec:
                   storage: 1Gi
     grafana:
       enabled: true
+      additionalDataSources:
+      - access: proxy
+        isDefault: false
+        name: loki
+        orgId: 1
+        type: loki
+        url: http://loki-gateway:80
+        version: 1
       forceDeployDashboards: true
       sidecar:
         dashboards:
