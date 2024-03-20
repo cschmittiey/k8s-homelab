@@ -8,3 +8,10 @@ machine:
           - bind
           - rshared
           - rw
+  logging:
+    destinations:
+      - endpoint: "udp://127.0.0.1:12000/"
+        format: "json_lines"
+  install:
+    extraKernelArgs:
+      - talos.logging.kernel=udp://127.0.0.1:12001/
