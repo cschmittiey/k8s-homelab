@@ -44,7 +44,7 @@ nodes:
     installDiskSelector:
       serial: "BTNH00850CA9512A"
     talosImageURL: factory.talos.dev/installer/1e46839f66e7b7e1dd392f76f0aba18dc5eb4fc68c6cafcb76907d5c6a97e7bd
-    controlPlane: false
+    controlPlane: true
     networkInterfaces:
       - interface: enp11s0
         dhcp: false
@@ -56,6 +56,23 @@ nodes:
             gateway: "10.10.10.1"
     patches:
       - "@./patches/node_venus.yaml"
+  - hostname: "earth"
+    ipAddress: "10.10.10.102"
+    installDiskSelector:
+      serial: "S6S1NS0TB04060D"
+    talosImageURL: factory.talos.dev/installer/1e46839f66e7b7e1dd392f76f0aba18dc5eb4fc68c6cafcb76907d5c6a97e7bd
+    controlPlane: true
+    networkInterfaces:
+      - interface: eth0
+        dhcp: false
+        addresses:
+          - "10.10.10.102/24"
+        mtu: 1500
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "10.10.10.1"
+    patches:
+      - "@./patches/node_earth.yaml"
 
 patches:
   # Configure containerd
