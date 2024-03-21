@@ -54,6 +54,8 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: "10.10.10.1"
+        vip:
+          ip: "10.10.10.25"
     patches:
       - "@./patches/node_venus.yaml"
   - hostname: "earth"
@@ -71,6 +73,8 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: "10.10.10.1"
+        vip:
+          ip: "10.10.10.25"
     patches:
       - "@./patches/node_earth.yaml"
 
