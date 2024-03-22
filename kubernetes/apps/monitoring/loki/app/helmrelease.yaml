@@ -144,12 +144,12 @@ spec:
       replicas: 2
       persistence:
         storageClass: longhorn
-      extraVolumeMounts:
-        - name: rules
-          mountPath: /rules
-      extraVolumes:
-        - name: rules
-          emptyDir: {}
+      # extraVolumeMounts:
+      #   - name: rules
+      #     mountPath: /rules
+      # extraVolumes:
+      #   - name: rules
+      #     emptyDir: {}
     write:
       replicas: 2
       persistence:
@@ -159,14 +159,14 @@ spec:
       persistence:
         storageClass: longhorn
       extraVolumeMounts:
-        - name: rules
-          mountPath: /rules/fake
+        # - name: rules
+        #   mountPath: /rules/fake
         - name: scratch
           mountPath: /tmp/scratch
       extraVolumes:
-        - name: rules
-          configMap:
-            name: loki-alerting-rules
+        # - name: rules
+        #   configMap:
+        #     name: loki-alerting-rules
         - name: scratch
           emptyDir: {}
     monitoring:
