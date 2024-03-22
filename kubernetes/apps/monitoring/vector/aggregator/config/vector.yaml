@@ -15,8 +15,6 @@ sources:
     address: 0.0.0.0:6000
     type: vector
     version: '2'
-    decoding:
-      codec: json
   journal_logs:
     type: vector
     address: 0.0.0.0:6001
@@ -111,6 +109,7 @@ transforms:
     source: |-
       .__host, .err = replace(.__host, "10.10.10.100", "mercury")
       .__host = replace(.__host, "10.10.10.101", "venus")
+      .__host = replace(.__host, "10.10.10.101", "earth")
   talos_service_logs_xform:
     type: remap
     inputs:
@@ -118,6 +117,7 @@ transforms:
     source: |-
       .__host, .err = replace(.__host, "10.10.10.100", "mercury")
       .__host = replace(.__host, "10.10.10.101", "venus")
+      .__host = replace(.__host, "10.10.10.102", "earth")
 # Sinks
 sinks:
   loki_journal:
@@ -135,17 +135,18 @@ sinks:
     labels:
       hostname: '{{ host }}'
   loki_kubernetes:
-    inputs: ["kubernetes_logs_remap"]
+    inputs:
+      - kubernetes_logs
     type: loki
     endpoint: http://loki-gateway:80
-    encoding: { codec: json }
-    out_of_order_action: accept
-    remove_label_fields: true
-    remove_timestamp: true
-    labels:
-      app: '{{ custom_app_name }}'
-      namespace: '{{ kubernetes.pod_namespace }}'
-      node: '{{ kubernetes.pod_node_name }}'
+    # encoding: { codec: json }
+    # out_of_order_action: accept
+    # remove_label_fields: true
+    # remove_timestamp: true
+    # labels:
+    #   app: '{{ custom_app_name }}'
+    #   namespace: '{{ kubernetes.pod_namespace }}'
+    #   node: '{{ kubernetes.pod_node_name }}'
   # loki_vyos:
   #   type: loki
   #   inputs:
