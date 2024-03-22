@@ -139,7 +139,7 @@ sinks:
       - kubernetes_logs
     type: loki
     endpoint: http://loki-gateway:80
-    # encoding: { codec: json }
+    encoding: { codec: protobuf }
     # out_of_order_action: accept
     # remove_label_fields: true
     # remove_timestamp: true
