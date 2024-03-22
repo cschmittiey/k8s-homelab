@@ -48,7 +48,9 @@ transforms:
     inputs: ["kubernetes_logs"]
     source: |
       # Standardize 'app' index
-      .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+      .custom_app_name = kubernetes.pod_labels."app.kubernetes.io/name" || kubernetes.pod_labels.app || kubernetes.pod_labels."k8s-app" || "unknown"
+      # container name
+      .container_name = kubernetes.container_name || "unknown"
 
   # [63950.153039] [wan-local-default-D]IN=eth4 OUT= MAC=xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx SRC=xxx.xxx.xxx.xxx DST=xxx.xxx.xxx.xxx LEN=40 TOS=0x00 PREC=0x00 TTL=240 ID=60610 PROTO=TCP SPT=53451 DPT=2002 WINDOW=1024 RES=0x00 SYN URGP=0
   # vyos_firewall_route:
@@ -148,6 +150,7 @@ sinks:
       namespace: "{{ kubernetes.pod_namespace }}"
       node: "{{ kubernetes.pod_node_name }}"
       cluster: "${CONFIG_CLUSTER_NAME}"
+      source: "{{ source_type }}"
   # loki_vyos:
   #   type: loki
   #   inputs:
