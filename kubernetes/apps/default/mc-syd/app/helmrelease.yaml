@@ -41,12 +41,12 @@ spec:
               OPS: "_cSmith_"
               LEVEL: "world"
               MAX_PLAYERS: "20"
-              WHITELIST: "_cSmith_, sydneyjov, Macky2468"
+              WHITELIST: "_cSmith_, sydneyjov, macky2423"
               USE_AIKAR_FLAGS: "true"
             resources:
               requests:
                 cpu: "100m"
-                memory: "2Gi"
+                memory: "3Gi"
               limits:
                 cpu: "2000m"
                 memory: "4Gi"
