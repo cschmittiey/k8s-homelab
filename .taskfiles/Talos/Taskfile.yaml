@@ -21,6 +21,7 @@ tasks:
       - task: bootstrap-apply
       - task: bootstrap-install
       - task: fetch-kubeconfig
+      - task: bootstrap-gateway-api-crds
       - task: bootstrap-apps
       - talosctl health --server=false
 
@@ -70,6 +71,17 @@ tasks:
       - until kubectl --kubeconfig {{.KUBECONFIG_FILE}} wait --for=condition=Ready nodes --all --timeout=600s; do sleep 10; done
     preconditions:
       - { msg: "Missing kubeconfig", sh: "test -f {{.KUBECONFIG_FILE}}" }
+
+  bootstrap-gateway-api-crds:
+    desc: Bootstrap CRDs needed before installing cilium with gateway api enabled
+    cmds:
+      - kubectl --kubeconfig {{.KUBECONFIG_FILE}} apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.0.0/config/crd/standard/gateway.networking.k8s.io_gatewayclasses.yaml
+      - kubectl --kubeconfig {{.KUBECONFIG_FILE}} apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.0.0/config/crd/standard/gateway.networking.k8s.io_gateways.yaml
+      - kubectl --kubeconfig {{.KUBECONFIG_FILE}} apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.0.0/config/crd/standard/gateway.networking.k8s.io_httproutes.yaml
+      - kubectl --kubeconfig {{.KUBECONFIG_FILE}} apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.0.0/config/crd/standard/gateway.networking.k8s.io_referencegrants.yaml
+      - kubectl --kubeconfig {{.KUBECONFIG_FILE}} apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.0.0/config/crd/experimental/gateway.networking.k8s.io_grpcroutes.yaml
+      - kubectl --kubeconfig {{.KUBECONFIG_FILE}} apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.0.0/config/crd/experimental/gateway.networking.k8s.io_tlsroutes.yaml
+
 
   upgrade-talos:
     desc: Upgrade talos on a node
