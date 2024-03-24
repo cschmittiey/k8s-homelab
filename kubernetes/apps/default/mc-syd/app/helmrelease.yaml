@@ -41,7 +41,7 @@ spec:
               OPS: "_cSmith_"
               LEVEL: "world"
               MAX_PLAYERS: "20"
-              WHITELIST: "_cSmith_, usugaggies, Macky2468"
+              WHITELIST: "_cSmith_, sydneyjov, Macky2468"
               USE_AIKAR_FLAGS: "true"
             resources:
               requests:
