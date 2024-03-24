@@ -18,11 +18,11 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      mc-raul:
+      mc-syd:
         type: "deployment"
         replicas: 1
         containers:
-          mc-raul:
+          mc-syd:
             image: &image
               repository: "ghcr.io/itzg/minecraft-server"
               tag: "2024.3.0"
@@ -72,7 +72,7 @@ spec:
                 drop: ["ALL"]
                 add: ["NET_RAW"]
     service:
-      mc-raul:
+      mc-syd:
         primary: true
         controller: mc-syd
         type: LoadBalancer
