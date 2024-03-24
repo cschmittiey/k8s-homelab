@@ -1,0 +1,134 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.0.3/charts/library/common/values.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: &app mc-syd
+  namespace: default
+spec:
+  interval: 30m
+  timeout: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.0.4
+      sourceRef:
+        name: bjw-s
+        kind: HelmRepository
+        namespace: flux-system
+  values:
+    controllers:
+      mc-raul:
+        type: "deployment"
+        replicas: 1
+        containers:
+          mc-raul:
+            image: &image
+              repository: "ghcr.io/itzg/minecraft-server"
+              tag: "2024.3.0"
+            env:
+              TZ: "America/Los_Angeles"
+              MEMORY: "2048M"
+              EULA: "TRUE"
+              TYPE: "FABRIC"
+              MODRINTH_ALLOWED_VERSION_TYPE: "release"
+              MODRINTH_DOWNLOAD_DEPENDENCIES: "optional"
+              MODRINTH_PROJECTS: |-
+                fallingtree
+                fabric-api
+                sodium
+                lithium
+              OPS: "_cSmith_"
+              LEVEL: "world"
+              MAX_PLAYERS: "20"
+              WHITELIST: "_cSmith_, usugaggies, Macky2468"
+              USE_AIKAR_FLAGS: "true"
+            resources:
+              requests:
+                cpu: "100m"
+                memory: "2Gi"
+              limits:
+                cpu: "2000m"
+                memory: "4Gi"
+            probes:
+              liveness: &probe
+                enabled: true
+                custom: true
+                spec:
+                  periodSeconds: 60
+                  exec: &probeexec {command: ["mc-health"]}
+              readiness: *probe
+              startup:
+                <<: *probe
+                spec:
+                  initialDelaySeconds: 30
+                  periodSeconds: 1
+                  failureThreshold: 300
+                  exec: *probeexec
+            securityContext:
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: true
+              capabilities:
+                drop: ["ALL"]
+                add: ["NET_RAW"]
+    service:
+      mc-raul:
+        primary: true
+        controller: mc-syd
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        annotations:
+          io.cilium/lb-ipam-ips: "10.10.10.31"
+        labels:
+          io.cilium/l2: "true"
+        ports:
+          minecraft:
+            enabled: true
+            primary: true
+            port: 25565
+            protocol: TCP
+    persistence:
+      data:
+        existingClaim: *app
+        globalMounts:
+          - path: "/data"
+            readOnly: false
+      tmp:
+        type: emptyDir
+        medium: Memory
+        globalMounts:
+          - path: /tmp
+            readOnly: false
+    defaultPodOptions:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: &uid 1000 # must be 1000 for `minecraft` user, so that autopause (`knockd`) can be launched with sudo nopasswd (https://github.com/itzg/docker-minecraft-server/blob/ec539a5dd27ba6e796c6d89975c01a99ce031f4e/files/sudoers-mc)
+        # runAsUser: &uid ${APP_UID_MINECRAFT}
+        runAsGroup: *uid
+        fsGroup: *uid
+        runAsNonRoot: true
+        seccompProfile: {type: "RuntimeDefault"}
+        fsGroupChangePolicy: "Always"
+      # affinity:
+      #   nodeAffinity:
+      #     preferredDuringSchedulingIgnoredDuringExecution:
+      #       - weight: 15
+      #         preference:
+      #           matchExpressions:
+      #             - key: "kubernetes.io/hostname"
+      #               operator: "In"
+      #               values: ["ange", "charlotte"] # i5-8500T
+      #       - weight: 10
+      #         preference:
+      #           matchExpressions:
+      #             - key: "kubernetes.io/hostname"
+      #               operator: "In"
+      #               values: ["chise"] # i3-8100
+      #   podAntiAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       - topologyKey: "kubernetes.io/hostname"
+      #         namespaces: ["minecraft", "minecraft2"]
+      #         labelSelector:
+      #           matchLabels:
+      #             app.kubernetes.io/name: "minecraft2"
+      #             app.kubernetes.io/instance: "minecraft2"

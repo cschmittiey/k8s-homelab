@@ -6,4 +6,5 @@ resources:
   - ./fren-bot/ks.yaml
   - ./oceanman4/ks.yaml
   - ./mc-raul/ks.yaml
+  - ./mc-syd/ks.yaml
   - ./ha-discord-mute-sensor/ks.yaml
