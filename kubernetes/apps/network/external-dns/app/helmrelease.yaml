@@ -36,14 +36,8 @@ spec:
       - --cloudflare-proxied
       - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
       - --crd-source-kind=DNSEndpoint
-      - --source=gateway-httproute
-      - --source=gateway-tlsroute
-      - --label-filter=external-dns==true
-      # not supported by cilium gateway (yet?)
-      # - --source=gateway-tcproute
-      # - --source=gateway-udproute
     policy: sync
-    sources: ["crd", "ingress"]
+    sources: ["crd", "ingress", "gateway-tlsroute", "gateway-httproute"]
     txtPrefix: k8s.
     txtOwnerId: default
     domainFilters: ["${SECRET_DOMAIN}"]
