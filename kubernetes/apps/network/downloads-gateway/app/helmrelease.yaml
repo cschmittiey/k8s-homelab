@@ -31,7 +31,7 @@ spec:
             tag: v3.37.0@sha256:ba9688ff9abaf73bbc0b257be547b51a097ca74324fedddeeb709732c2692eef
         env:
           - name: VPN_SERVICE_PROVIDER
-            value: mullvad
+            value: airvpn
           - name: VPN_TYPE
             value: wireguard
           - name: VPN_INTERFACE
@@ -43,9 +43,7 @@ spec:
           - name: HEALTH_VPN_DURATION_INITIAL
             value: 30s
           - name: SERVER_COUNTRIES
-            value: Singapore
-          - name: SERVER_HOSTNAMES
-            value: sg-sin-wg-001
+            value: United States
           - name: WIREGUARD_ADDRESSES
             valueFrom:
               secretKeyRef:
@@ -56,6 +54,16 @@ spec:
               secretKeyRef:
                 name: downloads-gateway
                 key: WIREGUARD_PRIVATE_KEY
+          - name: WIREGUARD_DNS
+            valueFrom:
+              secretKeyRef:
+                name: downloads-gateway
+                key: WIREGUARD_DNS
+          - name: WIREGUARD_PRESHARED_KEY
+            valueFrom:
+              secretKeyRef:
+                name: downloads-gateway
+                key: WIREGUARD_PRESHARED_KEY
 
         securityContext:
           capabilities:
@@ -73,22 +81,20 @@ spec:
       - IP: 10
         hostname: qbittorrent
         ports:
-          - port: 56956
+          - port: 28163
             type: udp
-          - port: 56956
+          - port: 28163
             type: tcp
 
     routed_namespaces:
       - downloads
-      - organizarrs
-      - services
 
     settings:
       NOT_ROUTED_TO_GATEWAY_CIDRS: 10.0.0.0/8 192.168.0.0/16
       VPN_BLOCK_OTHER_TRAFFIC: true
       VPN_INTERFACE: wg0
       VPN_LOCAL_CIDRS: 10.0.0.0/8 192.168.0.0/16
-      VPN_TRAFFIC_PORT: "51820"
+      VPN_TRAFFIC_PORT: "1637"
       VXLAN_ID: 43
       VXLAN_IP_NETWORK: 172.16.1
 
