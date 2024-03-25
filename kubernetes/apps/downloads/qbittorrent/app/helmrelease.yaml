@@ -27,6 +27,8 @@ spec:
       namespace: storage
     - name: volsync
       namespace: storage
+    - name: downloads-gateway
+      namespace: network
   values:
     controllers:
       qbittorrent:

@@ -45,7 +45,7 @@ spec:
           - name: SERVER_COUNTRIES
             value: United States
           - name: FIREWALL_VPN_INPUT_PORTS
-            value: 1637, 28163
+            value: 1637,28163
           - name: WIREGUARD_ADDRESSES
             valueFrom:
               secretKeyRef:
