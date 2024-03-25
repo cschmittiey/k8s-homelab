@@ -19,7 +19,7 @@ spec:
     image:
       repository: ghcr.io/angelnu/pod-gateway
       tag: v1.10.0@sha256:d728eac85f750b37c96a0dafd038561ea4b8035857802be1128ea9b19c61e181
-    DNS: 172.16.1.1
+    DNS: 10.10.10.27
     addons:
       vpn:
         enabled: true
@@ -44,6 +44,8 @@ spec:
             value: 30s
           - name: SERVER_COUNTRIES
             value: United States
+          - name: FIREWALL_VPN_INPUT_PORTS
+            value: 1637, 28163
           - name: WIREGUARD_ADDRESSES
             valueFrom:
               secretKeyRef:
