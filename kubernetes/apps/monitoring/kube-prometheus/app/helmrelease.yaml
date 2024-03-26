@@ -90,6 +90,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/grafana-dashboards-kubernetes
+          - name: 'trunk-recorder-prometheus-plugin'
+            orgId: 1
+            folder: "Trunk-Recorder"
+            type: file
+            disableDeletion: true
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/trunk-recorder-prometheus-plugin
       dashboards:
         grafana-dashboards-kubernetes:
           k8s-system-api-server:
@@ -109,6 +117,10 @@ spec:
             token: ''
           k8s-views-pods:
             url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
+            token: ''
+        trunk-recorder-prometheus-plugin:
+          trunk-recorder-prometheus:
+            url: https://raw.githubusercontent.com/USA-RedDragon/trunk-recorder-prometheus/main/grafana/dashboard.json
             token: ''
       ingress:
         enabled: true
