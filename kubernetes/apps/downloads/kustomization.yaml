@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./qbittorrent/ks.yaml
-  - ./test-pod/kustomization.yaml
+  - ./test-pod/ks.yaml
 
