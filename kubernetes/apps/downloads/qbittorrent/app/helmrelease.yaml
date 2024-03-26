@@ -127,6 +127,6 @@ spec:
       media:
         type: nfs
         server: nas.cleeb.net
-        path: /mnt/Hellabooties/Downloads
+        path: /mnt/Hellabooties/Downloads/qbit
         globalMounts:
-          - path: /media
+          - path: /downloads
