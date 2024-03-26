@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fedora-shell
+  labels:
+    name: fedora-shell
+    setGateway: "true"
+  annotations:
+    setGateway: "true"
+  namespace: downloads
+spec:
+  containers:
+  - name: fedora-shell
+    image: fedora:latest
+    resources:
+      limits:
+        memory: "1G"
+        cpu: "1"
+    # Just sleep forever
+    command: [ "sleep" ]
+    args: [ "infinity" ]
