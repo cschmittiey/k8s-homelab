@@ -54,6 +54,8 @@ spec:
           capabilities:
             add:
               - NET_ADMIN
+        networkPolicy:
+          enabled: false # Using my own Cilium-based Network Policies
 
       netshoot:
         enabled: true
