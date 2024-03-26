@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: fedora-shell
   labels:
-    name: fedora-shell
+    name: fedora-shell/
     setGateway: "true"
   annotations:
     setGateway: "true"
