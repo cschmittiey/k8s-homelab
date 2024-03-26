@@ -46,31 +46,10 @@ spec:
             value: United States
           - name: FIREWALL_VPN_INPUT_PORTS
             value: 1637,28163
-          - name: WIREGUARD_ADDRESSES
-            valueFrom:
-              secretKeyRef:
-                name: downloads-gateway
-                key: WIREGUARD_ADDRESSES
-          - name: WIREGUARD_PRIVATE_KEY
-            valueFrom:
-              secretKeyRef:
-                name: downloads-gateway
-                key: WIREGUARD_PRIVATE_KEY
-          - name: WIREGUARD_DNS
-            valueFrom:
-              secretKeyRef:
-                name: downloads-gateway
-                key: WIREGUARD_DNS
-          - name: WIREGUARD_PRESHARED_KEY
-            valueFrom:
-              secretKeyRef:
-                name: downloads-gateway
-                key: WIREGUARD_PRESHARED_KEY
-          - name: WIREGUARD_MTU
-            valueFrom:
-              secretKeyRef:
-                name: downloads-gateway
-                key: WIREGUARD_MTU
+        envFrom:
+        - secretRef:
+            name: downloads-gateway
+
         securityContext:
           capabilities:
             add:
