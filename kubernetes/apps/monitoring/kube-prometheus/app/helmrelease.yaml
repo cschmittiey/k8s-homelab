@@ -222,6 +222,12 @@ spec:
           - auto-gomaxprocs
           - memory-snapshot-on-shutdown
           - new-service-discovery-manager
+        additionalScrapeConfigs:
+          - job_name: external-trunk-recorder
+            metrics_path: /metrics
+            static_configs:
+              - targets:
+                - 192.168.0.181:9842
         externalLabels:
           cluster: ${CLUSTER_NAME}
         replicaExternalLabelName: __replica__
