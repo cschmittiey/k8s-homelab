@@ -98,7 +98,7 @@ spec:
               - --repo=https://github.com/WDaan/VueTorrent
               - --ref=latest-release
               - --period=86400s
-              - --root=/addons
+              - --root=/add-ons
             resources:
               requests:
                 cpu: 10m
