@@ -45,7 +45,6 @@ spec:
           setGateway: "true"
         containers:
           app:
-            hostname: qbittorrent
             image:
               repository: ghcr.io/onedr0p/qbittorrent-beta
               tag: 4.6.4@sha256:0a8379d10dafe1e9f1f12d8a1b5b4352bf3c19529aeb43c0357a5f2e5be08e3e
@@ -113,6 +112,7 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
             supplementalGroups: [10000]
+          hostname: qbittorrent
     service:
       app:
         controller: qbittorrent
