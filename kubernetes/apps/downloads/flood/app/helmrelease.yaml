@@ -47,9 +47,9 @@ spec:
               FLOOD_OPTION_RUNDIR: /data
               FLOOD_OPTION_AUTH: none
               FLOOD_OPTION_QBURL: http://qbittorrent.downloads.svc.cluster.local.:80
-            # envFrom:
-            #   - secretRef:
-            #       name: flood-secret
+            envFrom:
+              - secretRef:
+                  name: flood-secret
             resources:
               requests:
                 memory: 250Mi
