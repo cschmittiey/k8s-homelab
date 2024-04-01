@@ -20,4 +20,5 @@ resources:
   - ./grafana.yaml
   - ./vector-charts.yaml
   - ./angelnu-charts.yaml
+  - ./cloudnative-pg.yaml
 
