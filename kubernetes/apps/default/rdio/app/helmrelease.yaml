@@ -126,3 +126,10 @@ spec:
             scrapeTimeout: 3s
             interval: 10s
 
+    persistence:
+      data:
+        existingClaim: *app
+        globalMounts:
+          - path: "/app/data"
+            readOnly: false
+
