@@ -71,9 +71,15 @@ spec:
               - name: DB_TYPE
                 value: postgresql
               - name: DB_PORT
-                value: "5432"
+                valueFrom:
+                  secretKeyRef:
+                    name: rdio-pg-cluster-app
+                    key: port
               - name: DB_NAME
-                value: rdio
+                valueFrom:
+                  secretKeyRef:
+                    name: rdio-pg-cluster-app
+                    key: dbname
               # - name: DB_SSLMODE
               #   value: "require"
               - name: DB_PASS
