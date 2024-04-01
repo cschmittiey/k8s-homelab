@@ -8,3 +8,4 @@ resources:
   - ./mc-raul/ks.yaml
   - ./mc-syd/ks.yaml
   - ./ha-discord-mute-sensor/ks.yaml
+  - ./rdio/ks.yaml
