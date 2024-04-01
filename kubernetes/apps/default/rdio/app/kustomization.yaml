@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
 - ./helmrelease.yaml
-- ./cluster/kustomization.yaml
+- ./cluster/
