@@ -113,6 +113,8 @@ spec:
     ingress:
       media: # this can now be any name you wish
         className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         hosts:
           - host: &host rdio.${SECRET_DOMAIN}
             paths:
