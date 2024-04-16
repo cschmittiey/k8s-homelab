@@ -119,6 +119,7 @@ sinks:
       app: '{{ custom_app_name }}'
       namespace: '{{ kubernetes.pod_namespace }}'
       node: '{{ kubernetes.pod_node_name }}'
+      container: "{{ container_name }}"
 
   # vyos:
   #   inputs: ["vyos_source", "vyos_firewall_geoip_remap"]
