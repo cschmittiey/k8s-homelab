@@ -30,19 +30,19 @@ spec:
     - name: volsync
       namespace: storage
   valuesFrom:
-    - targetPath: loki.structuredConfig.common.storage.s3.bucketnames
+    - targetPath: loki.storage.bucketNames.chunks
       kind: Secret
       name: loki-bucket
       valuesKey: BUCKET_NAME
-    - targetPath: loki.structuredConfig.common.storage.s3.endpoint
+    - targetPath: loki.storage.s3.endpoint
       kind: Secret
       name: loki-bucket
       valuesKey: BUCKET_HOST
-    - targetPath: loki.structuredConfig.common.storage.s3.access_key_id
+    - targetPath: loki.storage.s3.accessKeyId
       kind: Secret
       name: loki-bucket
       valuesKey: AWS_ACCESS_KEY_ID
-    - targetPath: loki.structuredConfig.common.storage.s3.secret_access_key
+    - targetPath: loki.storage.s3.secretAccessKey
       kind: Secret
       name: loki-bucket
       valuesKey: AWS_SECRET_ACCESS_KEY
@@ -74,12 +74,12 @@ spec:
           max_outstanding_requests_per_tenant: 4096
         frontend:
           max_outstanding_per_tenant: 4096
-        schema_config:
+        schemaConfig:
           configs:
-            - from: "2022-01-11" # quote
-              store: boltdb-shipper
+            - from: "2024-04-01" # quote
+              store: tsdb
               object_store: s3
-              schema: v12
+              schema: v13
               index:
                 prefix: loki_index_
                 period: 24h
