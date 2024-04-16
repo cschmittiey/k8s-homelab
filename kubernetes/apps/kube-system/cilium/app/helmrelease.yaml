@@ -129,5 +129,5 @@ spec:
           - NET_ADMIN
           - SYS_ADMIN
           - SYS_RESOURCE
-    gatewayAPI:
-      enabled: true
+    # gatewayAPI:
+    #   enabled: true
