@@ -1,79 +1,103 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: vector-agent
-  namespace: monitoring
 spec:
-  interval: 15m
+  interval: 30m
+  timeout: 15m
   chart:
     spec:
-      chart: vector
-      version: 0.32.1
+      chart: app-template
+      version: 3.1.0
       sourceRef:
         kind: HelmRepository
-        name: vector-charts
+        name: bjw-s
         namespace: flux-system
-      interval: 15m
   install:
-    createNamespace: true
-    remediation: # perform remediation when helm install fails
+    remediation:
       retries: 3
   upgrade:
-    remediation: # perform remediation when helm upgrade fails
-      retries: 3
-      remediateLastFailure: true # remediate the last failure, when no retries remain
     cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  dependsOn:
+    - name: vector-aggregator
+      namespace: monitoring
   values:
-    role: "Agent"
-    podMonitor:
-      enabled: true
-    service:
-      enabled: false
-    tolerations:
-      - key: node-role.kubernetes.io/master
-        effect: NoSchedule
-    customConfig:
-      data_dir: /vector-data-dir
-      api:
-        enabled: false
-      # Sources
-      sources:
-        kubernetes_logs:
-          type: kubernetes_logs
-        talos_kernel_logs:
-          type: socket
-          mode: udp
-          address: 127.0.0.1:12000
-        talos_service_logs:
-          type: socket
-          mode: udp
-          address: 127.0.0.1:12001
-      # Sinks
-      sinks:
-        loki_kubernetes_sink:
-          type: vector
-          inputs:
-            - kubernetes_logs
-          address: "vector-aggregator.monitoring:6000"
-          version: "2"
-        talos_kernel_sink:
-          type: vector
-          inputs:
-            - talos_kernel_logs
-          address: "vector-aggregator.monitoring:6050"
-          version: "2"
-        talos_service_sink:
-          type: vector
-          inputs:
-            - talos_service_logs
-          address: "vector-aggregator.monitoring:6051"
-          version: "2"
-    podAnnotations:
-      configmap.reloader.stakater.com/reload: vector-agent
-    resources:
-      requests:
-        cpu: 22m
-        memory: 249M
-      limits:
-        memory: 918M
+    controllers:
+      vector-agent:
+        type: daemonset
+        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: docker.io/timberio/vector
+              tag: 0.37.1-alpine@sha256:ced16088cdcfcadd2f471c5760ea3b08bec82b9be00a8b90173b9ade7d001607
+            env:
+              PROCFS_ROOT: /host/proc
+              SYSFS_ROOT: /host/sys
+              VECTOR_SELF_NODE_NAME:
+                valueFrom:
+                  fieldRef:
+                    apiVersion: v1
+                    fieldPath: spec.nodeName
+              VECTOR_SELF_POD_NAME:
+                valueFrom:
+                  fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.name
+              VECTOR_SELF_POD_NAMESPACE:
+                valueFrom:
+                  fieldRef:
+                    apiVersion: v1
+                    fieldPath: metadata.namespace
+            args: ["--config", "/etc/vector/vector.yaml"]
+            securityContext:
+              privileged: true
+    serviceAccount:
+      create: true
+      name: vector-agent
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: vector-agent-configmap
+        globalMounts:
+          - path: /etc/vector/vector.yaml
+            subPath: vector.yaml
+            readOnly: true
+      data:
+        type: emptyDir
+        globalMounts:
+          - path: /vector-data-dir
+      procfs:
+        type: hostPath
+        hostPath: /proc
+        hostPathType: Directory
+        globalMounts:
+          - path: /host/proc
+            readOnly: true
+      sysfs:
+        type: hostPath
+        hostPath: /sys
+        hostPathType: Directory
+        globalMounts:
+          - path: /host/sys
+            readOnly: true
+      var-lib:
+        type: hostPath
+        hostPath: /var/lib
+        hostPathType: Directory
+        globalMounts:
+          - readOnly: true
+      var-log:
+        type: hostPath
+        hostPath: /var/log
+        hostPathType: Directory
+        globalMounts:
+          - readOnly: true
