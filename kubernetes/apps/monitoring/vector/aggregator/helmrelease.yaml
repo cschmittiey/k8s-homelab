@@ -78,8 +78,11 @@ spec:
             port: 6000
           kubernetes:
             port: 6010
-          # vyos:
-          #   port: 6020
+          talos-kernel:
+            port: 6020
+          talos-service:
+            port: 6030
+
     persistence:
       config:
         type: configMap
