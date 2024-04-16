@@ -15,6 +15,15 @@ sources:
       namespace_labels: ""
     node_annotation_fields:
       node_labels: ""
+  talos_kernel_logs:
+    type: socket
+    mode: udp
+    address: 127.0.0.1:12000
+  talos_service_logs:
+    type: socket
+    mode: udp
+    address: 127.0.0.1:12001
+
 
 sinks:
   kubernetes:
@@ -23,3 +32,15 @@ sinks:
     version: "2"
     address: vector-aggregator.monitoring.svc.cluster.local:6010
     inputs: ["kubernetes_source"]
+  talos_service_logs:
+    type: vector
+    compression: true
+    version: "2"
+    address: vector-aggregator.monitoring.svc.cluster.local:6020
+    inputs: ["talos_service_logs"]
+  talos_kernel_logs:
+    type: vector
+    compression: true
+    version: "2"
+    address: vector-aggregator.monitoring.svc.cluster.local:6030
+    inputs: ["talos_kernel_logs"]
