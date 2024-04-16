@@ -24,7 +24,7 @@ sources:
     version: "2"
     address: 0.0.0.0:6010
 
-  talos_kernel_logs:
+  talos_kernel_source:
     address: 0.0.0.0:6020
     type: socket
     mode: udp
@@ -33,7 +33,7 @@ sources:
       codec: json
     host_key: __host
 
-  talos_service_logs:
+  talos_service_source:
     address: 0.0.0.0:6030
     type: socket
     mode: udp
@@ -58,7 +58,7 @@ transforms:
   talos_kernel_logs_xform:
     type: remap
     inputs:
-      - talos_kernel_logs
+      - talos_kernel_source
     source: |-
       .__host = replace(.__host, "10.10.10.100", "mercury")
       .__host = replace(.__host, "10.10.10.101", "venus")
@@ -66,7 +66,7 @@ transforms:
   talos_service_logs_xform:
     type: remap
     inputs:
-      - talos_service_logs
+      - talos_service_source
     source: |-
       .__host = replace(.__host, "10.10.10.100", "mercury")
       .__host = replace(.__host, "10.10.10.101", "venus")
