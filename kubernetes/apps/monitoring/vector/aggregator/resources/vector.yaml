@@ -121,7 +121,7 @@ sinks:
     labels:
       hostname: '{{ __host }}'
       service: '{{ facility }}'
-      log_type:: "talos_kernel"
+      log_type: "talos_kernel"
 
   talos_service:
     type: loki
@@ -138,4 +138,4 @@ sinks:
     labels:
       hostname: '{{ __host }}'
       talos_service: '{{ ."talos-service" }}'
-      log_type:: "talos_service"
+      log_type: "talos_service"
