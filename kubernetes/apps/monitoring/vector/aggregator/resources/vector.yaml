@@ -135,5 +135,5 @@ sinks:
     out_of_order_action: rewrite_timestamp
     labels:
       hostname: '{{ __host }}'
-      talos_service: '{{ talos-service }}'
+      talos_service: '{{ ."talos-service" }}'
       namespace: "talos:service"
