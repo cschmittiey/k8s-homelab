@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/external-secrets.io/externalsecret_v1beta1.json
 apiVersion: v1
 kind: Secret
 metadata:
@@ -10,6 +11,7 @@ stringData:
   AWS_ACCESS_KEY_ID: '${MINIO_ACCESS_KEY}'
   AWS_SECRET_ACCESS_KEY: '${MINIO_SECRET_KEY}'
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/volsync.backube/replicationsource_v1alpha1.json
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
@@ -37,6 +39,7 @@ spec:
       daily: 7
       weekly: 5
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/volsync.backube/replicationdestination_v1alpha1.json
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
