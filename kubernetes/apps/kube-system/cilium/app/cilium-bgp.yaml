@@ -12,7 +12,7 @@ spec:
     - localASN: 64513
       exportPodCIDR: false
       neighbors:
-        - peerAddress: "192.168.1.1/32"
+        - peerAddress: "192.168.0.1/32"
           peerASN: 64512
       serviceSelector:
         matchExpressions:
