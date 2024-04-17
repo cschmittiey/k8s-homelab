@@ -106,7 +106,7 @@ spec:
         size: 20Gi
         storageClass: openebs-hostpath
     gateway:
-      replicas: 2
+      replicas: 1
       image:
         registry: ghcr.io
       ingress:
