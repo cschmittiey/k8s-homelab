@@ -52,12 +52,12 @@ spec:
               TZ: America/Los_Angeles
               QBITTORRENT__PORT: &port 80
               QBITTORRENT__BT_PORT: &bittorrentPort 28163
-              QBT_Application__MemoryWorkingSetLimit:
-                valueFrom:
-                  resourceFieldRef:
-                    containerName: app
-                    resource: limits.memory
-                    divisor: 1Mi
+              # QBT_Application__MemoryWorkingSetLimit:
+              #   valueFrom:
+              #     resourceFieldRef:
+              #       containerName: app
+              #       resource: limits.memory
+              #       divisor: 1Mi
               QBT_Preferences__WebUI__AuthSubnetWhitelistEnabled: true
               QBT_Preferences__WebUI__AuthSubnetWhitelist: |-
                 ${CLUSTER_CIDR}, ${NODE_CIDR}, 192.168.0.0/24
