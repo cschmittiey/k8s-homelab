@@ -62,7 +62,7 @@ transforms:
     source: |-
       .__host, err= replace(.__host, "10.10.10.100", "mercury")
       .__host = replace(.__host, "10.10.10.101", "venus")
-      .__host = replace(.__host, "10.10.10.101", "earth")
+      .__host = replace(.__host, "10.10.10.102", "earth")
   talos_service_logs_xform:
     type: remap
     inputs:
@@ -70,7 +70,7 @@ transforms:
     source: |-
       .__host, err = replace(.__host, "10.10.10.100", "mercury")
       .__host = replace(.__host, "10.10.10.101", "venus")
-      .__host = replace(.__host, "10.10.10.101", "earth")
+      .__host = replace(.__host, "10.10.10.102", "earth")
 
 #
 # Sinks
@@ -135,5 +135,5 @@ sinks:
     out_of_order_action: rewrite_timestamp
     labels:
       hostname: '{{ __host }}'
-      service: "talos-service"
+      talos_service: "{{ talos-service }}"
       namespace: "talos:service"
