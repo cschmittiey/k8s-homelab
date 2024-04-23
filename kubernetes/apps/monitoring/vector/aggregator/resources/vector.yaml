@@ -70,6 +70,8 @@ transforms:
     source: |-
       .__host, err = replace(.__host, "10.10.10.100", "mercury")
       .__host = replace(.__host, "10.10.10.101", "venus")
+      .__host = replace(.__host, "10.10.10.102", "earth")
+
 
 #
 # Sinks
