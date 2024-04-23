@@ -43,6 +43,7 @@ spec:
               MAX_PLAYERS: "20"
               WHITELIST: "tinyventi, _cSmith_, katarinuhh, SugarDannii_, slytherwins, Astriiin, Sailanarmo, McThom1st, exoticJai, JessMae05"
               USE_AIKAR_FLAGS: "true"
+              VERSION: "1.20.4"
             resources:
               requests:
                 cpu: "100m"
