@@ -19,7 +19,7 @@ spec:
       max_connections: "400"
       shared_buffers: 256MB
   nodeMaintenanceWindow:
-    inProgress: true
+    inProgress: false
     reusePVC: true
   resources:
     requests:

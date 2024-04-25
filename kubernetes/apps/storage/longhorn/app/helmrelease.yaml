@@ -19,6 +19,6 @@ spec:
     - name: snapshot-controller
   values:
     persistence:
-      defaultClassReplicaCount: 1
+      defaultClassReplicaCount: 2
     defaultSettings:
       backupTarget: nfs://10.10.10.20:/mnt/Hellabooties/k8s-nfs-storage/longhorn-backups/
