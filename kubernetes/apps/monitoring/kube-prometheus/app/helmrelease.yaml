@@ -90,6 +90,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/grafana-dashboards-kubernetes
+          - name: 'cloudnative-pg'
+            orgId: 1
+            folder: 'cloudnative-pg'
+            type: file
+            disableDeletion: true
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/cloudnative-pg
           - name: 'trunk-recorder-prometheus-plugin'
             orgId: 1
             folder: "Trunk-Recorder"
@@ -121,6 +129,10 @@ spec:
         trunk-recorder-prometheus-plugin:
           trunk-recorder-prometheus:
             url: https://raw.githubusercontent.com/USA-RedDragon/trunk-recorder-prometheus/main/grafana/dashboard.json
+            token: ''
+        cloudnative-pg:
+          cluster:
+            url: https://github.com/cloudnative-pg/grafana-dashboards/blob/main/charts/cluster/grafana-dashboard.json
             token: ''
       ingress:
         enabled: true
