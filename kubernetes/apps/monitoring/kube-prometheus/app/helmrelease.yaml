@@ -132,7 +132,7 @@ spec:
             token: ''
         cloudnative-pg:
           cluster:
-            url: https://github.com/cloudnative-pg/grafana-dashboards/blob/main/charts/cluster/grafana-dashboard.json
+            url: https://raw.githubusercontent.com/cloudnative-pg/grafana-dashboards/main/charts/cluster/grafana-dashboard.json
             token: ''
       ingress:
         enabled: true
