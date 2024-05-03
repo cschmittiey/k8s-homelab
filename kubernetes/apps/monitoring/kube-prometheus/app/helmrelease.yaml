@@ -269,5 +269,5 @@ spec:
               storageClassName: longhorn
               resources:
                 requests:
-                  storage: 20Gi
+                  storage: 40Gi
     cleanPrometheusOperatorObjectNames: true
