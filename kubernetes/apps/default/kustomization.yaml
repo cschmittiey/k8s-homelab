@@ -11,3 +11,4 @@ resources:
   - ./rdio/ks.yaml
   - ./ollama/ks.yaml
   - ./openwebui/ks.yaml
+  - ./komga/ks.yaml
