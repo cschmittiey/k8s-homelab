@@ -5,3 +5,4 @@ resources:
 - ./helmrelease.yaml
 - ./cluster/
 - ../../../../templates/volsync
+- ./secret.sops.yaml
