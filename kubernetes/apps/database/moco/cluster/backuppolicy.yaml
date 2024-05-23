@@ -25,6 +25,6 @@ spec:
       # The recommended way is to use generic ephemeral volume with a provisioner
       # that can provide enough capacity.
       # https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes
-      PersistentVolumeClaim:
+      persistentVolumeClaim:
         claimName: moco-daily-backup
 
