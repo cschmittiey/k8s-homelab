@@ -4,11 +4,13 @@ metadata:
   namespace: database
   name: daily
 spec:
+  # Backup schedule.  Any CRON format is allowed.
+  schedule: "@daily"
+
   jobConfig:
     serviceAccountName: default
 
-      # Backup schedule.  Any CRON format is allowed.
-    schedule: "@daily"
+
 
     bucketConfig:
       bucketName: "moco"
