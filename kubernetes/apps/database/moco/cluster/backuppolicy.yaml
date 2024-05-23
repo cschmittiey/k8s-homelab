@@ -10,8 +10,6 @@ spec:
   jobConfig:
     serviceAccountName: default
 
-
-
     bucketConfig:
       bucketName: "moco"
       endpointURL: https://s3.cleeb.net

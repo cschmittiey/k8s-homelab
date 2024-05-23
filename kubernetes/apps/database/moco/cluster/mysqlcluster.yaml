@@ -41,7 +41,7 @@ spec:
         # requests can be omitted; it will be set to the same value as limits.
         resources:
           limits:
-            cpu: "1"
+            cpu: "500m"
             memory: "2Gi"
 
   volumeClaimTemplates:
