@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - ./mysqlcluster.yaml
   - ./secret.sops.yaml
+  - ./backuppolicy.yaml
