@@ -75,7 +75,7 @@ spec:
 
   #   # jobConfig is the same in BackupPolicy
   #   jobConfig:
-  #     serviceAccountName: backup-owner
+  #     serviceAccountName: default
   #     env:
   #     - name: AWS_ACCESS_KEY_ID
   #       value: minioadmin

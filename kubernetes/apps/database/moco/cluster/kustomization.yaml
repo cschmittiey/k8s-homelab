@@ -6,3 +6,5 @@ resources:
   - ./mysqlcluster.yaml
   - ./secret.sops.yaml
   - ./backuppolicy.yaml
+  - ./persistentvolumeclaim.yaml
+
