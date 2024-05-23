@@ -16,7 +16,7 @@ spec:
       usePathStyle: true
     envFrom:
     - secretRef:
-        name: moco-cluster-secret
+        name: rdio-cluster-secret
 
     workVolume:
       # Using emptyDir as a working directory is NOT recommended.
