@@ -9,10 +9,10 @@ spec:
   # Decreasing the number of instances is not allowed.
   replicas: 3
 
+  backupPolicyName: daily
+
   podTemplate:
     spec:
-
-      backupPolicyName: daily
 
       # Make the data directory writable. If moco-init fails with "Permission denied", uncomment the following settings.
       # securityContext:
@@ -50,7 +50,7 @@ spec:
       name: mysql-data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClass: openebs-hostpath
+      storageClassName: openebs-hostpath
       resources:
         requests:
           storage: 50Gi
