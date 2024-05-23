@@ -7,6 +7,9 @@ spec:
   jobConfig:
     serviceAccountName: default
 
+      # Backup schedule.  Any CRON format is allowed.
+    schedule: "@daily"
+
     bucketConfig:
       bucketName: "moco"
       endpointURL: https://s3.cleeb.net
@@ -14,11 +17,12 @@ spec:
     envFrom:
     - secretRef:
         name: moco-cluster-secret
-  workVolume:
-    # Using emptyDir as a working directory is NOT recommended.
-    # The recommended way is to use generic ephemeral volume with a provisioner
-    # that can provide enough capacity.
-    # https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes
-    PersistentVolumeClaim:
-      claimName: moco-daily-backup
+
+    workVolume:
+      # Using emptyDir as a working directory is NOT recommended.
+      # The recommended way is to use generic ephemeral volume with a provisioner
+      # that can provide enough capacity.
+      # https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes
+      PersistentVolumeClaim:
+        claimName: moco-daily-backup
 
