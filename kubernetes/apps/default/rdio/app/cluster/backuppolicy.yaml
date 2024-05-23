@@ -1,0 +1,28 @@
+apiVersion: moco.cybozu.com/v1beta2
+kind: BackupPolicy
+metadata:
+  namespace: default
+  name: daily
+spec:
+  # Backup schedule.  Any CRON format is allowed.
+  schedule: "@daily"
+
+  jobConfig:
+    serviceAccountName: default
+
+    bucketConfig:
+      bucketName: "moco"
+      endpointURL: https://s3.cleeb.net
+      usePathStyle: true
+    envFrom:
+    - secretRef:
+        name: moco-cluster-secret
+
+    workVolume:
+      # Using emptyDir as a working directory is NOT recommended.
+      # The recommended way is to use generic ephemeral volume with a provisioner
+      # that can provide enough capacity.
+      # https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes
+      persistentVolumeClaim:
+        claimName: rdio-cluster-daily-backup
+
