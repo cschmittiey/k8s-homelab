@@ -88,7 +88,7 @@ spec:
               - name: DB_PASS
                 valueFrom:
                   secretKeyRef:
-                    name: mysql-database.rdio-moco-v0
+                    name: moco-rdio-moco-v0
                     key: WRITABLE_PASSWORD
               # - name: DB_USER
               #   valueFrom:
