@@ -22,4 +22,5 @@ resources:
   - ./angelnu-charts.yaml
   - ./cloudnative-pg.yaml
   - ./spegel-org.yaml
+  - ./moco.yaml
 

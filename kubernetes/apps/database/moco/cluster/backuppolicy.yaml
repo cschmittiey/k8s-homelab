@@ -1,0 +1,14 @@
+apiVersion: moco.cybozu.com/v1beta2
+kind: BackupPolicy
+metadata:
+  namespace: database
+  name: daily
+spec:
+  jobConfig:
+    bucketConfig:
+      bucketName: "moco"
+      endpointURL: https://s3.cleeb.net
+      usePathStyle: true
+    envFrom:
+    - secretRef:
+        name: moco-cluster-secret

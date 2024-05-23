@@ -1,0 +1,90 @@
+apiVersion: moco.cybozu.com/v1beta2
+kind: MySQLCluster
+metadata:
+  namespace: database
+  name: moco-cluster-v0
+spec:
+  # replicas is the number of mysqld Pods.  The default is 1.
+  # You can only increase the number of instances in a MySQLCluster from 1 to 3 or 5, or from 3 to 5.
+  # Decreasing the number of instances is not allowed.
+  replicas: 3
+
+  podTemplate:
+    spec:
+
+      backupPolicyName: daily
+
+      # Make the data directory writable. If moco-init fails with "Permission denied", uncomment the following settings.
+      # securityContext:
+      #   fsGroup: 10000
+      #   fsGroupChangePolicy: "OnRootMismatch"  # available since k8s 1.20
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - mysql
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                - moco-cluster-v0
+            topologyKey: "kubernetes.io/hostname"
+
+      containers:
+      # At least a container named "mysqld" must be defined.
+      - name: mysqld
+        image: ghcr.io/cybozu-go/moco/mysql:8.0.35
+        # By limiting CPU and memory, Pods will have Guaranteed QoS class.
+        # requests can be omitted; it will be set to the same value as limits.
+        resources:
+          limits:
+            cpu: "1"
+            memory: "2Gi"
+
+  volumeClaimTemplates:
+  # At least a PVC named "mysql-data" must be defined.
+  - metadata:
+      name: mysql-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClass: openebs-hostpath
+      resources:
+        requests:
+          storage: 50Gi
+
+  primaryServiceTemplate:
+    metadata:
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: moco-cluster.${SECRET_DOMAIN}
+        io.cilium/lb-ipam-ips: 10.10.10.35
+    spec:
+      type: LoadBalancer
+
+  # # restore field is not editable.
+  # # to modify parameters, delete and re-create MySQLCluster.
+  # restore:
+  #   # The source MySQLCluster's name and namespace
+  #   sourceName: moco-cluster-v0
+  #   sourceNamespace: database
+
+  #   # The restore point-in-time in RFC3339 format.
+  #   restorePoint: "2021-05-26T12:34:56Z"
+
+  #   # jobConfig is the same in BackupPolicy
+  #   jobConfig:
+  #     serviceAccountName: backup-owner
+  #     env:
+  #     - name: AWS_ACCESS_KEY_ID
+  #       value: minioadmin
+  #     - name: AWS_SECRET_ACCESS_KEY
+  #       value: minioadmin
+  #     bucketConfig:
+  #       bucketName: moco
+  #       endpointURL: https://s3.cleeb.net
+  #       usePathStyle: true
+  #     workVolume:
+  #       emptyDir: {}
+
