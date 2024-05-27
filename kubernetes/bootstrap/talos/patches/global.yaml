@@ -15,3 +15,4 @@ machine:
   install:
     extraKernelArgs:
       - talos.logging.kernel=udp://10.10.10.30:6020/
+      - mitigations=off
