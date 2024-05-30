@@ -24,7 +24,7 @@ nodes:
     ipAddress: "10.10.10.100"
     installDiskSelector:
       serial: "S6S1NJ0TB29942H"
-    talosImageURL: factory.talos.dev/installer/1e46839f66e7b7e1dd392f76f0aba18dc5eb4fc68c6cafcb76907d5c6a97e7bd
+    talosImageURL: factory.talos.dev/installer/08b345c5cc62aff37f8f58c939c5bb90d7e3b8c93cb4492a7d707b9b4d1a92f5
     controlPlane: true
     networkInterfaces:
       - interface: eth0
@@ -43,7 +43,7 @@ nodes:
     ipAddress: "10.10.10.101"
     installDiskSelector:
       serial: "BTNH00850CA9512A"
-    talosImageURL: factory.talos.dev/installer/1e46839f66e7b7e1dd392f76f0aba18dc5eb4fc68c6cafcb76907d5c6a97e7bd
+    talosImageURL: factory.talos.dev/installer/20d26c9f0e0a58ed15adab2d8290804943d4ae4acbefe96e8a6581b053105192
     controlPlane: true
     networkInterfaces:
       - interface: enp11s0
@@ -62,7 +62,7 @@ nodes:
     ipAddress: "10.10.10.102"
     installDiskSelector:
       serial: "S6S1NS0TB04060D"
-    talosImageURL: factory.talos.dev/installer/1e46839f66e7b7e1dd392f76f0aba18dc5eb4fc68c6cafcb76907d5c6a97e7bd
+    talosImageURL: factory.talos.dev/installer/08b345c5cc62aff37f8f58c939c5bb90d7e3b8c93cb4492a7d707b9b4d1a92f5
     controlPlane: true
     networkInterfaces:
       - interface: eth0
