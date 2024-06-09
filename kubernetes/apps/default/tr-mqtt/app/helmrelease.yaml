@@ -103,10 +103,10 @@ spec:
     #         scrapeTimeout: 3s
     #         interval: 10s
 
-    persistence:
-      data:
-        existingClaim: *app
-        globalMounts:
-          - path: "/mosquitto/config"
-            readOnly: false
+    # persistence:
+    #   data:
+    #     existingClaim: *app
+    #     globalMounts:
+    #       - path: "/mosquitto/config"
+    #         readOnly: false
 
