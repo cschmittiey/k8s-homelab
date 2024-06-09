@@ -1,0 +1,112 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app tr-mqtt
+  namespace: default
+spec:
+  interval: 30m
+  timeout: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.2.1
+      sourceRef:
+        name: bjw-s
+        kind: HelmRepository
+        namespace: flux-system
+  values:
+    defaultPodOptions:
+      enableServiceLinks: true
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: "OnRootMismatch"
+        supplementalGroups:
+          - 65539
+
+    controllers:
+      tr-mqtt: # this can now be any name you wish
+        containers:
+          app: # this can now be any name you wish
+            image:
+              repository: docker.io/library/eclipse-mosquitto
+              tag: latest@sha256:bf5fb92712be8660ef6a204bf7a966c8f81f37d2b91a91432b9faaebf49c49d3
+              pullPolicy: IfNotPresent
+
+            probes:
+              liveness:
+                custom: true
+                type: TCP
+                spec:
+                  port: mqtt
+              readiness:
+                custom: true
+                type: TCP
+                spec:
+                  port: mqtt
+
+            resources:
+              limits:
+                cpu: 500m
+                memory: 250Mi
+              requests:
+                cpu: 10m
+                memory: 10Mi
+
+            env:
+              - name: TZ
+                value: America/Los_Angeles
+
+    service:
+      tr-mqtt: # this can now be any name you wish
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        annotations:
+          io.cilium/lb-ipam-ips: "10.10.10.35"
+        labels:
+          io.cilium/l2: "true"
+        controller: tr-mqtt
+        ports:
+          mqtt:
+            port: 1883
+          # metrics:
+          #   port: 9108
+
+
+
+    # ingress:
+    #   media: # this can now be any name you wish
+    #     className: external
+    #     annotations:
+    #       external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    #     hosts:
+    #       - host: &host tr-mqtt.${SECRET_DOMAIN}
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: tr-mqtt
+    #               port: http
+    #     tls:
+    #       - hosts:
+    #           - *host
+
+    # serviceMonitor:
+    #   tr-mqtt:
+    #     serviceName: tr-mqtt
+    #     endpoints:
+    #       - port: metrics
+    #         scheme: http
+    #         path: /metrics
+    #         scrapeTimeout: 3s
+    #         interval: 10s
+
+    persistence:
+      data:
+        existingClaim: *app
+        globalMounts:
+          - path: "/mosquitto/config"
+            readOnly: false
+

@@ -12,3 +12,4 @@ resources:
   - ./ollama/ks.yaml
   - ./openwebui/ks.yaml
   - ./komga/ks.yaml
+  - ./tr-mqtt/ks.yaml
