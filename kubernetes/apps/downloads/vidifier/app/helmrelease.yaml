@@ -17,18 +17,30 @@ spec:
         kind: HelmRepository
         namespace: flux-system
   values:
-    # defaultPodOptions:
-    #   enableServiceLinks: true
-    #   securityContext:
-    #     runAsUser: 568
-    #     runAsGroup: 568
-    #     fsGroup: 568
-    #     fsGroupChangePolicy: "OnRootMismatch"
-    #     supplementalGroups:
-    #       - 65539
+    defaultPodOptions:
+      enableServiceLinks: true
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: "OnRootMismatch"
+        supplementalGroups:
+          - 65539
+
+    values:
+      defaultPodOptions:
+        labels:
+          setGateway: "true"
+        annotations:
+          setGateway: "true"
 
     controllers:
-      vidifier: # this can now be any name you wish
+      vidifier:
+        annotations:
+          reloader.stakater.com/auto: "true"
+          setGateway: "true"
+        labels:
+          setGateway: "true"
         containers:
           app: # this can now be any name you wish
             image:
