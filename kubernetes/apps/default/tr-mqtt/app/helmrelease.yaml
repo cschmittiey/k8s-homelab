@@ -103,10 +103,13 @@ spec:
     #         scrapeTimeout: 3s
     #         interval: 10s
 
-    # persistence:
-    #   data:
-    #     existingClaim: *app
-    #     globalMounts:
-    #       - path: "/mosquitto/config"
-    #         readOnly: false
-
+    persistence:
+      config-file:
+        type: configMap
+        name: mosquitto-configmap
+        advancedMounts:
+          mosquitto:
+            app:
+              - path: /mosquitto/config/mosquitto.conf
+                subPath: mosquitto.conf
+                readOnly: true
