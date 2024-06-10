@@ -108,7 +108,7 @@ spec:
         type: configMap
         name: mosquitto-configmap
         advancedMounts:
-          mosquitto:
+          tr-mqtt:
             app:
               - path: /mosquitto/config/mosquitto.conf
                 subPath: mosquitto.conf
