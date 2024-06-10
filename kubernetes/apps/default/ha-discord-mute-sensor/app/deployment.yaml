@@ -17,7 +17,7 @@ spec:
         resources:
           limits:
             memory: "128Mi"
-            cpu: "500m"
+            cpu: "50m"
         envFrom:
           - secretRef:
               name: ha-discord-mute-sensor-secret
