@@ -101,7 +101,7 @@ spec:
         analytics:
           reporting_enabled: false
     backend:
-      replicas: 2
+      replicas: 1
       persistence:
         size: 20Gi
         storageClass: openebs-hostpath
@@ -121,9 +121,9 @@ spec:
           - hosts:
               - *host
     read:
-      replicas: 2
+      replicas: 1
     write:
-      replicas: 2
+      replicas: 1
       persistence:
         size: 20Gi
         storageClass: openebs-hostpath
