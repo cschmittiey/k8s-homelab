@@ -101,7 +101,7 @@ spec:
         analytics:
           reporting_enabled: false
     backend:
-      replicas: 1
+      replicas: 3
       persistence:
         size: 20Gi
         storageClass: openebs-hostpath
