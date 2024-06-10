@@ -5,5 +5,5 @@ resources:
   - ./namespace.yaml
   - ./qbittorrent/ks.yaml
 #  - ./test-pod/ks.yaml
-  - ./flood/ks.yaml
+  # - ./flood/ks.yaml
   - ./vidifier/ks.yaml
