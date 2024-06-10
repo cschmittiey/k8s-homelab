@@ -61,7 +61,7 @@ spec:
         name: loki
         orgId: 1
         type: loki
-        url: http://loki-gateway:80
+        url: https://loki.snail.church
         version: 1
       forceDeployDashboards: true
       sidecar:
