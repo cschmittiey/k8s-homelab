@@ -2,12 +2,12 @@ apiVersion: moco.cybozu.com/v1beta2
 kind: MySQLCluster
 metadata:
   namespace: default
-  name: rdio-moco-v0
+  name: rdio-moco-v1
 spec:
   # replicas is the number of mysqld Pods.  The default is 1.
   # You can only increase the number of instances in a MySQLCluster from 1 to 3 or 5, or from 3 to 5.
   # Decreasing the number of instances is not allowed.
-  replicas: 3
+  replicas: 1
 
   backupPolicyName: daily
 
@@ -55,28 +55,27 @@ spec:
         requests:
           storage: 50Gi
 
-  # # restore field is not editable.
-  # # to modify parameters, delete and re-create MySQLCluster.
-  # restore:
-  #   # The source MySQLCluster's name and namespace
-  #   sourceName: moco-cluster-v0
-  #   sourceNamespace: database
+  # restore field is not editable.
+  # to modify parameters, delete and re-create MySQLCluster.
+  restore:
+    # The source MySQLCluster's name and namespace
+    sourceName: rdio-moco-v0
+    sourceNamespace: default
 
-  #   # The restore point-in-time in RFC3339 format.
-  #   restorePoint: "2021-05-26T12:34:56Z"
+    # The restore point-in-time in RFC3339 format.
+    restorePoint: "2024-06-10T04:50:00Z"
 
-  #   # jobConfig is the same in BackupPolicy
-  #   jobConfig:
-  #     serviceAccountName: default
-  #     env:
-  #     - name: AWS_ACCESS_KEY_ID
-  #       value: minioadmin
-  #     - name: AWS_SECRET_ACCESS_KEY
-  #       value: minioadmin
-  #     bucketConfig:
-  #       bucketName: moco
-  #       endpointURL: https://s3.cleeb.net
-  #       usePathStyle: true
-  #     workVolume:
-  #       emptyDir: {}
+    # jobConfig is the same in BackupPolicy
+    jobConfig:
+      serviceAccountName: default
+
+      bucketConfig:
+        bucketName: "moco"
+        endpointURL: https://s3.cleeb.net
+        usePathStyle: true
+      envFrom:
+      - secretRef:
+          name: rdio-cluster-secret
+      workVolume:
+        emptyDir: {}
 
