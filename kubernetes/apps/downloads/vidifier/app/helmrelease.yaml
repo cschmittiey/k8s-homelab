@@ -108,5 +108,9 @@ spec:
         globalMounts:
           - path: /app/data
             readOnly: true
+      local:
+        type: emptyDir
+        globalMounts:
+          - path: /.local
 
 
