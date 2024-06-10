@@ -26,13 +26,10 @@ spec:
         fsGroupChangePolicy: "OnRootMismatch"
         supplementalGroups:
           - 65539
-
-    values:
-      defaultPodOptions:
-        labels:
-          setGateway: "true"
-        annotations:
-          setGateway: "true"
+      labels:
+        setGateway: "true"
+      annotations:
+        setGateway: "true"
 
     controllers:
       vidifier:
