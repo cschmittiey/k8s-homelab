@@ -97,6 +97,7 @@ spec:
         type: secret
         name: vidifier-secret
         globalMounts:
-          - /app/data
+          - path: /app/data
+            readOnly: true
 
 
