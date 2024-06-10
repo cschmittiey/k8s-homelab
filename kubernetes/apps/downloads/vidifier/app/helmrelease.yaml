@@ -41,8 +41,8 @@ spec:
         containers:
           app: # this can now be any name you wish
             image:
-              repository: ghcr.io/classabbyamp/vidifierbot
-              tag: 0.6.3
+              repository: ghcr.io/cschmittiey/vidifierbot
+              tag: latest
               pullPolicy: IfNotPresent
 
             resources:
