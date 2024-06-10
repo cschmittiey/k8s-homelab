@@ -88,7 +88,7 @@ spec:
               - name: DB_PASS
                 valueFrom:
                   secretKeyRef:
-                    name: moco-rdio-moco-v0
+                    name: moco-rdio-moco-v1
                     key: WRITABLE_PASSWORD
               # - name: DB_USER
               #   valueFrom:
