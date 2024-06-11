@@ -33,12 +33,14 @@ spec:
   postgresql:
     shared_preload_libraries:
       - "vectors.so"
+    parameters:
+      search_path: '"$user", public, vectors'
 
 
   bootstrap:
     initdb:
       postInitSQL:
-        - ALTER SYSTEM SET search_path TO "$user", public, vectors;
+        # - ALTER SYSTEM SET search_path TO "$user", public, vectors;
         - CREATE EXTENSION IF NOT EXISTS "vectors";
         - CREATE EXTENSION IF NOT EXISTS "cube";
         - CREATE EXTENSION IF NOT EXISTS "earthdistance";
