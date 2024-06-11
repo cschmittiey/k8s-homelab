@@ -49,14 +49,11 @@ spec:
   #   recovery:
   #     source: &previousCluster immich-cnpg-v0
 
-  # otherwise postgres crashes with hugepages enabled
   resources:
     requests:
-      memory: 100Mi
-      hugepages-2Mi: 100Mi
+      cpu: 500m
     limits:
-      memory: 1Gi
-      hugepages-2Mi: 100Mi
+      memory: 4Gi
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
