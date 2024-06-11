@@ -13,3 +13,5 @@ resources:
   - ./openwebui/ks.yaml
   - ./komga/ks.yaml
   - ./tr-mqtt/ks.yaml
+  - ./immich/ks.yaml
+

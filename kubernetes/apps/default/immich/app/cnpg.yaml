@@ -1,0 +1,71 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: immich-cnpg
+  namespace: default
+spec:
+  instances: 1
+  storage:
+    size: 5Gi
+  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.3
+
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore: &barmanObjectStore
+      data:
+        compression: snappy
+      wal:
+        compression: snappy
+        maxParallel: 8
+      destinationPath: s3://cnpg/
+      endpointURL: https://s3.cleeb.net
+      # Note: serverName version needs to be incremented
+      # when recovering from an existing cnpg cluster
+      serverName: &currentCluster immich-cnpg-v0
+      s3Credentials:
+        accessKeyId:
+          name: immich-cnpg
+          key: minio-user
+        secretAccessKey:
+          name: immich-cnpg
+          key: minio-pass
+
+  postgresql:
+    shared_preload_libraries:
+    - "vectors.so"
+
+
+  bootstrap:
+    initdb:
+      postInitTemplateSQL:
+        - ALTER SYSTEM SET search_path TO "$user", public, vectors;
+        - CREATE EXTENSION IF NOT EXISTS "vectors";
+        - CREATE EXTENSION IF NOT EXISTS "cube";
+        - CREATE EXTENSION IF NOT EXISTS "earthdistance";
+
+  # # Note: previousCluster needs to be set to the name of the previous
+  # # cluster when recovering from an existing cnpg cluster
+  # bootstrap:
+  #   recovery:
+  #     source: &previousCluster immich-cnpg-v0
+
+  # otherwise postgres crashes with hugepages enabled
+  resources:
+    requests:
+      memory: 100Mi
+      hugepages-2Mi: 100Mi
+    limits:
+      memory: 1Gi
+      hugepages-2Mi: 100Mi
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: immich
+  namespace: default
+spec:
+  immediate: true
+  schedule: 0 0 0 * * *
+  backupOwnerReference: self
+  cluster:
+    name: immich-cnpg
