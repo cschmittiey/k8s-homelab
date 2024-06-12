@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 1
   storage:
-    size: 5Gi
+    size: 30Gi
   imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.3
 
   backup:
