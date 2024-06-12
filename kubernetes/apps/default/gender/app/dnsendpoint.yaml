@@ -5,7 +5,7 @@ metadata:
   name: gender
 spec:
   endpoints:
-    - dnsName: "gender.${SECRET_DOMAIN}"
+    - dnsName: "gender.${SECRET_DOMAIN}."
       recordType: TXT
       targets:
         - "im guy :)"
