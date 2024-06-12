@@ -29,6 +29,8 @@ spec:
 
     controllers:
       rdio: # this can now be any name you wish
+        annotations:
+          secret.reloader.stakater.com/reload: "rdio-config"
         containers:
           app: # this can now be any name you wish
             image:
