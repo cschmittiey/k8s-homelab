@@ -108,6 +108,7 @@ spec:
         pullPolicy: IfNotPresent
       ingress:
         main:
+          enabled: true
           className: external
           annotations:
             external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
