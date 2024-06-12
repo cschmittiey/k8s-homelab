@@ -6,6 +6,6 @@ metadata:
 spec:
   endpoints:
     - dnsName: "gender.${SECRET_DOMAIN}."
-      recordType: A
+      recordType: TXT
       targets:
-        - 24.17.154.134
+        - "im guy :)"
