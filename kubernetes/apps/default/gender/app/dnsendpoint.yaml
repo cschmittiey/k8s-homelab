@@ -1,0 +1,11 @@
+---
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: gender
+spec:
+  endpoints:
+    - dnsName: "gender.${SECRET_DOMAIN}"
+      recordType: TXT
+      targets:
+        - "im guy :)"
