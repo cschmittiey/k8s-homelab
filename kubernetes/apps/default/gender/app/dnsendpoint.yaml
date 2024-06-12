@@ -5,7 +5,7 @@ metadata:
   name: gender2
 spec:
   endpoints:
-    - dnsName: "gender.${SECRET_DOMAIN}."
+    - dnsName: "gender2.${SECRET_DOMAIN}."
       recordType: A
       targets:
         - 24.17.154.134
