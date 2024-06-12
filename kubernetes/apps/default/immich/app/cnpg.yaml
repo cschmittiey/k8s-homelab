@@ -39,11 +39,13 @@ spec:
 
   bootstrap:
     initdb:
-      postInitSQL:
-        # - ALTER SYSTEM SET search_path TO "$user", public, vectors;
-        - CREATE EXTENSION IF NOT EXISTS "vectors";
+      postInitApplicationSQL: #List of SQL queries to be executed as a superuser in the application database right after is created - to be used with extreme care (by default empty)
         - CREATE EXTENSION IF NOT EXISTS "cube";
-        - CREATE EXTENSION IF NOT EXISTS "earthdistance";
+        - CREATE EXTENSION IF NOT EXISTS vectors;
+        - CREATE EXTENSION IF NOT EXISTS earthdistance CASCADE;
+        # - ALTER DATABASE app SET search_path TO "$user", public, vectors;
+        - GRANT ALL ON SCHEMA vectors TO app;
+        - GRANT SELECT ON TABLE pg_vector_index_stat to app;
 
   # # Note: previousCluster needs to be set to the name of the previous
   # # cluster when recovering from an existing cnpg cluster
