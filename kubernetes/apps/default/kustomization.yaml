@@ -14,5 +14,4 @@ resources:
   - ./komga/ks.yaml
   - ./tr-mqtt/ks.yaml
   - ./immich/ks.yaml
-  - ./gender/ks.yaml
 
