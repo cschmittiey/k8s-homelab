@@ -26,7 +26,7 @@ spec:
         app.kubernetes.io/name: oceanman4
     spec:
       containers:
-        - image: codetheweb/muse:638f80da82318d06b9f8bf3f4b13e0b8e02099a5
+        - image: codetheweb/muse:2.8.1
           name: oceanman4
           volumeMounts:
             - mountPath: /data
