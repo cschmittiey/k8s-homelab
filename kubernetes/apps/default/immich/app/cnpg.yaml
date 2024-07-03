@@ -36,6 +36,8 @@ spec:
     parameters:
       search_path: '"$user", public, vectors'
 
+  monitoring:
+    enablePodMonitor: true
 
   bootstrap:
     initdb:
