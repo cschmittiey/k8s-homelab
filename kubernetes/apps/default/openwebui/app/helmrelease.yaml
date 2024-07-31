@@ -35,7 +35,12 @@ spec:
               repository: ghcr.io/open-webui/open-webui
               tag: main
             env:
-              OLLAMA_BASE_URLS: "http://ollama.default.svc.cluster.local:11434;http://192.168.0.204:11434"
+              OLLAMA_BASE_URLS: "http://192.168.0.204:11434;http://ollama.default.svc.cluster.local:11434"
+              OPENAI_API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: openai
+                    key: OPENAI_API_KEY
             securityContext:
               allowPrivilegeEscalation: false
               capabilities: { drop: ["ALL"] }
