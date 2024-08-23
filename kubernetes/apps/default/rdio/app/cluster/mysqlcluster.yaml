@@ -73,7 +73,7 @@ spec:
         bucketName: "moco"
         endpointURL: https://s3.cleeb.net
         usePathStyle: true
-        # region: us-east-1
+        region: us-east-1
       envFrom:
       - secretRef:
           name: rdio-cluster-secret
