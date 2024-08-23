@@ -2,7 +2,7 @@ apiVersion: moco.cybozu.com/v1beta2
 kind: MySQLCluster
 metadata:
   namespace: default
-  name: rdio-moco-v2
+  name: rdio-moco-v3
 spec:
   # replicas is the number of mysqld Pods.  The default is 1.
   # You can only increase the number of instances in a MySQLCluster from 1 to 3 or 5, or from 3 to 5.
@@ -30,7 +30,7 @@ spec:
               - key: app.kubernetes.io/instance
                 operator: In
                 values:
-                - rdio-moco-v2
+                - rdio-moco-v3
             topologyKey: "kubernetes.io/hostname"
 
       containers:
@@ -59,11 +59,11 @@ spec:
   # to modify parameters, delete and re-create MySQLCluster.
   restore:
     # The source MySQLCluster's name and namespace
-    sourceName: rdio-moco-v1
+    sourceName: rdio-moco-v2
     sourceNamespace: default
 
     # The restore point-in-time in RFC3339 format.
-    restorePoint: "2024-06-12T18:00:00Z"
+    restorePoint: "2024-08-23T18:00:00Z"
 
     # jobConfig is the same in BackupPolicy
     jobConfig:
