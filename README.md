@@ -94,11 +94,11 @@ Using cloudflare with cloudflared tunnels for now, and then manually creating pu
 
 ## 🔧 Hardware
 
-| Device                      | Count | OS Disk Size | Data Disk Size              | Ram  | Operating System | Purpose                |
-|-----------------------------|-------|--------------|-----------------------------|------|------------------|------------------------|
-| Intel NUC7i5BNK             | 1     | 1TB SSD      | TODO                        | 16GB | Talos            | getting started node   |
-| Homebuilt PC (Ryzen 5600G)  | 1     | 512GB SSD    | TODO                        | 32GB | Talos            | the real workhorse     |
-| Intel NUC8i7BEH             | 1     | 1TB SSD      | TODO                        | 16GB | Talos            | thank u klipper ❤️      |
+| Device                     | Count | OS Disk Size | Data Disk Size | Ram  | Operating System | Purpose              |
+|----------------------------|-------|--------------|----------------|------|------------------|----------------------|
+| Intel NUC7i5BNK            | 1     | 1TB SSD      | TODO           | 32GB | Talos            | getting started node |
+| Intel NUC8i7BEH            | 1     | 1TB SSD      | TODO           | 32GB | Talos            | thank u klipper ❤️    |
+| Homebuilt PC (Ryzen 5600G) | 1     | 2TB SSD      | TODO           | 32GB | Talos            | the real workhorse   |
 
 
 ---
