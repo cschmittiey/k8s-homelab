@@ -55,6 +55,13 @@ spec:
     recovery:
       source: &previousCluster immich-cnpg-v0
 
+    # Note: externalClusters is needed when recovering from an existing cnpg cluster
+  externalClusters:
+    - name: *previousCluster
+      barmanObjectStore:
+        <<: *barmanObjectStore
+        serverName: *previousCluster
+
   resources:
     requests:
       cpu: 500m
