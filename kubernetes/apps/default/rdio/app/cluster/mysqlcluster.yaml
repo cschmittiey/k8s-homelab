@@ -10,7 +10,7 @@ spec:
   replicas: 1
 
   backupPolicyName: daily
-
+  serverIDBase: 1
   podTemplate:
     spec:
 
