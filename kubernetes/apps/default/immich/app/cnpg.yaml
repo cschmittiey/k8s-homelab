@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 1
   storage:
-    size: 110Gi
+    size: 128Gi
   imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.3
 
   backup:
@@ -21,7 +21,7 @@ spec:
       endpointURL: https://s3.cleeb.net
       # Note: serverName version needs to be incremented
       # when recovering from an existing cnpg cluster
-      serverName: &currentCluster immich-cnpg-v0
+      serverName: &currentCluster immich-cnpg-v1
       s3Credentials:
         accessKeyId:
           name: immich-cnpg
@@ -39,21 +39,21 @@ spec:
   monitoring:
     enablePodMonitor: true
 
-  bootstrap:
-    initdb:
-      postInitApplicationSQL: #List of SQL queries to be executed as a superuser in the application database right after is created - to be used with extreme care (by default empty)
-        - CREATE EXTENSION IF NOT EXISTS "cube";
-        - CREATE EXTENSION IF NOT EXISTS vectors;
-        - CREATE EXTENSION IF NOT EXISTS earthdistance CASCADE;
-        # - ALTER DATABASE app SET search_path TO "$user", public, vectors;
-        - GRANT ALL ON SCHEMA vectors TO app;
-        - GRANT SELECT ON TABLE pg_vector_index_stat to app;
-
-  # # Note: previousCluster needs to be set to the name of the previous
-  # # cluster when recovering from an existing cnpg cluster
   # bootstrap:
-  #   recovery:
-  #     source: &previousCluster immich-cnpg-v0
+  #   initdb:
+  #     postInitApplicationSQL: #List of SQL queries to be executed as a superuser in the application database right after is created - to be used with extreme care (by default empty)
+  #       - CREATE EXTENSION IF NOT EXISTS "cube";
+  #       - CREATE EXTENSION IF NOT EXISTS vectors;
+  #       - CREATE EXTENSION IF NOT EXISTS earthdistance CASCADE;
+  #       # - ALTER DATABASE app SET search_path TO "$user", public, vectors;
+  #       - GRANT ALL ON SCHEMA vectors TO app;
+  #       - GRANT SELECT ON TABLE pg_vector_index_stat to app;
+
+  # Note: previousCluster needs to be set to the name of the previous
+  # cluster when recovering from an existing cnpg cluster
+  bootstrap:
+    recovery:
+      source: &previousCluster immich-cnpg-v0
 
   resources:
     requests:
