@@ -3,7 +3,7 @@
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
 talosVersion: v1.7.6
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.31.0
+kubernetesVersion: v1.30.2
 
 clusterName: &cluster sol
 endpoint: https://10.10.10.25:6443
@@ -42,7 +42,7 @@ nodes:
   - hostname: "venus"
     ipAddress: "10.10.10.101"
     installDiskSelector:
-      serial: "BTNH00850CA9512A"
+      serial: "24183R809353"
     talosImageURL: factory.talos.dev/installer/20d26c9f0e0a58ed15adab2d8290804943d4ae4acbefe96e8a6581b053105192
     controlPlane: true
     networkInterfaces:
