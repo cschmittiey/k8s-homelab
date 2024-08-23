@@ -5,6 +5,8 @@ metadata:
   name: &app downloads-gateway
   namespace: flux-system
 spec:
+  dependsOn:
+      - name: cert-manager
   targetNamespace: network
   commonMetadata:
     labels:
