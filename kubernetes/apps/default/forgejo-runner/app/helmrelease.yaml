@@ -1,0 +1,102 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app forgejo-runner
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+      strategy: rollback
+  values:
+    controllers:
+      forgejo-runner:
+        replicas: 2
+        initContainers:
+          runner-register:
+            image:
+              repository: code.forgejo.org/forgejo/runner
+              tag: 3.5.1
+            command:
+              - "forgejo-runner"
+              - "register"
+              - "--no-interactive"
+              - "--token"
+              - $(RUNNER_TOKEN)
+              - "--name"
+              - $(RUNNER_NAME)
+              - "--instance"
+              - $(FORGEJO_INSTANCE_URL)
+              - "--labels"
+              - "docker:docker://node:20-bullseye,x86_64:docker://node:20-bullseye,linux:docker://node:20-bullseye,pc:docker://node:20-bullseye,ubuntu-x86_64:docker://node:20-bullseye"
+            env:
+              - name: RUNNER_NAME
+                valueFrom:
+                  secretKeyRef:
+                    name: forgejo-runner-secret
+                    key: RUNNER_NAME
+              - name: RUNNER_TOKEN
+                valueFrom:
+                  secretKeyRef:
+                    name: forgejo-runner-secret
+                    key: RUNNER_TOKEN
+              - name: FORGEJO_INSTANCE_URL
+                valueFrom:
+                  secretKeyRef:
+                    name: forgejo-runner-secret
+                    key: FORGEJO_INSTANCE_URL
+        containers:
+          daemon:
+            image:
+              repository: docker
+              tag: 27.2.0-dind
+            securityContext:
+              privileged: true
+            env:
+              - name: DOCKER_TLS_CERTDIR
+                value: /certs
+          app:
+            image:
+              repository: code.forgejo.org/forgejo/runner
+              tag: 3.5.1
+            command:
+              - "sh"
+              - "-c"
+              - "while ! nc -z localhost 2376 </dev/null; do echo 'waiting for docker daemon...'; sleep 5; done; forgejo-runner daemon"
+            env:
+              - name: DOCKER_HOST
+                value: tcp://localhost:2376
+              - name: DOCKER_CERT_PATH
+                value: /certs/client
+              - name: DOCKER_TLS_VERIFY
+                value: "1"
+        annotations:
+          reloader.stakater.com/auto: "true"
+    service:
+      app:
+        controller: forgejo-runner
+        ports:
+          http:
+            port: 45315
+    persistence:
+      docker-certs:
+        type: emptyDir
+        globalMounts:
+          - path: /certs
+      runner-data:
+        type: emptyDir
+        globalMounts:
+          - path: /data
