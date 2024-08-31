@@ -24,4 +24,5 @@ resources:
   - ./spegel-org.yaml
   - ./moco.yaml
   - ./immich.yaml
+  - ./wrenix.yaml
 
