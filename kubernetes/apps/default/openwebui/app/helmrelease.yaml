@@ -36,7 +36,8 @@ spec:
               tag: main@sha256:02e2d8d9b51bab2416fe3c52faa65848935b17268ae459d26aaf3536907a623d
             env:
               OLLAMA_BASE_URLS: "http://192.168.0.204:11434;http://ollama.default.svc.cluster.local:11434"
-              OPENAI_API_KEY:
+              OPENAI_API_BASE_URLS: "https://api.openai.com/v1;https://openrouter.ai/api/v1"
+              OPENAI_API_KEYS:
                 valueFrom:
                   secretKeyRef:
                     name: openai
