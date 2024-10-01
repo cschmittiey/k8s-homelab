@@ -162,7 +162,7 @@ nodes:
       mode: metal
       arch: amd64
     installDiskSelector:
-      serial: S7M3NL0X718246M
+      serial: 24152N801438
     nodeLabels:
       rack: garage
       zone: red1
