@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/budimanjojo/talhelper/master/pkg/config/schemas/talconfig.json
 ---
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.8.0
+talosVersion: v1.7.7
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.31.2
+kubernetesVersion: v1.30.2
 
 clusterName: &cluster sol
 endpoint: https://10.10.10.25:6443
@@ -121,7 +121,7 @@ nodes:
               - siderolabs/realtek-firmware
               - siderolabs/util-linux-tools
     ipAddress: 10.10.10.103
-    controlPlane: true
+    controlPlane: false
     machineSpec:
       mode: metal
       arch: amd64
