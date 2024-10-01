@@ -9,3 +9,4 @@ resources:
   - ./ingress-nginx/ks.yaml
   - ./k8s-gateway/ks.yaml
   - ./downloads-gateway/ks.yaml
+  - ./generic-device-plugin/ks.yaml
