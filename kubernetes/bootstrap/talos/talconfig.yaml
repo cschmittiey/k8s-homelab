@@ -3,7 +3,7 @@
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
 talosVersion: v1.8.0
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.30.2
+kubernetesVersion: v1.31.1
 
 clusterName: &cluster sol
 endpoint: https://10.10.10.25:6443
@@ -115,8 +115,8 @@ nodes:
       customization:
         systemExtensions:
           officialExtensions:
-              - siderolabs/i915-ucode
-              - siderolabs/intel-ucode
+              - siderolabs/amd-ucode
+              - siderolabs/amdgpu-firmware
               - siderolabs/iscsi-tools
               - siderolabs/realtek-firmware
               - siderolabs/util-linux-tools
