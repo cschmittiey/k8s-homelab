@@ -3,7 +3,7 @@
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
 talosVersion: v1.8.0
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-kubernetesVersion: v1.31.1
+kubernetesVersion: v1.31.2
 
 clusterName: &cluster sol
 endpoint: https://10.10.10.25:6443
@@ -20,63 +20,126 @@ cniConfig:
   name: none
 
 nodes:
-  - hostname: "mercury"
-    ipAddress: "10.10.10.100"
-    installDiskSelector:
-      serial: "S6S1NJ0TB29942H"
-    talosImageURL: factory.talos.dev/installer/08b345c5cc62aff37f8f58c939c5bb90d7e3b8c93cb4492a7d707b9b4d1a92f5
+  - hostname: mercury
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+              - siderolabs/i915-ucode
+              - siderolabs/intel-ucode
+              - siderolabs/iscsi-tools
+              - siderolabs/realtek-firmware
+              - siderolabs/util-linux-tools
+    ipAddress: 10.10.10.100
     controlPlane: true
+    machineSpec:
+      mode: metal
+      arch: amd64
+    installDiskSelector:
+      busPath: /pci0000:00/0000:00:1d.0/0000:3a:00.0/nvme/nvme0/nvme0n1
+    nodeLabels:
+      rack: garage
+      zone: red1
+    nameservers:
+      - 1.1.1.1
+      - 8.8.8.8
     networkInterfaces:
       - interface: eth0
-        dhcp: false
         addresses:
           - "10.10.10.100/24"
-        mtu: 1500
         routes:
           - network: 0.0.0.0/0
-            gateway: "10.10.10.1"
-        vip:
-          ip: "10.10.10.25"
-    patches:
-      - "@./patches/node_mercury.yaml"
-  - hostname: "venus"
-    ipAddress: "10.10.10.101"
-    installDiskSelector:
-      serial: "24183R809353"
-    talosImageURL: factory.talos.dev/installer/20d26c9f0e0a58ed15adab2d8290804943d4ae4acbefe96e8a6581b053105192
+            gateway: 10.10.10.1
+  - hostname: venus
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+              - siderolabs/amd-ucode
+              - siderolabs/amdgpu-firmware
+              - siderolabs/iscsi-tools
+              - siderolabs/realtek-firmware
+              - siderolabs/util-linux-tools
+    ipAddress: 10.10.10.101
     controlPlane: true
-    networkInterfaces:
-      - interface: enp11s0
-        dhcp: false
-        addresses:
-          - "10.10.10.101/24"
-        mtu: 1500
-        routes:
-          - network: 0.0.0.0/0
-            gateway: "10.10.10.1"
-        vip:
-          ip: "10.10.10.25"
-    patches:
-      - "@./patches/node_venus.yaml"
-  - hostname: "earth"
-    ipAddress: "10.10.10.102"
+    machineSpec:
+      mode: metal
+      arch: amd64
     installDiskSelector:
-      serial: "S6S1NS0TB04060D"
-    talosImageURL: factory.talos.dev/installer/08b345c5cc62aff37f8f58c939c5bb90d7e3b8c93cb4492a7d707b9b4d1a92f5
-    controlPlane: true
+      busPath: /pci0000:00/0000:00:02.2/0000:11:00.0/nvme/nvme0/nvme0n1
+    nodeLabels:
+      rack: garage
+      zone: red1
+    nameservers:
+      - 1.1.1.1
+      - 8.8.8.8
     networkInterfaces:
       - interface: eth0
-        dhcp: false
         addresses:
-          - "10.10.10.102/24"
-        mtu: 1500
+          - "10.10.10.101/24"
         routes:
           - network: 0.0.0.0/0
-            gateway: "10.10.10.1"
-        vip:
-          ip: "10.10.10.25"
-    patches:
-      - "@./patches/node_earth.yaml"
+            gateway: 10.10.10.1
+  - hostname: earth
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+              - siderolabs/i915-ucode
+              - siderolabs/intel-ucode
+              - siderolabs/iscsi-tools
+              - siderolabs/realtek-firmware
+              - siderolabs/util-linux-tools
+    ipAddress: 10.10.10.102
+    controlPlane: true
+    machineSpec:
+      mode: metal
+      arch: amd64
+    installDiskSelector:
+      busPath: /pci0000:00/0000:00:1d.0/0000:3b:00.0/nvme/nvme0/nvme0n1
+    nodeLabels:
+      rack: garage
+      zone: red1
+    nameservers:
+      - 1.1.1.1
+      - 8.8.8.8
+    networkInterfaces:
+      - interface: eth0
+        addresses:
+          - "10.10.10.102/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 10.10.10.1
+  - hostname: mars
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+              - siderolabs/i915-ucode
+              - siderolabs/intel-ucode
+              - siderolabs/iscsi-tools
+              - siderolabs/realtek-firmware
+              - siderolabs/util-linux-tools
+    ipAddress: 10.10.10.103
+    controlPlane: true
+    machineSpec:
+      mode: metal
+      arch: amd64
+    installDiskSelector:
+      serial: S7M3NL0X718246M
+    nodeLabels:
+      rack: garage
+      zone: red1
+    nameservers:
+      - 1.1.1.1
+      - 8.8.8.8
+    networkInterfaces:
+      - interface: eth0
+        addresses:
+          - "10.10.10.103/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 10.10.10.1
 
 patches:
   # Configure containerd
@@ -194,8 +257,9 @@ controlPlane:
 
     # Disable default API server admission plugins.
     - |-
-      - op: remove
-        path: /cluster/apiServer/admissionControl
+      cluster:
+        apiServer:
+          admissionControl: null
 
     # Enable K8s Talos API Access
     - |-
@@ -208,6 +272,5 @@ controlPlane:
             allowedKubernetesNamespaces:
               - system-upgrade
 
-    # User specified controlPlane patches
-    - "@./patches/controlPlane.yaml"
-
+    # # User specified controlPlane patches
+    # - "@./patches/controlPlane.yaml"
