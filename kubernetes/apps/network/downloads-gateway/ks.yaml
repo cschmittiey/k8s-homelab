@@ -7,6 +7,7 @@ metadata:
 spec:
   dependsOn:
       - name: cert-manager
+      - name: generic-device-plugin
   targetNamespace: network
   commonMetadata:
     labels:
