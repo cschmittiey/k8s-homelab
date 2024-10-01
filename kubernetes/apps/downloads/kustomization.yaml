@@ -7,3 +7,4 @@ resources:
 #  - ./test-pod/ks.yaml
   # - ./flood/ks.yaml
   - ./vidifier/ks.yaml
+  - ./generic-device-plugin/ks.yaml
