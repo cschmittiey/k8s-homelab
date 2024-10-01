@@ -61,7 +61,7 @@ This Git repository contains the following directories under [Kubernetes](./kube
 
 ### Networking
 
-tbd! using cilium as my cni provider
+I'm using Cilium as my CNI, pod-gateway for routing traffic through VPNs when needed, and cloudflared to get my services exposed without needing to port forward. (although i do anyways, lol)
 
 ---
 
@@ -69,7 +69,7 @@ tbd! using cilium as my cni provider
 
 While most of my infrastructure and workloads are self-hosted I do rely upon the cloud for certain key parts of my setup. This saves me from having to worry about two things. (1) Dealing with chicken/egg scenarios and (2) services I critically need whether my cluster is online or not.
 
-The alternative solution to these two problems would be to host a Kubernetes cluster in the cloud and deploy applications like [HCVault](https://www.vaultproject.io/), [Vaultwarden](https://github.com/dani-garcia/vaultwarden), [ntfy](https://ntfy.sh/), and [Gatus](https://gatus.io/). However, maintaining another cluster and monitoring another group of workloads is a lot more time and effort than I am willing to put in.
+The alternative solution to these two problems would be to host a Kubernetes cluster in the cloud and deploy applications like [Vault](https://www.vaultproject.io/), [Vaultwarden](https://github.com/dani-garcia/vaultwarden), [ntfy](https://ntfy.sh/), and [Gatus](https://gatus.io/). However, maintaining another cluster and monitoring another group of workloads is a lot more time and effort than I am willing to put in.
 
 | Service                                         | Use                                                               | Cost           |
 |-------------------------------------------------|-------------------------------------------------------------------|----------------|
@@ -82,24 +82,18 @@ The alternative solution to these two problems would be to host a Kubernetes clu
 
 ## 🌐 DNS
 
-### Home DNS
-
-to be determined - likely going to install technetium for split horizon dns so I can resolve internal services locally. the template has a k8s_gateway setup I'd like to leverage.
-
-### Public DNS
-
-Using cloudflare with cloudflared tunnels for now, and then manually creating public dns records until I set up another external-dns deployment.
+I'm using external-dns to manage my dns records in cloudflare. Works great!
 
 ---
 
 ## 🔧 Hardware
 
-| Device                     | Count | OS Disk Size | Data Disk Size | Ram  | Operating System | Purpose              |
-|----------------------------|-------|--------------|----------------|------|------------------|----------------------|
-| Intel NUC7i5BNK            | 1     | 1TB SSD      | TODO           | 32GB | Talos            | getting started node |
-| Intel NUC8i7BEH            | 1     | 1TB SSD      | TODO           | 32GB | Talos            | thank u klipper ❤️    |
-| Homebuilt PC (Ryzen 5600G) | 1     | 2TB SSD      | TODO           | 32GB | Talos            | the real workhorse   |
-
+| Device                     | Count | Disk Size | Ram    | Operating System | Purpose               |
+|----------------------------|-------|-----------|--------|------------------|-----------------------|
+| Intel NUC7i5BNK            | 1     | 1TB SSD   | 32GB   | Talos            | getting started node  |
+| Intel NUC8i7BEH            | 1     | 1TB SSD   | 32GB   | Talos            | thank u klipper ❤️     |
+| Homebuilt PC (Ryzen 5600G) | 1     | 2TB SSD   | 32GB   | Talos            | the real workhorse    |
+| HP T740 Thin Client        | 2     | 1TB SSD   | varies | Talos            | what a steal for $50! |
 
 ---
 
