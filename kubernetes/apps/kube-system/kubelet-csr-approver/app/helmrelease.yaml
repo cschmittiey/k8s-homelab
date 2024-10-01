@@ -23,7 +23,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    providerRegex: ^(mercury|venus|earth|mars|mercury)$
+    providerRegex: ^(mercury|venus|earth|mars|jupiter)$
     bypassDnsResolution: true
     metrics:
       enable: true
