@@ -49,6 +49,8 @@ spec:
         envFrom:
         - secretRef:
             name: downloads-gateway
+        requests:
+          kernel.org/tun: 1
 
         securityContext:
           capabilities:

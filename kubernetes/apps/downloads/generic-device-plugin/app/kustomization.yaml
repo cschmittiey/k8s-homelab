@@ -1,2 +1,2 @@
 resources:
-  - ./generic-device-plugin.yaml
+  - ./helmrelease.yaml
