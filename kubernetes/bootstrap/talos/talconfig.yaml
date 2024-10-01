@@ -208,11 +208,6 @@ patches:
           service:
             disabled: false
 
-  - |-
-    cluster:
-      extraManifests:
-        - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/refs/heads/main/deploy/ha-install.yaml
-
   # Configure kubelet
   - |-
     machine:
