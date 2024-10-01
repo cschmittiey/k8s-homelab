@@ -50,6 +50,8 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: 10.10.10.1
+        vip:
+          ip: "10.10.10.25"
   - hostname: venus
     schematic:
       customization:
@@ -80,6 +82,8 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: 10.10.10.1
+        vip:
+          ip: "10.10.10.25"
   - hostname: earth
     schematic:
       customization:
@@ -110,6 +114,8 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: 10.10.10.1
+        vip:
+          ip: "10.10.10.25"
   - hostname: mars
     schematic:
       customization:
@@ -140,7 +146,36 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: 10.10.10.1
-
+  - hostname: jupiter
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+              - siderolabs/amd-ucode
+              - siderolabs/amdgpu-firmware
+              - siderolabs/iscsi-tools
+              - siderolabs/realtek-firmware
+              - siderolabs/util-linux-tools
+    ipAddress: 10.10.10.104
+    controlPlane: false
+    machineSpec:
+      mode: metal
+      arch: amd64
+    installDiskSelector:
+      serial: S7M3NL0X718246M
+    nodeLabels:
+      rack: garage
+      zone: red1
+    nameservers:
+      - 1.1.1.1
+      - 8.8.8.8
+    networkInterfaces:
+      - interface: eth0
+        addresses:
+          - "10.10.10.104/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 10.10.10.1
 patches:
   # Configure containerd
   - |-
