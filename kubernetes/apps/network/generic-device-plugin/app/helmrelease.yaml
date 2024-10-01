@@ -54,11 +54,11 @@ spec:
                 name: http
             resources:
               requests:
-                cpu: 20m
-                memory: 48Mi
+                cpu: 300m
+                memory: 128Mi
               limits:
-                cpu: 20m
-                memory: 48Mi
+                cpu: 2000m
+                memory: 512Mi
             securityContext:
               privileged: true
               readOnlyRootFilesystem: true
