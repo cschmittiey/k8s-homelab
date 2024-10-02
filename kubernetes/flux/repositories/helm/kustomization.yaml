@@ -25,4 +25,5 @@ resources:
   - ./moco.yaml
   - ./immich.yaml
   - ./wrenix.yaml
-
+  - ./intel.yaml
+  - ./node-feature-discovery.yaml

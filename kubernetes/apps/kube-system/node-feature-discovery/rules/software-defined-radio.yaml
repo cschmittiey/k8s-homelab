@@ -1,0 +1,26 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.ok8.sh/nfd.k8s-sigs.io/nodefeaturerule_v1alpha1.json
+apiVersion: nfd.k8s-sigs.io/v1alpha1
+kind: NodeFeatureRule
+metadata:
+  name: software-defined-radio
+spec:
+  rules:
+    - # Realtek Semiconductor Corp. RTL2838 DVB-T, Realtek Semiconductor Corp. RTL2832U DVB-T
+      name: rtl
+      labels:
+        sdr.feature.node.kubernetes.io/rtl: "true"
+      matchFeatures:
+        - feature: usb.device
+          matchExpressions:
+            class: { op: In, value: ["2838", "2832"] }
+            vendor: { op: In, value: ["0bda"] }
+    - # SDRPlay RSP2/RSP2pro, RSP1, RSP1a, RSPduo, RSPdx
+      name: sdrplay
+      labels:
+        sdr.feature.node.kubernetes.io/sdrplay: "true"
+      matchFeatures:
+        - feature: usb.device
+          matchExpressions:
+            class: { op: In, value: ["3010", "3000", "2500", "3020", "3030"] }
+            vendor: { op: In, value: ["1df7"] }
