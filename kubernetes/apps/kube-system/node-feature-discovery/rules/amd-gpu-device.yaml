@@ -1,0 +1,16 @@
+---
+apiVersion: nfd.k8s-sigs.io/v1alpha1
+kind: NodeFeatureRule
+metadata:
+  name: amd-gpu-device
+spec:
+  rules:
+    - # Whatever the hell is in the V1756b and the 5600G (vega 7 and 8 mobile i think?)
+      name: amd.gpu
+      labels:
+        amd.feature.node.kubernetes.io/gpu: "true"
+      matchFeatures:
+        - feature: pci.device
+          matchExpressions:
+            class: { op: In, value: ["1638", "15d8", "15dd", "1638"] }
+            vendor: { op: In, value: ["1002"] }
