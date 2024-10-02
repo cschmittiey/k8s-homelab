@@ -99,6 +99,11 @@ spec:
       architecture: standalone
       auth:
         enabled: false
+      resources:
+        requests:
+          cpu: 100m
+        limits:
+          cpu: 500m
 
     # Immich components
 
