@@ -44,7 +44,7 @@ spec:
         - key: CriticalAddonsOnly
           operator: Exists
       nodeSelector:
-        amd.feature.node.kubernetes.io/gpu: "true"
+        feature.node.kubernetes.io/pci-0300_1002.present: "true"
         kubernetes.io/arch: amd64
       priorityClassName: system-node-critical
 
