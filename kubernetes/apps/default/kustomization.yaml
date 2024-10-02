@@ -15,3 +15,4 @@ resources:
   - ./tr-mqtt/ks.yaml
   - ./immich/ks.yaml
   - ./forgejo-runner/ks.yaml
+  - ./plex/ks.yaml
