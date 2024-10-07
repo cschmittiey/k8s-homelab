@@ -31,7 +31,7 @@ nodes:
               - siderolabs/realtek-firmware
               - siderolabs/util-linux-tools
     ipAddress: 10.10.10.100
-    controlPlane: true
+    controlPlane: false
     machineSpec:
       mode: metal
       arch: amd64
@@ -50,8 +50,6 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: 10.10.10.1
-        vip:
-          ip: "10.10.10.25"
   - hostname: venus
     schematic:
       customization:
@@ -127,7 +125,7 @@ nodes:
               - siderolabs/realtek-firmware
               - siderolabs/util-linux-tools
     ipAddress: 10.10.10.103
-    controlPlane: false
+    controlPlane: true
     machineSpec:
       mode: metal
       arch: amd64
@@ -146,6 +144,8 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: 10.10.10.1
+        vip:
+          ip: "10.10.10.25"
   - hostname: jupiter
     schematic:
       customization:
