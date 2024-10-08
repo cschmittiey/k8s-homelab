@@ -41,8 +41,8 @@ spec:
         # requests can be omitted; it will be set to the same value as limits.
         resources:
           limits:
-            cpu: "1"
-            memory: "8Gi"
+            cpu: "2"
+            memory: "10Gi"
 
   volumeClaimTemplates:
   # At least a PVC named "mysql-data" must be defined.
