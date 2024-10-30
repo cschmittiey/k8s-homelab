@@ -272,6 +272,7 @@ spec:
             static_configs:
               - targets:
                 - 192.168.0.190:9374
+                - 10.10.10.45:9374
 
           - job_name: 'moco-controller'
             kubernetes_sd_configs:
