@@ -144,7 +144,7 @@ spec:
             token: ''
         smokeping-prober:
           cluster:
-            url: https://raw.githubusercontent.com/SuperQ/smokeping_prober/refs/heads/master/dashboard.json
+            url: https://raw.githubusercontent.com/SuperQ/smokeping_prober/refs/heads/superq/fixup_graph/dashboard.json
             token: ''
       ingress:
         enabled: true
