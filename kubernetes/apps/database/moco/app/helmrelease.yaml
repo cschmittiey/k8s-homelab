@@ -54,3 +54,7 @@ spec:
 
     # topologySpreadConstraints -- topologySpreadConstraints used by moco-controller.
     topologySpreadConstraints: []
+
+    crds:
+      # crds.enabled -- Install and update CRDs as part of the Helm chart.
+      enabled: true
