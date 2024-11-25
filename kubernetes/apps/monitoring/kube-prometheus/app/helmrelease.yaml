@@ -106,14 +106,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/trunk-recorder-prometheus-plugin
-          - name: 'smokeping-prober'
-            orgId: 1
-            folder: "Smokeping Prober"
-            type: file
-            disableDeletion: true
-            editable: true
-            options:
-              path: /var/lib/grafana/dashboards/smokeping-prober
+          # - name: 'smokeping-prober'
+          #   orgId: 1
+          #   folder: "Smokeping Prober"
+          #   type: file
+          #   disableDeletion: true
+          #   editable: true
+          #   options:
+          #     path: /var/lib/grafana/dashboards/smokeping-prober
       dashboards:
         grafana-dashboards-kubernetes:
           k8s-system-api-server:
@@ -142,10 +142,10 @@ spec:
           cluster:
             url: https://raw.githubusercontent.com/cloudnative-pg/grafana-dashboards/main/charts/cluster/grafana-dashboard.json
             token: ''
-        smokeping-prober:
-          cluster:
-            url: https://raw.githubusercontent.com/SuperQ/smokeping_prober/refs/heads/superq/fixup_graph/dashboard.json
-            token: ''
+        # smokeping-prober:
+        #   cluster:
+        #     url: https://raw.githubusercontent.com/SuperQ/smokeping_prober/refs/heads/superq/fixup_graph/dashboard.json
+        #     token: ''
       ingress:
         enabled: true
         ingressClassName: internal
@@ -267,12 +267,12 @@ spec:
               - targets:
                 - 192.168.0.181:9842
 
-          - job_name: external-testbench-smokeping
-            metrics_path: /metrics
-            static_configs:
-              - targets:
-                - 192.168.0.190:9374
-                # - 10.10.10.45:9374
+          # - job_name: external-testbench-smokeping
+          #   metrics_path: /metrics
+          #   static_configs:
+          #     - targets:
+          #       - 192.168.0.190:9374
+          #       # - 10.10.10.45:9374
 
           - job_name: 'moco-controller'
             kubernetes_sd_configs:
