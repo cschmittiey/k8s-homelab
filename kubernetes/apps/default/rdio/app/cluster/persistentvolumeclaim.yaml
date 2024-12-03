@@ -8,4 +8,4 @@ spec:
   storageClassName: openebs-hostpath
   resources:
     requests:
-      storage: 20Gi
+      storage: 32Gi
