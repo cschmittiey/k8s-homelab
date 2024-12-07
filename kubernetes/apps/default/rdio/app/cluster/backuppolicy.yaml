@@ -2,10 +2,10 @@ apiVersion: moco.cybozu.com/v1beta2
 kind: BackupPolicy
 metadata:
   namespace: default
-  name: daily
+  name: daily #lmao
 spec:
   # Backup schedule.  Any CRON format is allowed.
-  schedule: "@daily"
+  schedule: "00 10 * * 4"
 
   jobConfig:
     serviceAccountName: default
