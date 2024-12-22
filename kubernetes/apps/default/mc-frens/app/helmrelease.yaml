@@ -79,14 +79,14 @@ spec:
         type: LoadBalancer
         externalTrafficPolicy: Cluster
         annotations:
-          io.cilium/lb-ipam-ips: "10.10.10.31"
+          io.cilium/lb-ipam-ips: "10.10.10.37"
         labels:
           io.cilium/l2: "true"
         ports:
           minecraft:
             enabled: true
             primary: true
-            port: 25570
+            port: 25565
             protocol: TCP
     persistence:
       data:
