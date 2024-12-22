@@ -18,7 +18,7 @@ spec:
         namespace: flux-system
   values:
     controllers:
-      mc-syd:
+      mc-frens:
         type: "deployment"
         replicas: 1
         containers:
