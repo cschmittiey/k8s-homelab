@@ -50,17 +50,17 @@ spec:
   restic:
     repository: "${APP}-volsync-secret"
     copyMethod: Snapshot # must be Snapshot
-    volumeSnapshotClassName: "${VOLSYNC_VOLUMESNAPSHOTCLASS:-csi-ceph-blockpool}"
-    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-8Gi}"
-    cacheStorageClassName: "${VOLSYNC_CACHESTORAGECLASS:-rook-ceph-block}"
+    volumeSnapshotClassName: "${VOLSYNC_VOLUMESNAPSHOTCLASS:-longhorn-snapshot-vsc}"
+    cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-10Gi}"
+    cacheStorageClassName: "${VOLSYNC_CACHESTORAGECLASS:-longhorn}"
     cacheAccessModes: ["${VOLSYNC_CACHE_ACCESSMODES:-ReadWriteOnce}"]
-    storageClassName: "${VOLSYNC_STORAGECLASS:-rook-ceph-block}"
+    storageClassName: "${VOLSYNC_STORAGECLASS:-longhorn}"
     accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]
     capacity: "${VOLSYNC_CAPACITY}"
     moverSecurityContext:
       runAsUser: 568
       runAsGroup: 568
       fsGroup: 568
-    enableFileDeletion: true
-    cleanupCachePVC: true
-    cleanupTempPVC: true
+    # enableFileDeletion: true
+    # cleanupCachePVC: true
+    # cleanupTempPVC: true
