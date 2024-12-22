@@ -16,4 +16,4 @@ resources:
   - ./immich/ks.yaml
   - ./forgejo-runner/ks.yaml
   - ./plex/ks.yaml
-  # - ./mc-frens/ks.yaml
+  - ./mc-frens/ks.yaml
