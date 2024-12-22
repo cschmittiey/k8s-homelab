@@ -118,13 +118,13 @@ spec:
                 matchExpressions:
                   - key: "kubernetes.io/hostname"
                     operator: "In"
-                    values: ["jupiter", "venus"]
+                    values: ["venus"]
             - weight: 10
               preference:
                 matchExpressions:
                   - key: "kubernetes.io/hostname"
                     operator: "In"
-                    values: ["mars", "earth"]
+                    values: ["jupiter", "mars"] # mercury and earth are weak nucs, jupiter and mars are less weak but still not optimalioooooooooooooooooooooo
       #   podAntiAffinity:
       #     requiredDuringSchedulingIgnoredDuringExecution:
       #       - topologyKey: "kubernetes.io/hostname"
