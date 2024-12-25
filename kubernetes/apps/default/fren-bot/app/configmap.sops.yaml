@@ -10,8 +10,8 @@ data:
     PRODUCTIVITY_CHANNEL_ID: ENC[AES256_GCM,data:JOmjR5u5bQQLwXfZKugOxDaSFg==,iv:9GE3yxwFpi1folULYwgVco8RndfvqLp/KKpueQwbrrg=,tag:g9fNAk2/Sbu6GHz7hxBtow==,type:str]
     GUILD_ID: ENC[AES256_GCM,data:vKEzNha73boMHsH3lAfadxwA,iv:rJZm/PPxjpEkCwLk5hpHeRNMEFvrZzkPKdtRD+ggQSk=,tag:qu0YXCICGEJM/wbrairlYg==,type:str]
     GAS_GAMER_CHAT: ENC[AES256_GCM,data:qBr5+ZVfFmdqGg==,iv:PF53qpRMrTxTJOyvytwnE7Kj0UURyH9Pu01U8Yqc0g0=,tag:w9DRe7MIaFg+cfkvqb895Q==,type:str]
-    FRENCRAFT_HOST: ENC[AES256_GCM,data:H/1dIT4TLPp5tw==,iv:nJ5BtezYoY1am5KiWMOqQC9d0gxr6mX0Y2yqKVB/X1A=,tag:l+ku+0oevWlIV4zDDxJjDg==,type:str]
-    FRENCRAFT_PORT: ENC[AES256_GCM,data:v0XD83g=,iv:AxPdwCe1WxNgA+tuD0dB+E7eioA+q4ddLEnjZX1wC1c=,tag:5xsE/ylcHl6qa+iT3/9XgA==,type:str]
+    FRENCRAFT_HOST: ENC[AES256_GCM,data:F/prFVLA0fyC,iv:0uBx1TT7MUjTiqsNUUNs2QY6mdgzegfGkmQd8x7qWec=,tag:UjlBiHXNhpWHIUbWOQQ8YA==,type:str]
+    FRENCRAFT_PORT: ENC[AES256_GCM,data:sMI=,iv:lURZ+KmyBYcX5ivSb2yf3wt1ahDss4KZAWx1FXZeMnw=,tag:4d+Adj4WbzV84oCANh4XWA==,type:str]
     MC_POLL_INTERVAL: ENC[AES256_GCM,data:GeH7EA==,iv:we40zH9DGEUN+iO82opqAauiNBfUvHYKXxcFUi2EkLc=,tag:xB/oFBos5ldHUsHk7exPmg==,type:str]
     SM_MC_CHANNEL: ENC[AES256_GCM,data:ykewyqSvvzaaGJg=,iv:sbP+gDqvuKMAv/cePnn8JGLQM/ujD9a6M6QHZXqkcXY=,tag:2lHfNiwmuMx2WIampw3GNQ==,type:str]
     FRENCRAFT_CREATE_HOST: ENC[AES256_GCM,data:dDkvFnEwHqc=,iv:XYciVOwfOfm7hcjeIwO0keh8vt8vqEzRGz/ED8k8vQY=,tag:twL3JASaNPyK5I/rRi9SHw==,type:str]
@@ -36,8 +36,8 @@ sops:
             VXZJOC9rUEtMRkhsMmhUVVhsMDV5REUKceIKUmuXovcMGbNeInKKAaGzAqxCbni4
             /gWMsgg3gWEQyslQwNL3KbpYsR39yPAnumGQbe2XbTnyGVKE+cTFcQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-03-10T03:31:26Z"
-    mac: ENC[AES256_GCM,data:LUqdi6xEX5/6PKc+QBx29ZS2tetsW5asHAQAxgq7vMu2rT0V23zse6EajcA77owYn730qWJM4yq8JQrMIVph3xZrgpiZh5QCKeBgQ+t0eA67GS4FimjbW450mhVnAQngWE1hKdkcvFjL4x78WFqtB4O4v1Ffdt5rJr/QaMmTQAU=,iv:I+d3f3S79TdQt6sfI2u0H9utXSNvOeZFoqkTgbTHkPc=,tag:KL4DWpZS1PUx8KhInpJYiQ==,type:str]
+    lastmodified: "2024-12-25T22:30:00Z"
+    mac: ENC[AES256_GCM,data:cqHdxAC01wTOki6kp/bdMNG3wN/D313jyu4vM17O2PMQq85Ai42ObtzgzWXMile6tD+npRv3rYrZub5mJBtGK2yJ/6x9JzJA5HL8cNHNBsnQ34XKMbpgFKbkf4Ur/jHqnJGtOnXS0FTN6lYfthRuIywhfhw3+fCMm7PEyqfSDLE=,iv:C468XSf6eh8E7dISVFz5mbPAXvM2Zg4D5W5cPh/Zhbk=,tag:44JP9gdPgD/2UkYa6rgubw==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
-    version: 3.8.1
+    version: 3.9.2
