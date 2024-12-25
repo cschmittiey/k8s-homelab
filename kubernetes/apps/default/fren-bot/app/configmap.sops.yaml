@@ -19,7 +19,7 @@ data:
     MC_CREATE_POLL_INTERVAL: ENC[AES256_GCM,data:MAE5GA==,iv:a2/N58PMtMlrkY8JKb6Exfj944HiGRwekrHfO1Ag4dA=,tag:ToXiJFHfc/XM+FFL/dOF/w==,type:str]
     PRODUCTIVITY_RESPONDER_ENABLED: ENC[AES256_GCM,data:z62j+A==,iv:OPj6QgZwe9mv7rDbwjdpYIcIr4vYNkaF8XQi7iW8eAk=,tag:8JlMXqOy5Dywg0iJbkQ49A==,type:str]
     DISCORD_RESPONDER_ENABLED: ENC[AES256_GCM,data:xZJNHg==,iv:pJNE5CHvffgnKlecW6QIowMA5/Ds8mbPPobArej6ZVk=,tag:wie/elzOyQpgMTYkKr8L1Q==,type:str]
-    FRENCRAFT_RESPONDER_ENABLED: ENC[AES256_GCM,data:qjV0zso=,iv:CwVOq8+I8h3My74XscUm0PBtixW/2B3p61sz7mExWIU=,tag:fHF2fmV1xujn42AZ2KV/pw==,type:str]
+    FRENCRAFT_RESPONDER_ENABLED: ENC[AES256_GCM,data:0bP9Kg==,iv:KALWf6ZmfmOXGgVKvRenoI3XM9bt7QayTIx36W8nO3c=,tag:AOKS2unS71nfTQaRYmBP+w==,type:str]
     CREATE_RESPONDER_ENABLED: ENC[AES256_GCM,data:hyaAGLY=,iv:Ar8Dzll/2ur44nqPAB27quIMn2HnARfrjws+ykm+STU=,tag:KII8S4bJnq+bscIDvV3T8Q==,type:str]
 sops:
     kms: []
@@ -36,8 +36,8 @@ sops:
             VXZJOC9rUEtMRkhsMmhUVVhsMDV5REUKceIKUmuXovcMGbNeInKKAaGzAqxCbni4
             /gWMsgg3gWEQyslQwNL3KbpYsR39yPAnumGQbe2XbTnyGVKE+cTFcQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-12-25T22:30:00Z"
-    mac: ENC[AES256_GCM,data:cqHdxAC01wTOki6kp/bdMNG3wN/D313jyu4vM17O2PMQq85Ai42ObtzgzWXMile6tD+npRv3rYrZub5mJBtGK2yJ/6x9JzJA5HL8cNHNBsnQ34XKMbpgFKbkf4Ur/jHqnJGtOnXS0FTN6lYfthRuIywhfhw3+fCMm7PEyqfSDLE=,iv:C468XSf6eh8E7dISVFz5mbPAXvM2Zg4D5W5cPh/Zhbk=,tag:44JP9gdPgD/2UkYa6rgubw==,type:str]
+    lastmodified: "2024-12-25T22:43:10Z"
+    mac: ENC[AES256_GCM,data:KQ13oyJxWNy/VvNwkfLR5j3abHRFJiqmISMeuBc691mb/pnKuZLyBaXjVBlCqcstAGWfijYJf0zh1DW5MxYRV3l1/HIL2B2aY6bCk2XvyfjonSmLbVEFmTWZU91tFukUW8Vj6ucl2vqucBqbhqX4Ob+JW05ZlGwedQTZgojudHM=,iv:mAkdQ2Gym8Erye7uDxoHvQ2vps60oK9FoTw+471QfqQ=,tag:6yYkhrVzFYYSwa7Am970hw==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.9.2
