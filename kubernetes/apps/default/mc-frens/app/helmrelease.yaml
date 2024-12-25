@@ -44,6 +44,7 @@ spec:
               WHITELIST: "_cSmith_,emmaiscool7,LuxAurelium,FoxInSocks69420,Smaned,Sailanarmo,CommanderScotty,drop_the_mike,Ashton_the_bean,dimnsionofsound,iamamac,amddude,judrbug,FrivolousBeluga,Meliferrous,CH4KRA1337,Shiglet_McDongol,KingPhilip5,spel3o,Rose_God,rabbipanda44,HoneyButton"
               USE_AIKAR_FLAGS: "true"
               VERSION: "1.21.4"
+              ENABLE_QUERY: "true"
             resources:
               requests:
                 cpu: "100m"
