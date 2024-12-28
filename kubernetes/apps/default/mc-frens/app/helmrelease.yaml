@@ -38,7 +38,6 @@ spec:
                 fabric-api
                 sodium
                 lithium
-                discord-mc-chat
               OPS: "_cSmith_"
               LEVEL: "world"
               MAX_PLAYERS: "20"
