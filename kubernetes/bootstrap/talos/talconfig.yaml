@@ -25,7 +25,7 @@ nodes:
       customization:
         systemExtensions:
           officialExtensions:
-              - siderolabs/i915-ucode
+              - siderolabs/i915
               - siderolabs/intel-ucode
               - siderolabs/iscsi-tools
               - siderolabs/realtek-firmware
@@ -36,7 +36,7 @@ nodes:
       mode: metal
       arch: amd64
     installDiskSelector:
-      busPath: /pci0000:00/0000:00:1d.0/0000:3a:00.0/nvme/nvme0/nvme0n1
+      bus_path: /pci0000:00/0000:00:1d.0/0000:3a:00.0/nvme/nvme0/nvme0n1
     nodeLabels:
       rack: garage
       zone: red1
@@ -56,7 +56,7 @@ nodes:
         systemExtensions:
           officialExtensions:
               - siderolabs/amd-ucode
-              - siderolabs/amdgpu-firmware
+              - siderolabs/amdgpu
               - siderolabs/iscsi-tools
               - siderolabs/realtek-firmware
               - siderolabs/util-linux-tools
@@ -66,7 +66,7 @@ nodes:
       mode: metal
       arch: amd64
     installDiskSelector:
-      busPath: /pci0000:00/0000:00:02.2/0000:11:00.0/nvme/nvme0/nvme0n1
+      bus_path: /pci0000:00/0000:00:02.2/0000:11:00.0/nvme/nvme0/nvme0n1
     nodeLabels:
       rack: garage
       zone: red1
@@ -87,7 +87,7 @@ nodes:
       customization:
         systemExtensions:
           officialExtensions:
-              - siderolabs/i915-ucode
+              - siderolabs/i915
               - siderolabs/intel-ucode
               - siderolabs/iscsi-tools
               - siderolabs/realtek-firmware
@@ -98,7 +98,7 @@ nodes:
       mode: metal
       arch: amd64
     installDiskSelector:
-      busPath: /pci0000:00/0000:00:1d.0/0000:3b:00.0/nvme/nvme0/nvme0n1
+      bus_path: /pci0000:00/0000:00:1d.0/0000:3b:00.0/nvme/nvme0/nvme0n1
     nodeLabels:
       rack: garage
       zone: red1
@@ -120,7 +120,7 @@ nodes:
         systemExtensions:
           officialExtensions:
               - siderolabs/amd-ucode
-              - siderolabs/amdgpu-firmware
+              - siderolabs/amdgpu
               - siderolabs/iscsi-tools
               - siderolabs/realtek-firmware
               - siderolabs/util-linux-tools
@@ -152,7 +152,7 @@ nodes:
         systemExtensions:
           officialExtensions:
               - siderolabs/amd-ucode
-              - siderolabs/amdgpu-firmware
+              - siderolabs/amdgpu
               - siderolabs/iscsi-tools
               - siderolabs/realtek-firmware
               - siderolabs/util-linux-tools
