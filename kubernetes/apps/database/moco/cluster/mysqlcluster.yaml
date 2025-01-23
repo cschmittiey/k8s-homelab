@@ -36,7 +36,7 @@ spec:
       containers:
       # At least a container named "mysqld" must be defined.
       - name: mysqld
-        image: ghcr.io/cybozu-go/moco/mysql:8.4.3
+        image: ghcr.io/cybozu-go/moco/mysql:8.4.4
         # By limiting CPU and memory, Pods will have Guaranteed QoS class.
         # requests can be omitted; it will be set to the same value as limits.
         resources:
