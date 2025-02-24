@@ -45,6 +45,8 @@ spec:
               USE_AIKAR_FLAGS: "true"
               VERSION: "1.21.4"
               ENABLE_QUERY: "true"
+              EXISTING_WHITELIST_FILE: "SYNCHRONIZE"
+
             resources:
               requests:
                 cpu: "100m"
