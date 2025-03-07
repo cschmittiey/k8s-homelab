@@ -9,7 +9,7 @@ resources:
   - ./mc-syd/ks.yaml
   - ./ha-discord-mute-sensor/ks.yaml
   - ./rdio/ks.yaml
-  - ./ollama/ks.yaml
+#  - ./ollama/ks.yaml
   - ./openwebui/ks.yaml
   - ./komga/ks.yaml
   - ./tr-mqtt/ks.yaml
