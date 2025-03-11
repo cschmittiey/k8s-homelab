@@ -78,9 +78,9 @@ spec:
         path: /mnt/Archive/Media/comics
         globalMounts:
           - path: /comics
-      downloads:
-        type: nfs
-        server: nas.cleeb.net
-        path: /mnt/Hellabooties/Downloads
-        globalMounts:
-          - path: /downloads
+      # downloads:
+      #   type: nfs
+      #   server: nas.cleeb.net
+      #   path: /mnt/Hellabooties/Downloads
+      #   globalMounts:
+      #     - path: /downloads
