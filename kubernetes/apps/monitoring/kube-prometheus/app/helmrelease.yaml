@@ -28,6 +28,8 @@ spec:
     keepHistory: false
   values:
     crds:
+      upgradeJob:
+        enabled: true
     alertmanager:
       ingress:
         enabled: true
