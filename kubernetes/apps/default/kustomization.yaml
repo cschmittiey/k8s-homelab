@@ -6,14 +6,14 @@ resources:
   - ./fren-bot/ks.yaml
   - ./oceanman4/ks.yaml
   - ./mc-raul/ks.yaml
-  - ./mc-syd/ks.yaml
+  # - ./mc-syd/ks.yaml
   - ./ha-discord-mute-sensor/ks.yaml
   - ./rdio/ks.yaml
 #  - ./ollama/ks.yaml
   - ./openwebui/ks.yaml
-  - ./komga/ks.yaml
+  # - ./komga/ks.yaml
   - ./tr-mqtt/ks.yaml
   - ./immich/ks.yaml
   - ./forgejo-runner/ks.yaml
-  - ./plex/ks.yaml
-  - ./mc-frens/ks.yaml
+  # - ./plex/ks.yaml
+  # - ./mc-frens/ks.yaml
