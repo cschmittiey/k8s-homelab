@@ -84,25 +84,25 @@ spec:
         dashboardproviders.yaml:
           apiVersion: 1
           providers:
-          - name: 'grafana-dashboards-kubernetes'
+          - name: grafana-dashboards-kubernetes
             orgId: 1
-            folder: 'Kubernetes'
+            folder: Kubernetes
             type: file
             disableDeletion: true
             editable: true
             options:
               path: /var/lib/grafana/dashboards/grafana-dashboards-kubernetes
-          - name: 'cloudnative-pg'
+          - name: cloudnative-pg
             orgId: 1
-            folder: 'cloudnative-pg'
+            folder: cloudnative-pg
             type: file
             disableDeletion: true
             editable: true
             options:
               path: /var/lib/grafana/dashboards/cloudnative-pg
-          - name: 'trunk-recorder-prometheus-plugin'
+          - name: trunk-recorder-prometheus-plugin
             orgId: 1
-            folder: "Trunk-Recorder"
+            folder: Trunk-Recorder
             type: file
             disableDeletion: true
             editable: true
