@@ -77,7 +77,7 @@ spec:
               - path: /
                 service:
                   identifier: app
-                  port: *port
+                  port: 5678
 
     persistence:
       data:
