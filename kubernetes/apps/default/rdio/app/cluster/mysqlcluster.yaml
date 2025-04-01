@@ -10,7 +10,7 @@ spec:
   replicas: 1
 
   backupPolicyName: daily
-  serverIDBase: 1
+  # serverIDBase: 1
   podTemplate:
     spec:
 
@@ -55,28 +55,28 @@ spec:
         requests:
           storage: 50Gi
 
-  # restore field is not editable.
-  # to modify parameters, delete and re-create MySQLCluster.
-  restore:
-    # The source MySQLCluster's name and namespace
-    sourceName: rdio-moco-v2
-    sourceNamespace: default
+  # # restore field is not editable.
+  # # to modify parameters, delete and re-create MySQLCluster.
+  # restore:
+  #   # The source MySQLCluster's name and namespace
+  #   sourceName: rdio-moco-v2
+  #   sourceNamespace: default
 
-    # The restore point-in-time in RFC3339 format.
-    restorePoint: "2024-08-23T18:00:00Z"
+  #   # The restore point-in-time in RFC3339 format.
+  #   restorePoint: "2024-08-23T18:00:00Z"
 
-    # jobConfig is the same in BackupPolicy
-    jobConfig:
-      serviceAccountName: default
+  #   # jobConfig is the same in BackupPolicy
+  #   jobConfig:
+  #     serviceAccountName: default
 
-      bucketConfig:
-        bucketName: "moco"
-        endpointURL: https://s3.cleeb.net
-        usePathStyle: true
-        region: garage
-      envFrom:
-      - secretRef:
-          name: rdio-cluster-secret
-      workVolume:
-        emptyDir: {}
+  #     bucketConfig:
+  #       bucketName: "moco"
+  #       endpointURL: https://s3.cleeb.net
+  #       usePathStyle: true
+  #       region: garage
+  #     envFrom:
+  #     - secretRef:
+  #         name: rdio-cluster-secret
+  #     workVolume:
+  #       emptyDir: {}
 
