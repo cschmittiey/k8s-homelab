@@ -75,10 +75,7 @@ spec:
           folderAnnotation: grafana_folder
           searchNamespace: ALL
           provider:
-          foldersFromFilesStructure: true
-          multicluster:
-            etcd:
-              enabled: true
+            foldersFromFilesStructure: true
       # Provision grafana-dashboards-kubernetes
       dashboardProviders:
         dashboardproviders.yaml:
