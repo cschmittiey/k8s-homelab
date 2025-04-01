@@ -64,7 +64,7 @@ spec:
         controller: n8n
         ports:
           http:
-            port: *port
+            port: 8080
 
     ingress:
       main:
