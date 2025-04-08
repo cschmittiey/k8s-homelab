@@ -7,3 +7,4 @@ resources:
   - ../../../../templates/volsync
   - ./secret.sops.yaml
   - ./dragonfly/
+  - ./cnpg.yaml
