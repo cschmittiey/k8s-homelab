@@ -77,7 +77,7 @@ spec:
               - *host
     persistence:
       data:
-        existingClaim: "${VOLSYNC_CLAIM}"
+        existingClaim: nocodb
         advancedMounts:
           nocodb:
             app:
