@@ -18,3 +18,4 @@ resources:
   # - ./plex/ks.yaml
   # - ./mc-frens/ks.yaml
   - ./n8n/ks.yaml
+  - ./nocodb/ks.yaml
