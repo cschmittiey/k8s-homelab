@@ -25,7 +25,7 @@ spec:
           mc-syd:
             image: &image
               repository: "ghcr.io/itzg/minecraft-server"
-              tag: "2025.6.1"
+              tag: "2025.6.2"
             env:
               TZ: "America/Los_Angeles"
               MEMORY: "2048M"
