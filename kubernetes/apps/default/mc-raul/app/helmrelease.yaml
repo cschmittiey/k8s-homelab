@@ -25,7 +25,7 @@ spec:
           mc-raul:
             image: &image
               repository: "ghcr.io/itzg/minecraft-server"
-              tag: "2025.6.2"
+              tag: "2025.8.0"
             env:
               TZ: "America/Los_Angeles"
               MEMORY: "2048M"
