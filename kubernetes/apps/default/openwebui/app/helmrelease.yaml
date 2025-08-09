@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/open-webui/open-webui
-              tag: 0.6@sha256:fda936056184035a71a9ad5ff3721530ff061f16bc3907efb33a3201ba87ccfe
+              tag: 0.6@sha256:ff87dd7605720f33411d87ed5550357b665cec4880378176f2f95bfe751f5e32
             env:
               OLLAMA_BASE_URLS: "http://192.168.0.190:11434"
               OPENAI_API_BASE_URLS: "https://api.openai.com/v1;https://openrouter.ai/api/v1"
