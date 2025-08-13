@@ -25,7 +25,7 @@ spec:
           mc-frens:
             image: &image
               repository: "ghcr.io/itzg/minecraft-server"
-              tag: "2025.8.0"
+              tag: "2025.8.1"
             env:
               TZ: "America/Los_Angeles"
               MEMORY: "4096M"
