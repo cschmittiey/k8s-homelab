@@ -7,7 +7,7 @@ spec:
   instances: 1
   storage:
     size: 180Gi
-  imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.3
+  imageName: ghcr.io/tensorchord/cloudnative-vectorchord:16
 
   backup:
     retentionPolicy: 30d
@@ -35,7 +35,8 @@ spec:
 
   postgresql:
     shared_preload_libraries:
-      - "vectors.so"
+      # - "vectors.so"
+      - "vchord.so"
     parameters:
       search_path: '"$user", public, vectors'
 
