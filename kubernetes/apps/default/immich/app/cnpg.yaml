@@ -24,11 +24,11 @@ spec:
       serverName: &currentCluster immich-cnpg-v1
       s3Credentials:
         accessKeyId:
-          name: immich-cnpg
-          key: minio-user
+          name: immich-cnpg-backup-secret
+          key: AWS_ACCESS_KEY
         secretAccessKey:
-          name: immich-cnpg
-          key: minio-pass
+          name: immich-cnpg-backup-secret
+          key: AWS_SECRET_ACCESS_KEY
 
   postgresql:
     shared_preload_libraries:
