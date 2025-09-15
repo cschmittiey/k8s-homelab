@@ -11,7 +11,7 @@ data:
     GUILD_ID: ENC[AES256_GCM,data:vKEzNha73boMHsH3lAfadxwA,iv:rJZm/PPxjpEkCwLk5hpHeRNMEFvrZzkPKdtRD+ggQSk=,tag:qu0YXCICGEJM/wbrairlYg==,type:str]
     GAS_GAMER_CHAT: ENC[AES256_GCM,data:qBr5+ZVfFmdqGg==,iv:PF53qpRMrTxTJOyvytwnE7Kj0UURyH9Pu01U8Yqc0g0=,tag:w9DRe7MIaFg+cfkvqb895Q==,type:str]
     FRENCRAFT_HOST: ENC[AES256_GCM,data:Dm5I+BQfR6Kob2eqVd0I283Sz+EliH8=,iv:Yj7JVYSEJaK9LrxePwZcMBhNTACp3OQY9MN57HBS1GU=,tag:K7L+ODoiLxTttY/fEL+Yaw==,type:str]
-    FRENCRAFT_PORT: ENC[AES256_GCM,data:5UW4968=,iv:1oSrmtwHflynoMuk6+JRqOkwhtcRtixmCxkqLPURmsY=,tag:H1eO8dAZFstqupYg83+dbg==,type:int]
+    FRENCRAFT_PORT: ENC[AES256_GCM,data:mPebll4=,iv:S4fozTTS4/fY9UHj/3FScO5vajGSn+KZ+o5s3tcmvkU=,tag:JX6Wj7+M2YH0phfJ2KnURA==,type:str]
     MC_POLL_INTERVAL: ENC[AES256_GCM,data:GeH7EA==,iv:we40zH9DGEUN+iO82opqAauiNBfUvHYKXxcFUi2EkLc=,tag:xB/oFBos5ldHUsHk7exPmg==,type:str]
     SM_MC_CHANNEL: ENC[AES256_GCM,data:ykewyqSvvzaaGJg=,iv:sbP+gDqvuKMAv/cePnn8JGLQM/ujD9a6M6QHZXqkcXY=,tag:2lHfNiwmuMx2WIampw3GNQ==,type:str]
     FRENCRAFT_CREATE_HOST: ENC[AES256_GCM,data:dDkvFnEwHqc=,iv:XYciVOwfOfm7hcjeIwO0keh8vt8vqEzRGz/ED8k8vQY=,tag:twL3JASaNPyK5I/rRi9SHw==,type:str]
@@ -32,7 +32,7 @@ sops:
             VXZJOC9rUEtMRkhsMmhUVVhsMDV5REUKceIKUmuXovcMGbNeInKKAaGzAqxCbni4
             /gWMsgg3gWEQyslQwNL3KbpYsR39yPAnumGQbe2XbTnyGVKE+cTFcQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-09-14T23:38:25Z"
-    mac: ENC[AES256_GCM,data:uWIlo6K0Ho6r6cl19GPRvUQO6sydz9oW5j7TgAfbnd0sB5sstXZxP5t4s3cxz7yRTZnsKGTJRBDwQnpQeJ1DzFbk7PKp120zim9OBZNDpUO8xL0nV9DhL0i3zugQY2Za/kIySzh4rBr9C+HWsbd35qJF2XJNOVwjxwJct8EDUR0=,iv:yOgZP8rso0yyXA55LWlyn1JCisHO7kk4GYqU4vGoOa4=,tag:clRvHBvxGnfu2tB8Dj97ow==,type:str]
+    lastmodified: "2025-09-15T00:45:24Z"
+    mac: ENC[AES256_GCM,data:OZy5gadr8Z2MnLfxLa6GdzCrxclMpNwG5Z7DmCI7EYUFCivBxKz0Q+fZ/AWoYTpMdio8aHJkHeIgykl0UZCwHgSRKblXPdJ8ZV2wXCmOqq+lVFfxsOrFzB6v1wHTRox3erSUN9JQjtPiuvaRvUTQRHr3iE2vAdnpPMa/V8zEHc8=,iv:8RAMkqlPBCQnYcp3uTLCSIAgwo1HfRvgXBs2bKaZk7w=,tag:hyOIdttfcBxGJInkmjASqA==,type:str]
     encrypted_regex: ^(data|stringData)$
     version: 3.10.2
