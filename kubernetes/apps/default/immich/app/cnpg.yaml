@@ -7,7 +7,7 @@ spec:
   instances: 1
   storage:
     size: 180Gi
-  imageName: ghcr.io/tensorchord/cloudnative-vectorchord:16
+  imageName: ghcr.io/tensorchord/cloudnative-vectorchord:16.9-0.4.3
 
   backup:
     retentionPolicy: 30d
