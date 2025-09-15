@@ -13,9 +13,9 @@ spec:
     retentionPolicy: 30d
     barmanObjectStore: &barmanObjectStore
       data:
-        compression: snappy
+        compression: None
       wal:
-        compression: snappy
+        compression: None
         maxParallel: 8
       destinationPath: s3://cnpg/
       endpointURL: https://s3.cleeb.net
