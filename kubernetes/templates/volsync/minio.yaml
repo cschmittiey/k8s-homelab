@@ -10,6 +10,7 @@ stringData:
   RESTIC_PASSWORD: '${RESTIC_PASS}'
   AWS_ACCESS_KEY_ID: '${MINIO_ACCESS_KEY}'
   AWS_SECRET_ACCESS_KEY: '${MINIO_SECRET_KEY}'
+  AWS_DEFAULT_REGION: 'garage'
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/volsync.backube/replicationsource_v1alpha1.json
 apiVersion: volsync.backube/v1alpha1
