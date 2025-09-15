@@ -29,6 +29,9 @@ spec:
         secretAccessKey:
           name: nocodb
           key: minio-pass
+        region:
+          name: nocodb
+          key: region
 
   postgresql:
     shared_preload_libraries:

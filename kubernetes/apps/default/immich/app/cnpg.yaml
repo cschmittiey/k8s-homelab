@@ -29,6 +29,9 @@ spec:
         secretAccessKey:
           name: immich-cnpg-backup-secret
           key: AWS_SECRET_ACCESS_KEY
+        region:
+          name: immich-cnpg-backup-secret
+          key: AWS_REGION
 
   postgresql:
     shared_preload_libraries:
