@@ -8,7 +8,7 @@ spec:
   storage:
     size: 180Gi
   #imageName: ghcr.io/tensorchord/cloudnative-vectorchord:16.9-0.4.3
-  imageName: ghcr.io/corentingiraud/cnpg-pgvector-vectorchord:16-migration
+  imageName: ghcr.io/cschmittiey/cnpg-pgvector-vectorchord:16-migration
 
 
   backup:
