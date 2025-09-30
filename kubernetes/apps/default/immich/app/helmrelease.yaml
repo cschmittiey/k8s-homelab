@@ -50,7 +50,7 @@ spec:
 
     image:
       # renovate: datasource=github-releases depName=immich-app/immich
-      tag: "v1.142.0"
+      tag: "v1.144.1"
 
     immich:
       metrics:
