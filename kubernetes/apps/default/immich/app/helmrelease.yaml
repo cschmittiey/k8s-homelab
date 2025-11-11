@@ -75,25 +75,6 @@ spec:
 
     # Dependencies
 
-    postgresql:
-      enabled: false
-      # image:
-      #   repository: tensorchord/pgvecto-rs
-      #   tag: pg14-v0.2.0
-      # global:
-      #   postgresql:
-      #     auth:
-      #       username: immich
-      #       database: immich
-      #       password: immich
-      # primary:
-      #   initdb:
-      #     scripts:
-      #       create-extensions.sql: |
-      #         CREATE EXTENSION cube;
-      #         CREATE EXTENSION earthdistance;
-      #         CREATE EXTENSION vectors;
-
     redis:
       enabled: true
       architecture: standalone
