@@ -23,7 +23,7 @@ spec:
       endpointURL: https://s3.cleeb.net
       # Note: serverName version needs to be incremented
       # when recovering from an existing cnpg cluster
-      serverName: &currentCluster immich-cnpg-v1
+      serverName: &currentCluster immich-cnpg-v2
       s3Credentials:
         accessKeyId:
           name: immich-cnpg-backup-secret
@@ -59,7 +59,7 @@ spec:
   # cluster when recovering from an existing cnpg cluster
   bootstrap:
     recovery:
-      source: &previousCluster immich-cnpg-v0
+      source: &previousCluster immich-cnpg-v1
 
     # Note: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
