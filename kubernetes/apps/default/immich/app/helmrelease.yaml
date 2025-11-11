@@ -75,7 +75,7 @@ spec:
 
     # Dependencies
 
-    redis:
+    valkey:
       enabled: true
       architecture: standalone
       auth:
