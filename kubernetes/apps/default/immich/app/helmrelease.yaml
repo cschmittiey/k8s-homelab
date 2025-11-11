@@ -77,15 +77,6 @@ spec:
 
     valkey:
       enabled: true
-      architecture: standalone
-      auth:
-        enabled: false
-      master:
-        resources:
-          requests:
-            cpu: 100m
-          limits:
-            cpu: 500m
 
     # Immich components
 
