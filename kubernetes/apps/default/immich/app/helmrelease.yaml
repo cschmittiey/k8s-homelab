@@ -16,41 +16,43 @@ spec:
 
   values:
     ## This chart relies on the common library chart from bjw-s
-    ## You can find it at https://github.com/bjw-s/helm-charts/tree/main/charts/library/common
+    ## You can find it at https://github.com/bjw-s-labs/helm-charts/tree/923ef40a39520979c98f354ea23963ee54f54433/charts/library/common
     ## Refer there for more detail about the supported values
 
     # These entries are shared between all the Immich components
 
-    env:
-      # REDIS_HOSTNAME: '{{ printf "%s-redis-master" .Release.Name }}'
-      DB_HOSTNAME:
-        valueFrom:
-          secretKeyRef:
-            name: immich-cnpg-app
-            key: host
-      DB_USERNAME:
-        valueFrom:
-          secretKeyRef:
-            name: immich-cnpg-app
-            key: username
-      DB_DATABASE_NAME:
-        valueFrom:
-          secretKeyRef:
-            name: immich-cnpg-app
-            key: dbname
-      # -- You should provide your own secret outside of this helm-chart and use `postgresql.global.postgresql.auth.existingSecret` to provide credentials to the postgresql instance
-      DB_PASSWORD:
-        valueFrom:
-          secretKeyRef:
-            name: immich-cnpg-app
-            key: password
-      # IMMICH_MACHINE_LEARNING_URL: '{{ printf "http://%s-machine-learning:3003" .Release.Name }}'
-      PUBLIC_IMMICH_SERVER_URL: https://immich.${SECRET_DOMAIN}
-
-
-    image:
-      # renovate: datasource=github-releases depName=immich-app/immich
-      tag: "v2.2.3"
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              # renovate: datasource=github-releases depName=immich-app/immich
+              tag: "v2.2.3"
+            env:
+              REDIS_HOSTNAME: '{{ printf "%s-valkey" .Release.Name }}'
+              DB_HOSTNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-cnpg-app
+                    key: host
+              DB_USERNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-cnpg-app
+                    key: username
+              DB_DATABASE_NAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-cnpg-app
+                    key: dbname
+              # -- You should provide your own secret outside of this helm-chart and use `postgresql.global.postgresql.auth.existingSecret` to provide credentials to the postgresql instance
+              DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-cnpg-app
+                    key: password
+              IMMICH_MACHINE_LEARNING_URL: '{{ printf "http://%s-machine-learning:3003" .Release.Name }}'
+              PUBLIC_IMMICH_SERVER_URL: https://immich.${SECRET_DOMAIN}
 
     immich:
       metrics:
@@ -82,9 +84,13 @@ spec:
 
     server:
       enabled: true
-      image:
-        repository: ghcr.io/immich-app/immich-server
-        pullPolicy: IfNotPresent
+      controllers:
+        main:
+          containers:
+            main:
+              image:
+                repository: ghcr.io/immich-app/immich-server
+                pullPolicy: IfNotPresent
       ingress:
         main:
           enabled: true
@@ -96,17 +102,23 @@ spec:
             - host: &host immich.${SECRET_DOMAIN}
               paths:
                 - path: /
+                  service:
+                    identifier: main
           tls:
             - hosts:
                 - *host
 
     machine-learning:
       enabled: true
-      image:
-        repository: ghcr.io/immich-app/immich-machine-learning
-        pullPolicy: IfNotPresent
-      env:
-        TRANSFORMERS_CACHE: /cache
+      controllers:
+        main:
+          containers:
+            main:
+              image:
+                repository: ghcr.io/immich-app/immich-machine-learning
+                pullPolicy: IfNotPresent
+              env:
+                TRANSFORMERS_CACHE: /cache
       persistence:
         cache:
           enabled: true
