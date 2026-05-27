@@ -23,9 +23,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    image:
-      repository: ghcr.io/spegel-org/spegel
-      digest: sha256:aee8841c5039df075bc8fdaf1e0f9d9d0943294c3a6fd7df5392ea037de36048
     spegel:
       containerdSock: /run/containerd/containerd.sock
       containerdRegistryConfigPath: /etc/cri/conf.d/hosts
