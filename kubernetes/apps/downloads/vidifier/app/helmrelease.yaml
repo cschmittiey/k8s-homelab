@@ -42,7 +42,7 @@ spec:
           app: # this can now be any name you wish
             image:
               repository: ghcr.io/cschmittiey/vidifierbot
-              tag: 0.6.4
+              tag: 0.7.0
               pullPolicy: IfNotPresent
 
             resources:
