@@ -16,36 +16,36 @@
   ],
   rebaseWhen: 'conflicted',
   flux: {
-    fileMatch: [
-      '(^|/)ansible/.+\\.ya?ml$',
-      '(^|/)kubernetes/.+\\.ya?ml$',
+    managerFilePatterns: [
+      '/(^|/)ansible/.+\\.ya?ml$/',
+      '/(^|/)kubernetes/.+\\.ya?ml$/',
     ],
   },
   'helm-values': {
-    fileMatch: [
-      '(^|/)ansible/.+\\.ya?ml$',
-      '(^|/)kubernetes/.+\\.ya?ml$',
+    managerFilePatterns: [
+      '/(^|/)ansible/.+\\.ya?ml$/',
+      '/(^|/)kubernetes/.+\\.ya?ml$/',
     ],
   },
   kubernetes: {
-    fileMatch: [
-      '(^|/)ansible/.+\\.ya?ml$',
-      '(^|/)kubernetes/.+\\.ya?ml$',
+    managerFilePatterns: [
+      '/(^|/)ansible/.+\\.ya?ml$/',
+      '/(^|/)kubernetes/.+\\.ya?ml$/',
     ],
   },
   kustomize: {
-    fileMatch: [
-      '(^|/)kustomization\\.ya?ml$',
+    managerFilePatterns: [
+      '/(^|/)kustomization\\.ya?ml$/',
     ],
   },
   pip_requirements: {
-    fileMatch: [
-      '(^|/)[\\w-]*requirements(-\\w+)?\\.(txt|pip)$',
+    managerFilePatterns: [
+      '/(^|/)[\\w-]*requirements(-\\w+)?\\.(txt|pip)$/',
     ],
   },
   'ansible-galaxy': {
-    fileMatch: [
-      '(^|/)(galaxy|requirements)(\\.ansible)?\\.ya?ml$',
+    managerFilePatterns: [
+      '/(^|/)(galaxy|requirements)(\\.ansible)?\\.ya?ml$/',
     ],
   },
   commitMessageTopic: '{{depName}}',
@@ -360,10 +360,10 @@
       description: [
         'Process custom dependencies',
       ],
-      fileMatch: [
-        '(^|/).taskfiles/.+\\.ya?ml$',
-        '(^|/)ansible/.+\\.ya?ml$',
-        '(^|/)kubernetes/.+\\.ya?ml$',
+      managerFilePatterns: [
+        '/(^|/).taskfiles/.+\\.ya?ml$/',
+        '/(^|/)ansible/.+\\.ya?ml$/',
+        '/(^|/)kubernetes/.+\\.ya?ml$/',
       ],
       matchStrings: [
         '(?m:# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( repository=(?<registryUrl>\\S+))?\\n.+?: "?(?<currentValue>\\S+?)"?$)',
