@@ -25,4 +25,4 @@ wiki
 /config.yaml
 kubernetes/bootstrap/talos/clusterconfig/talosconfig
 *aider*
-
+.direnv/
