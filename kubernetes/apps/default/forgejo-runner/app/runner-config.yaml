@@ -58,7 +58,10 @@ container:
   # Whether to use privileged mode or not when launching task containers (privileged mode is required for Docker-in-Docker).
   privileged: false
   # And other options to be used when the container is started (eg, --add-host=my.forgejo.url:host-gateway).
-  options: -v /certs/client:/certs/client
+  # /nix-cache is a shared nix binary cache, mounted into the dind sidecar (see
+  # helmrelease.yaml). Job containers consume it via `extra-substituters =
+  # file:///nix-cache` and push back to it with `nix copy`.
+  options: -v /certs/client:/certs/client -v /nix-cache:/nix-cache
   # The parent directory of a job's working directory.
   # If it's empty, /workspace will be used.
   workdir_parent:
@@ -73,6 +76,7 @@ container:
   #   - '**'
   valid_volumes:
     - /certs/client
+    - /nix-cache
   # overrides the docker client host with the specified one.
   # If it's empty, act_runner will find an available docker host automatically.
   # If it's "-", act_runner will find an available docker host automatically, but the docker host won't be mounted to the job containers and service containers.

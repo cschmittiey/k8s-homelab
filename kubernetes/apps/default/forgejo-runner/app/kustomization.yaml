@@ -3,7 +3,9 @@ kind: Kustomization
 
 resources:
   - ./secret.sops.yaml
+  - ./pvc.yaml
   - ./helmrelease.yaml
+  - ./prune-cronjob.yaml
 
 configMapGenerator:
   - name: forgejo-runner-configmap

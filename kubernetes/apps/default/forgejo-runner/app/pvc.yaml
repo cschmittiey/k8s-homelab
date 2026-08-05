@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: forgejo-runner-nix-cache
+spec:
+  # ReadWriteMany: the runner Deployment has replicas: 2 and both share this
+  # cache. Longhorn serves RWX over nfs-ganesha, which is fine for the inert
+  # NAR/narinfo files a `file://` binary cache holds — but is why this must not
+  # be used as a nix *store* (sqlite, hardlinks, locking).
+  accessModes: ["ReadWriteMany"]
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: longhorn

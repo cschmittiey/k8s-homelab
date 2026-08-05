@@ -1,0 +1,53 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: forgejo-runner-nix-cache-prune
+spec:
+  # Sundays 04:00. Nothing here is urgent — the cache only ever grows, and
+  # over-pruning costs a re-substitution, not a failure.
+  schedule: "0 4 * * 0"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: prune
+              image: docker.io/library/busybox:1.37.0
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -eu
+                  echo "before: $(du -sh /nix-cache | cut -f1)"
+
+                  # atime rather than mtime: a NAR that CI substitutes on every
+                  # run is never rewritten, so mtime would evict paths that are
+                  # in constant use. A substitution reads the .narinfo and its
+                  # .nar in the same run, so the pair ages out together and we
+                  # don't strand a narinfo pointing at a deleted NAR.
+                  #
+                  # If the Longhorn RWX mount turns out to be noatime/relatime
+                  # this degrades to roughly mtime semantics. That is safe, just
+                  # less efficient: anything wrongly evicted is re-substituted
+                  # from cache.nixos.org and re-pushed on the next run.
+                  #
+                  # nix-cache-info is excluded unconditionally — without it nix
+                  # treats the directory as an invalid store and silently skips
+                  # it as a substituter.
+                  find /nix-cache -type f ! -name nix-cache-info \
+                    -atime +30 -exec rm -f {} +
+
+                  echo "after:  $(du -sh /nix-cache | cut -f1)"
+              volumeMounts:
+                - name: nix-cache
+                  mountPath: /nix-cache
+          volumes:
+            - name: nix-cache
+              persistentVolumeClaim:
+                claimName: forgejo-runner-nix-cache

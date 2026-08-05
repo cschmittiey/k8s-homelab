@@ -371,5 +371,26 @@
       ],
       datasourceTemplate: '{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}',
     },
+    {
+      customType: 'regex',
+      description: [
+        'Forgejo runner labels - digest-pinned job container images',
+      ],
+      managerFilePatterns: [
+        '/(^|/)kubernetes/.+\\.ya?ml$/',
+      ],
+      // Runner labels live inside one long comma-separated `--labels` argument,
+      // so neither of the comment-anchored patterns above can reach them.
+      //
+      // Matching on the `image:tag@sha256:...` shape means pinning a digest is
+      // what opts a label into Renovate: unpinned labels (node:20-bookworm,
+      // catthehacker/ubuntu, ...) are deliberately left alone. Because the tags
+      // in question are `latest`, these produce digest updates only, which the
+      // existing packageRule files as `chore(container)`.
+      matchStrings: [
+        'docker://(?<depName>[^\\s:,"]+):(?<currentValue>[^@\\s,"]+)@(?<currentDigest>sha256:[0-9a-f]{64})',
+      ],
+      datasourceTemplate: 'docker',
+    },
   ],
 }
