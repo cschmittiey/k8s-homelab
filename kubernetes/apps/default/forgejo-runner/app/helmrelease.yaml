@@ -41,7 +41,7 @@ spec:
               - "--instance"
               - $(FORGEJO_INSTANCE_URL)
               - "--labels"
-              - "docker:docker://ghcr.io/catthehacker/ubuntu:act-latest,x86_64:docker://ghcr.io/catthehacker/ubuntu:act-latest,linux:docker://ghcr.io/catthehacker/ubuntu:act-latest,pc:docker://ghcr.io/catthehacker/ubuntu:act-latest,ubuntu-x86_64:docker://ghcr.io/catthehacker/ubuntu:act-latest,linux:host"
+              - "docker:docker://node:20-bookworm,node20:docker://node:20-bookworm,ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-20.04,ubuntu-22.04:docker://ghcr.io/catthehacker/ubuntu:act-22.04,ubuntu-24.04:docker://ghcr.io/catthehacker/ubuntu:act-24.04,nix-latest:docker://ghcr.io/joschi/forgejo-nix:latest,lix-latest:docker://ghcr.io/joschi/forgejo-lix:latest,"
             env:
               - name: RUNNER_NAME
                 valueFrom:
