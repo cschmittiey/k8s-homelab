@@ -22,6 +22,21 @@ spec:
       retries: 3
       strategy: rollback
   values:
+    # The runner image runs as uid/gid 1000, and a freshly provisioned Longhorn
+    # volume mounts root-owned 0755 — so the server died on startup with
+    # "mkdir /data/cache: permission denied". fsGroup makes kubelet chown the
+    # volume to that group before the container starts.
+    #
+    # OnRootMismatch so the recursive chown only runs when the top-level
+    # ownership is actually wrong, rather than walking the whole cache on every
+    # start once it has filled up.
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+
     # One cache server shared by both runner replicas.
     #
     # Before this, each runner spawned its own internal cache server (the
