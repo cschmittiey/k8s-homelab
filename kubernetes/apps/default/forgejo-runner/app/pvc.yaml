@@ -13,3 +13,20 @@ spec:
     requests:
       storage: 50Gi
   storageClassName: longhorn
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: forgejo-runner-cache
+spec:
+  # Backing store for the actions cache (actions/cache: bun packages, go build
+  # and module dirs, model archives). ReadWriteOnce is deliberate — actcache
+  # keeps a bolt database, which exactly one process may hold open, so this is
+  # bound to the single cache-server replica rather than shared like the nix
+  # cache above. Sharing between the two runner replicas happens over HTTP
+  # instead, which is the whole point of the external cache server.
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 30Gi
+  storageClassName: longhorn

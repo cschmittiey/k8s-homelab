@@ -124,6 +124,19 @@ spec:
           forgejo-runner:
             daemon:
               - path: /nix-cache
+      # The shared secret for the external cache server, as a file so
+      # runner-config.yaml can reach it via cache.secret_url — the runner
+      # config itself is a ConfigMap and therefore plaintext in git. Only the
+      # runner process needs it; the dind sidecar does not.
+      cache-secret:
+        type: secret
+        name: forgejo-runner-secret
+        advancedMounts:
+          forgejo-runner:
+            app:
+              - path: /secrets/cache-secret
+                subPath: CACHE_SECRET
+                readOnly: true
       config:
         type: configMap
         name: forgejo-runner-configmap

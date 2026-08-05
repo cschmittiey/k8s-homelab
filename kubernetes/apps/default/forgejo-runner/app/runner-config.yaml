@@ -36,16 +36,28 @@ runner:
 cache:
   # Enable cache server to use actions/cache.
   enabled: true
-  # The directory to store the cache data.
-  # If it's empty, the cache data will be stored in $HOME/.cache/actcache.
-  dir: ""
+  # Use one shared cache server (see cache-server.yaml) instead of the internal
+  # one each replica would otherwise spawn.
+  #
+  # The internal server defaults its storage to $HOME/.cache/actcache, which is
+  # on no volume here — so cache data died with the pod. And with replicas: 2
+  # there were two of them, so a save on one runner was invisible to the other
+  # and a key missed roughly half the time even right after being written.
+  # That is why actions/cache appeared not to work at all for the large model
+  # archives.
+  #
+  # Setting external_server stops the internal server from being spawned; dir
+  # and port no longer apply. The runner still runs a local cache *proxy* that
+  # job containers talk to, so nothing about job networking changes.
+  external_server: "http://forgejo-runner-cache.default.svc.cluster.local:8088/"
+  # Shared secret authenticating the proxy to that server. Read from a file so
+  # it can live in the sops secret — this config is a ConfigMap, plaintext in
+  # git. The cache server gets the same value via $CACHE_SECRET.
+  secret_url: "file:/secrets/cache-secret"
   # The host of the cache server.
   # It's not for the address to listen, but the address to connect from job containers.
   # So 0.0.0.0 is a bad choice, leave it empty to detect automatically.
   host: ""
-  # The port of the cache server.
-  # 0 means to use a random available port.
-  port: 0
 
 container:
   # Specifies the network to which the container will connect.

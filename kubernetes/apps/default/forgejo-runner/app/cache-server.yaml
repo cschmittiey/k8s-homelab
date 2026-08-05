@@ -1,0 +1,73 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app forgejo-runner-cache
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+      strategy: rollback
+  values:
+    # One cache server shared by both runner replicas.
+    #
+    # Before this, each runner spawned its own internal cache server (the
+    # default when cache.external_server is empty) into $HOME/.cache/actcache —
+    # a path on no volume at all, so the data died with the pod. With two
+    # replicas that meant caches were both ephemeral and unshared: a save on
+    # one runner was invisible to the other, so a given key missed roughly half
+    # the time even when it had just been written.
+    #
+    # The runners now point at this over HTTP and keep no cache state of their
+    # own. See runner-config.yaml.
+    controllers:
+      forgejo-runner-cache:
+        replicas: 1
+        strategy: Recreate # RWO volume: the old pod must release it first
+        containers:
+          app:
+            image:
+              repository: code.forgejo.org/forgejo/runner
+              tag: 13.0.0
+            # The shared secret comes from the environment rather than being
+            # written into the runner ConfigMap, which is plaintext in git. The
+            # runner side reads the same value via cache.secret_url.
+            #
+            # --host is deliberately not passed: it advertises rather than
+            # binds, and the Service routes to the pod IP regardless.
+            command:
+              - "sh"
+              - "-c"
+              - 'exec forgejo-runner cache-server --dir /data --port 8088 --secret "$CACHE_SECRET"'
+            env:
+              - name: CACHE_SECRET
+                valueFrom:
+                  secretKeyRef:
+                    name: forgejo-runner-secret
+                    key: CACHE_SECRET
+        annotations:
+          reloader.stakater.com/auto: "true"
+    service:
+      app:
+        controller: forgejo-runner-cache
+        ports:
+          http:
+            port: 8088
+    persistence:
+      data:
+        existingClaim: forgejo-runner-cache
+        globalMounts:
+          - path: /data
