@@ -18,7 +18,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: prune
-              image: docker.io/library/busybox:1.37.0
+              image: docker.io/library/busybox:1.38.0
               command:
                 - /bin/sh
                 - -c
