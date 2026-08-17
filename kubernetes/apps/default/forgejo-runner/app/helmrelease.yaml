@@ -48,7 +48,7 @@ spec:
               # customManager in .github/renovate.json5, which matches exactly
               # the `docker://image:tag@sha256:...` shape and leaves the
               # unpinned labels below alone.
-              - "docker:docker://node:20-bookworm,node20:docker://node:20-bookworm,ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-20.04,ubuntu-22.04:docker://ghcr.io/catthehacker/ubuntu:act-22.04,ubuntu-24.04:docker://ghcr.io/catthehacker/ubuntu:act-24.04,nix-latest:docker://ghcr.io/joschi/forgejo-nix:latest@sha256:e0f61d2ab05e4903da910334e7f933f50e27d089dc4ece34124b23ea89fa119b,lix-latest:docker://ghcr.io/joschi/forgejo-lix:latest@sha256:d548edc74af9c87db50c9a30b5fa29c5f03cd0043dc69f76234e08a6820970d5"
+              - "docker:docker://node:20-bookworm,node20:docker://node:20-bookworm,ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-20.04,ubuntu-22.04:docker://ghcr.io/catthehacker/ubuntu:act-22.04,ubuntu-24.04:docker://ghcr.io/catthehacker/ubuntu:act-24.04,nix-latest:docker://ghcr.io/joschi/forgejo-nix:latest@sha256:bc049a99be3cc8ea903c6d3e4597099b9544a8ef238c1f6624ddd6dd041ef20a,lix-latest:docker://ghcr.io/joschi/forgejo-lix:latest@sha256:d548edc74af9c87db50c9a30b5fa29c5f03cd0043dc69f76234e08a6820970d5"
             env:
               - name: RUNNER_NAME
                 valueFrom:
