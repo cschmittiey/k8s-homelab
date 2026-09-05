@@ -42,9 +42,17 @@ spec:
       size: 50Gi
 
     database:
-      # start with the built-in embedded db on the pvc above,
-      # moving to external cnpg postgres is a good follow-up
-      external: false
+      # external cnpg postgres, cluster lives in ./cnpg.yaml,
+      # password is substituted from cluster-secrets in-cluster
+      # so it never sits in git plaintext
+      external: true
+      type: postgresql
+      host: onedev-rw.default.svc.cluster.local
+      port: "5432"
+      name: onedev
+      user: onedev
+      password: ${SECRET_ONEDEV_DB_PASSWORD}
+      maximumPoolSize: "25"
 
     onedev:
       # left empty on purpose so the first-run setup wizard

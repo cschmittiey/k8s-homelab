@@ -5,3 +5,5 @@ kind: Kustomization
 namespace: default
 resources:
   - ./helmrelease.yaml
+  - ./cnpg.yaml
+  - ./secret.sops.yaml
