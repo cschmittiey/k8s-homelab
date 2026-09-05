@@ -1,0 +1,66 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: onedev
+  namespace: default
+spec:
+  instances: 1
+  storage:
+    size: 20Gi
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.12
+
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore: &barmanObjectStore
+      data:
+        compression: snappy
+      wal:
+        compression: snappy
+        maxParallel: 8
+      destinationPath: s3://cnpg/
+      endpointURL: https://s3.cleeb.net
+      # Note: serverName version needs to be incremented
+      # when recovering from an existing cnpg cluster
+      serverName: &currentCluster onedev-v0
+      s3Credentials:
+        accessKeyId:
+          name: onedev
+          key: minio-user
+        secretAccessKey:
+          name: onedev
+          key: minio-pass
+        region:
+          name: onedev
+          key: region
+
+  bootstrap:
+    initdb:
+      database: onedev
+      owner: onedev
+      # owner password comes from our own sops secret so the
+      # same value can be handed to the onedev chart via
+      # ${SECRET_ONEDEV_DB_PASSWORD} substitution
+      secret:
+        name: onedev-db-owner
+
+  monitoring:
+    enablePodMonitor: true
+
+  resources:
+    requests:
+      cpu: 300m
+    limits:
+      memory: 2Gi
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: onedev
+  namespace: default
+spec:
+  immediate: true
+  schedule: 0 0 0 * * *
+  backupOwnerReference: self
+  cluster:
+    name: onedev

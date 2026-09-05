@@ -27,3 +27,4 @@ resources:
   - ./wrenix.yaml
   - ./intel.yaml
   - ./node-feature-discovery.yaml
+  - ./onedev.yaml

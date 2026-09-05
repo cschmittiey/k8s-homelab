@@ -1,0 +1,84 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app onedev
+  namespace: default
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: onedev
+      version: 16.5.11
+      sourceRef:
+        kind: HelmRepository
+        name: onedev
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    resources:
+      requests:
+        cpu: 500m
+        memory: 2Gi
+      limits:
+        memory: 4Gi
+
+    persistence:
+      storageClassName: longhorn
+      # chart default is 100Gi, 50Gi is plenty to try it out,
+      # longhorn volumes can be expanded later if needed
+      size: 50Gi
+
+    database:
+      # external cnpg postgres, cluster lives in ./cnpg.yaml,
+      # password is substituted from cluster-secrets in-cluster
+      # so it never sits in git plaintext
+      external: true
+      type: postgresql
+      host: onedev-rw.default.svc.cluster.local
+      port: "5432"
+      name: onedev
+      user: onedev
+      password: ${SECRET_ONEDEV_DB_PASSWORD}
+      maximumPoolSize: "25"
+
+    onedev:
+      # left empty on purpose so the first-run setup wizard
+      # creates the admin account, serverUrl is derived
+      # from ingress.host automatically
+      initSettings:
+        user: ""
+        password: ""
+        email: ""
+        serverUrl: ""
+        sshRootUrl: ""
+
+    ingress:
+      enabled: true
+      controller: nginx
+      className: external
+      host: &host onedev.${SECRET_DOMAIN}
+      annotations:
+        external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+      tls:
+        # creates a tls block pointing at secret onedev-tls which
+        # stays empty, so nginx serves the cluster wildcard cert
+        # (default-ssl-certificate) for this host, same as the
+        # other default-namespace apps
+        enabled: true
+
+    ssh:
+      # needs nginx tcp forwarding + lb thought, follow-up
+      enabled: false
