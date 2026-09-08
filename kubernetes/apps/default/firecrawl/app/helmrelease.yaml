@@ -1,0 +1,405 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app firecrawl
+  namespace: default
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    defaultPodOptions:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+
+    controllers:
+      firecrawl:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        strategy: Recreate
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+        containers:
+          app:
+            image:
+              repository: ghcr.io/firecrawl/firecrawl
+              tag: 2.11.162@sha256:1b223ef18d410f67615f32ccaa3dcedfc26af4286f096247bddca3b624545e63
+            command:
+              - node
+            args:
+              - dist/src/harness.js
+              - --start-docker
+            env:
+              - name: HOST
+                value: 0.0.0.0
+              - name: PORT
+                value: "3002"
+              - name: ENV
+                value: local
+              - name: IS_KUBERNETES
+                value: "true"
+              - name: USE_DB_AUTHENTICATION
+                value: "false"
+              - name: LOGGING_LEVEL
+                value: INFO
+              - name: NUM_WORKERS_PER_QUEUE
+                value: "2"
+              - name: CRAWL_CONCURRENT_REQUESTS
+                value: "2"
+              - name: MAX_CONCURRENT_JOBS
+                value: "2"
+              - name: BROWSER_POOL_SIZE
+                value: "2"
+              - name: NUQ_WORKER_COUNT
+                value: "1"
+              - name: NUQ_BACKEND
+                value: pg
+              - name: HARNESS_STARTUP_TIMEOUT_MS
+                value: "120000"
+              - name: FIRECRAWL_APP_SCHEME
+                value: http
+              - name: FIRECRAWL_APP_HOST
+                value: firecrawl-app
+              - name: FIRECRAWL_APP_PORT
+                value: "3002"
+              - name: PLAYWRIGHT_MICROSERVICE_URL
+                value: http://firecrawl-playwright:3000/scrape
+              # Kubernetes expands earlier env entries in later values. The
+              # credentials stay in the SOPS secret rather than the release.
+              - name: POSTGRES_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: firecrawl
+                    key: password
+              - name: NUQ_DATABASE_URL
+                value: postgresql://firecrawl:$(POSTGRES_PASSWORD)@firecrawl-rw.default.svc.cluster.local:5432/firecrawl
+              - name: NUQ_DATABASE_URL_LISTEN
+                value: postgresql://firecrawl:$(POSTGRES_PASSWORD)@firecrawl-rw.default.svc.cluster.local:5432/firecrawl
+              - name: REDIS_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: firecrawl
+                    key: redis-password
+              - name: REDIS_URL
+                value: redis://default:$(REDIS_PASSWORD)@firecrawl-redis:6379
+              - name: REDIS_RATE_LIMIT_URL
+                value: redis://default:$(REDIS_PASSWORD)@firecrawl-redis:6379
+              - name: RABBITMQ_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: firecrawl
+                    key: rabbitmq-password
+              - name: NUQ_RABBITMQ_URL
+                value: amqp://firecrawl:$(RABBITMQ_PASSWORD)@firecrawl-rabbitmq:5672
+            probes:
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /v0/health/readiness
+                    port: 3002
+                  failureThreshold: 60
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /v0/health/liveness
+                    port: 3002
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /v0/health/readiness
+                    port: 3002
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 500m
+                memory: 1Gi
+              limits:
+                memory: 8Gi
+
+      playwright:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        strategy: Recreate
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          app:
+            image:
+              repository: ghcr.io/firecrawl/playwright-service
+              # Upstream publishes only rolling tags; pin the reviewed image by
+              # digest and update it alongside the Firecrawl release contract.
+              tag: latest@sha256:df1a393ce8bfc3801570a826a9b0dcc400ae48789adb4a0ad9d6cbf0229b059b
+            env:
+              PORT: "3000"
+              ALLOW_LOCAL_WEBHOOKS: "false"
+              BLOCK_MEDIA: "false"
+              MAX_CONCURRENT_PAGES: "2"
+            probes:
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 3000
+                  failureThreshold: 60
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 3000
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 3000
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 250m
+                memory: 512Mi
+              limits:
+                memory: 4Gi
+
+      redis:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        strategy: Recreate
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 999
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          app:
+            image:
+              repository: docker.io/library/redis
+              tag: 8.2.8-alpine@sha256:a7859ed111db3c1f5404a973a4747505d559fb5ca32d37e447afc0ef845a2103
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - exec redis-server --appendonly yes --requirepass "$REDIS_PASSWORD" --maxmemory 1536mb --maxmemory-policy noeviction
+            env:
+              - name: REDIS_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: firecrawl
+                    key: redis-password
+              - name: REDISCLI_AUTH
+                valueFrom:
+                  secretKeyRef:
+                    name: firecrawl
+                    key: redis-password
+            probes:
+              liveness: &redisProbe
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command:
+                      - redis-cli
+                      - ping
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+              readiness: *redisProbe
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                memory: 2Gi
+
+      rabbitmq:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        strategy: Recreate
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 999
+            runAsGroup: 999
+            fsGroup: 999
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          app:
+            image:
+              repository: docker.io/library/rabbitmq
+              tag: 4.3.5@sha256:1773ab33af6af1bbae4a3b1070472c863e669806a9ac63a627c02a44b3a59dcf
+            env:
+              # These initialize a fresh Mnesia database only. Rotate the live
+              # user before changing this secret on an existing broker.
+              - name: RABBITMQ_DEFAULT_USER
+                value: firecrawl
+              # A Deployment pod's hostname changes when it is recreated.
+              # Pin the node name so Mnesia keeps using the same PVC directory.
+              - name: RABBITMQ_NODENAME
+                value: rabbit@localhost
+              - name: RABBITMQ_DEFAULT_PASS
+                valueFrom:
+                  secretKeyRef:
+                    name: firecrawl
+                    key: rabbitmq-password
+              - name: RABBITMQ_ERLANG_COOKIE
+                valueFrom:
+                  secretKeyRef:
+                    name: firecrawl
+                    key: rabbitmq-erlang-cookie
+            probes:
+              liveness: &rabbitmqProbe
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command:
+                      - rabbitmq-diagnostics
+                      - -q
+                      - ping
+                  initialDelaySeconds: 20
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+              readiness: *rabbitmqProbe
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+            resources:
+              requests:
+                cpu: 100m
+                memory: 256Mi
+              limits:
+                memory: 1Gi
+
+    service:
+      app:
+        controller: firecrawl
+        ports:
+          http:
+            port: 3002
+      playwright:
+        controller: playwright
+        ports:
+          http:
+            port: 3000
+      redis:
+        controller: redis
+        ports:
+          redis:
+            port: 6379
+      rabbitmq:
+        controller: rabbitmq
+        ports:
+          amqp:
+            port: 5672
+
+    ingress:
+      app:
+        className: internal
+        hosts:
+          - host: &host firecrawl.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      redis-data:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 4Gi
+        storageClass: longhorn
+        retain: true
+        advancedMounts:
+          redis:
+            app:
+              - path: /data
+      rabbitmq-data:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 2Gi
+        storageClass: longhorn
+        retain: true
+        advancedMounts:
+          rabbitmq:
+            app:
+              - path: /var/lib/rabbitmq
+      playwright-cache:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 1Gi
+        advancedMounts:
+          playwright:
+            app:
+              - path: /tmp/.cache

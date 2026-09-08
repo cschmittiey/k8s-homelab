@@ -20,3 +20,4 @@ resources:
   - ./n8n/ks.yaml
   - ./nocodb/ks.yaml
   - ./onedev/ks.yaml
+  - ./firecrawl/ks.yaml
