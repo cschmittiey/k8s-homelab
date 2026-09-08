@@ -13,3 +13,7 @@ configMapGenerator:
       - ./nuq.sql
 generatorOptions:
   disableNameSuffixHash: true
+  annotations:
+    # Preserve PostgreSQL dollar-quoted strings during Flux post-build
+    # substitution; otherwise every `$$` is collapsed to `$`.
+    kustomize.toolkit.fluxcd.io/substitute: disabled
