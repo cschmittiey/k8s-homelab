@@ -236,7 +236,7 @@ spec:
           app:
             image:
               repository: docker.io/library/redis
-              tag: 8.2.8-alpine@sha256:a7859ed111db3c1f5404a973a4747505d559fb5ca32d37e447afc0ef845a2103
+              tag: 8.10.1-alpine@sha256:becdda6c7f4b3fb42e42fd7f120bbf5c54c4caaaf16f26da24e4563d2c1f0576
             command:
               - /bin/sh
               - -c
