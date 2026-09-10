@@ -26,8 +26,8 @@ spec:
       forgejo-runner:
         # capacity is 1 job per replica (see runner-config.yaml), so this is
         # the cluster's concurrent-job ceiling rather than a redundancy knob.
-        # 4 because agentic dev pushes enough parallel CI to sit at it.
-        replicas: 4
+        # 1: one concurrent CI job for the whole cluster.
+        replicas: 1
         initContainers:
           runner-register:
             image:
