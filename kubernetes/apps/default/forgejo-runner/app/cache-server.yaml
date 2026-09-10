@@ -37,14 +37,14 @@ spec:
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
 
-    # One cache server shared by both runner replicas.
+    # One cache server shared by every runner replica.
     #
     # Before this, each runner spawned its own internal cache server (the
     # default when cache.external_server is empty) into $HOME/.cache/actcache —
-    # a path on no volume at all, so the data died with the pod. With two
-    # replicas that meant caches were both ephemeral and unshared: a save on
-    # one runner was invisible to the other, so a given key missed roughly half
-    # the time even when it had just been written.
+    # a path on no volume at all, so the data died with the pod. One of those
+    # per replica meant caches were both ephemeral and unshared: a save on one
+    # runner was invisible to the rest, so a given key usually missed even when
+    # it had just been written.
     #
     # The runners now point at this over HTTP and keep no cache state of their
     # own. See runner-config.yaml.

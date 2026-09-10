@@ -40,9 +40,9 @@ cache:
   # one each replica would otherwise spawn.
   #
   # The internal server defaults its storage to $HOME/.cache/actcache, which is
-  # on no volume here — so cache data died with the pod. And with replicas: 2
-  # there were two of them, so a save on one runner was invisible to the other
-  # and a key missed roughly half the time even right after being written.
+  # on no volume here — so cache data died with the pod. And there was one per
+  # replica, so a save on one runner was invisible to the rest and a key
+  # usually missed even right after being written.
   # That is why actions/cache appeared not to work at all for the large model
   # archives.
   #
