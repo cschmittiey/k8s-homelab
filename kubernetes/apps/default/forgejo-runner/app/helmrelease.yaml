@@ -24,7 +24,10 @@ spec:
   values:
     controllers:
       forgejo-runner:
-        replicas: 2
+        # capacity is 1 job per replica (see runner-config.yaml), so this is
+        # the cluster's concurrent-job ceiling rather than a redundancy knob.
+        # 4 because agentic dev pushes enough parallel CI to sit at it.
+        replicas: 4
         initContainers:
           runner-register:
             image:
@@ -114,8 +117,8 @@ spec:
       # resolves against dind's filesystem — a mount into `app` (or onto the
       # node) would be invisible to jobs.
       #
-      # Contention is bounded: 2 replicas x capacity 1 = at most 2 concurrent
-      # writers, and the contents are inert NARs rather than a nix store. A
+      # Contention is bounded: capacity 1 means at most one concurrent writer
+      # per replica, and the contents are inert NARs rather than a nix store. A
       # torn concurrent write fails its narinfo hash check on read and nix
       # falls back to cache.nixos.org, so the worst case is a cache miss.
       nix-cache:
