@@ -6,7 +6,6 @@
     ':disableRateLimiting',
     ':dependencyDashboard',
     ':semanticCommits',
-    ':automergeBranch',
   ],
   dependencyDashboard: true,
   dependencyDashboardTitle: 'Renovate Dashboard 🤖',
@@ -54,18 +53,24 @@
   packageRules: [
     {
       description: [
-        'Auto merge Github Actions',
+        'Automerge non-major updates',
       ],
-      matchManagers: [
-        'github-actions',
-      ],
-      automerge: true,
-      automergeType: 'branch',
-      ignoreTests: true,
+      // Majors stay manual on purpose: a major bump of a chart or image needs a
+      // human reading the release notes before Flux reconciles it.
       matchUpdateTypes: [
         'minor',
         'patch',
+        'digest',
       ],
+      automerge: true,
+      // Renovate performs the merge itself and waits for the branch to be green
+      // first, so `.github/workflows/kubeconform.yaml` still gates automerges and
+      // the squashed `(#N)` commit lands in history like every other PR here.
+      // GitHub's own auto-merge is deliberately not used: the repo has
+      // allow_auto_merge=false, and with no branch protection it would merge
+      // before the checks even started.
+      automergeType: 'pr',
+      platformAutomerge: false,
     },
     {
       description: [
