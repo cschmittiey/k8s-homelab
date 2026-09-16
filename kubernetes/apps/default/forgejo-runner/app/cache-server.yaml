@@ -56,7 +56,7 @@ spec:
           app:
             image:
               repository: code.forgejo.org/forgejo/runner
-              tag: 13.0.0
+              tag: 13.1.0
             # The shared secret comes from the environment rather than being
             # written into the runner ConfigMap, which is plaintext in git. The
             # runner side reads the same value via cache.secret_url.
