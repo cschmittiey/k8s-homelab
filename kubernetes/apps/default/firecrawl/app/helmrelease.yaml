@@ -292,7 +292,7 @@ spec:
           app:
             image:
               repository: docker.io/library/rabbitmq
-              tag: 4.3.6@sha256:aa268788e9379a43a15ea3909fa20016e53999f801da49164e114b9a8663d047
+              tag: 4.3.6@sha256:42b190dffdd0cdb656f989f5404c30e1049d6b7d9c987089669b1905e5e3a1a6
             env:
               # These initialize a fresh Mnesia database only. Rotate the live
               # user before changing this secret on an existing broker.
