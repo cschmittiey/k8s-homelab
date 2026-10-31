@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: ghcr.io/firecrawl/firecrawl
-              tag: 2.11.341@sha256:32de0537d3089bd2439ddca88c497ee4c5257b5cdd963822903a2ad58257da10
+              tag: 2.11.642@sha256:6e635de5fef19d3591fbd1081a5ee1394dfe71ef19e108305e74600ecc7fa4b2
             command:
               - node
             args:
