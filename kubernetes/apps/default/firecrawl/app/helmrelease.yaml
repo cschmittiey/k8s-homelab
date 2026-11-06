@@ -174,7 +174,7 @@ spec:
               repository: ghcr.io/firecrawl/playwright-service
               # Upstream publishes only rolling tags; pin the reviewed image by
               # digest and update it alongside the Firecrawl release contract.
-              tag: latest@sha256:df1a393ce8bfc3801570a826a9b0dcc400ae48789adb4a0ad9d6cbf0229b059b
+              tag: latest@sha256:eacaf2c256a6ff7fd1869e470d2969e97a037ff6c75ac01d38784d138a33f8eb
             env:
               PORT: "3000"
               ALLOW_LOCAL_WEBHOOKS: "false"
