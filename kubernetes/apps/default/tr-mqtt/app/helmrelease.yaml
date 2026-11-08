@@ -33,7 +33,7 @@ spec:
           app: # this can now be any name you wish
             image:
               repository: docker.io/library/eclipse-mosquitto
-              tag: latest@sha256:6f8d8a947c506f8a2290ec65cd4bd2bc7cb4d43fb5f6271f861cb013e2ef9797
+              tag: latest@sha256:75d6662dee52c947dc9dd9c29f1d8d7ffef78ddaf38001caa09755681e8bbc98
               pullPolicy: IfNotPresent
 
             probes:
