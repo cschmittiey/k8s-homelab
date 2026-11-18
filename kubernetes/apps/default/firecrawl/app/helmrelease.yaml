@@ -360,19 +360,7 @@ spec:
           amqp:
             port: 5672
 
-    ingress:
-      app:
-        className: internal
-        hosts:
-          - host: &host firecrawl.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
+    # HTTPRoute in httproute.yaml keeps this API on the internal gateway only.
 
     persistence:
       redis-data:

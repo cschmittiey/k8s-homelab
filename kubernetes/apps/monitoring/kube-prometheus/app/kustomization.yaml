@@ -3,4 +3,5 @@ kind: Kustomization
 
 resources:
 - ./helmrelease.yaml
+- ./httproutes.yaml
 - ./alertmanager-secret.sops.yaml

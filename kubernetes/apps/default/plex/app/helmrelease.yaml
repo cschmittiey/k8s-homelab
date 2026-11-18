@@ -92,19 +92,7 @@ spec:
         ports:
           http:
             port: 32400
-    ingress:
-      app:
-        annotations:
-          external-dns.alpha.kubernetes.io/target: external.snail.church
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-        className: external
-        hosts:
-          - host: "plex.snail.church"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+    # Plex is intentionally reached through its direct LoadBalancer Service above.
     persistence:
       config:
         existingClaim: plex

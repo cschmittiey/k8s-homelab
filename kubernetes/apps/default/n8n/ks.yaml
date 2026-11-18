@@ -16,6 +16,7 @@ spec:
     kind: GitRepository
     name: home-kubernetes
   dependsOn:
+    - name: envoy-gateway
     - name: longhorn
   wait: false
   interval: 30m

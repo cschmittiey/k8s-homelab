@@ -66,18 +66,7 @@ spec:
         sshRootUrl: ""
 
     ingress:
-      enabled: true
-      controller: nginx
-      className: external
-      host: &host onedev.${SECRET_DOMAIN}
-      annotations:
-        external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
-      tls:
-        # creates a tls block pointing at secret onedev-tls which
-        # stays empty, so nginx serves the cluster wildcard cert
-        # (default-ssl-certificate) for this host, same as the
-        # other default-namespace apps
-        enabled: true
+      enabled: false
 
     ssh:
       # needs nginx tcp forwarding + lb thought, follow-up
