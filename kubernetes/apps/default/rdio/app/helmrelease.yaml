@@ -115,21 +115,21 @@ spec:
 
 
 
-    ingress:
-      media: # this can now be any name you wish
-        className: external
+    route:
+      media:
+        kind: HTTPRoute
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-        hosts:
-          - host: &host rdio.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: rdio
-                  port: http
-        tls:
-          - hosts:
-              - *host
+        hostnames:
+          - "rdio.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-external
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: rdio
+                port: 3000
 
     # serviceMonitor:
     #   rdio:

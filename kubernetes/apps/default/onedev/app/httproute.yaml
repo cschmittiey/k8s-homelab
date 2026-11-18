@@ -1,0 +1,23 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: onedev
+  annotations:
+    external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+spec:
+  hostnames:
+    - onedev.${SECRET_DOMAIN}
+  parentRefs:
+    - name: envoy-external
+      namespace: network
+      sectionName: https
+  rules:
+    - backendRefs:
+        - name: onedev
+          port: 6610
+      sessionPersistence:
+        type: Cookie
+        absoluteTimeout: 48h
+        cookie:
+          lifetimeType: Permanent

@@ -1,0 +1,19 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gateway-crds
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: gateway-crds
+  # Install experimental Gateway API CRDs before the controller chart. Onedev
+  # uses HTTPRoute sessionPersistence, which is not in the standard channel.
+  values:
+    crds:
+      gatewayAPI:
+        enabled: true
+        channel: experimental
+      envoyGateway:
+        enabled: true

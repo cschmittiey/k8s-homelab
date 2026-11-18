@@ -67,18 +67,21 @@ spec:
           http:
             port: 5678
 
-    ingress:
+    route:
       main:
-        className: external
+        kind: HTTPRoute
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-        hosts:
-          - host: *hostName
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: 5678
+        hostnames:
+          - *hostName
+        parentRefs:
+          - name: envoy-external
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: n8n
+                port: 5678
 
     persistence:
       data:

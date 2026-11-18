@@ -50,21 +50,21 @@ spec:
         ports:
           http:
             port: *port
-    ingress:
-          app:
-            className: external
-            annotations:
-              external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-            hosts:
-              - host: &host "komga.${SECRET_DOMAIN}"
-                paths:
-                  - path: /
-                    service:
-                      identifier: app
-                      port: http
-            tls:
-              - hosts:
-                  - *host
+    route:
+      app:
+        kind: HTTPRoute
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hostnames:
+          - "komga.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-external
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: komga
+                port: 8080
 
     persistence:
       config:

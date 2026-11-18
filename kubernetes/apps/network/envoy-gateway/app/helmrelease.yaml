@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: envoy-gateway
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: envoy-gateway
+  # CRDs are owned by the separate gateway-crds release so experimental
+  # Gateway API fields survive controller chart upgrades.
+  values:
+    crds:
+      enabled: false
+    config:
+      envoyGateway:
+        provider:
+          kubernetes:
+            deploy:
+              type: GatewayNamespace

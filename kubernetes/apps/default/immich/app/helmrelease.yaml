@@ -93,20 +93,22 @@ spec:
                 pullPolicy: IfNotPresent
       ingress:
         main:
-          enabled: true
-          className: external
+          enabled: false
+      route:
+        main:
+          kind: HTTPRoute
           annotations:
             external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-            nginx.ingress.kubernetes.io/proxy-body-size: "0"
-          hosts:
-            - host: &host immich.${SECRET_DOMAIN}
-              paths:
-                - path: /
-                  service:
-                    identifier: main
-          tls:
-            - hosts:
-                - *host
+          hostnames:
+            - "immich.${SECRET_DOMAIN}"
+          parentRefs:
+            - name: envoy-external
+              namespace: network
+              sectionName: https
+          rules:
+            - backendRefs:
+                - identifier: main
+                  port: 2283
 
     machine-learning:
       enabled: true

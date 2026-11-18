@@ -11,6 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
+    - name: envoy-gateway
     - name: longhorn
   path: ./kubernetes/apps/default/onedev/app
   prune: true

@@ -32,14 +32,7 @@ spec:
         enabled: true
     alertmanager:
       ingress:
-        enabled: true
-        pathType: Prefix
-        ingressClassName: internal
-        hosts:
-          - &host alertmanager.${SECRET_DOMAIN}
-        tls:
-          - hosts:
-              - *host
+        enabled: false
       alertmanagerSpec:
         replicas: 2
         image:
@@ -146,15 +139,7 @@ spec:
         #     url: https://raw.githubusercontent.com/SuperQ/smokeping_prober/refs/heads/superq/fixup_graph/dashboard.json
         #     token: ''
       ingress:
-        enabled: true
-        ingressClassName: internal
-        annotations: []
-        pathType: Prefix
-        hosts:
-          - &host grafana.${SECRET_DOMAIN}
-        tls:
-          - hosts:
-              - *host
+        enabled: false
     kubeApiServer:
       enabled: true
       serviceMonitor:
@@ -243,15 +228,7 @@ spec:
       thanosServiceMonitor:
         enabled: true
       ingress:
-        enabled: true
-        ingressClassName: internal
-        annotations: []
-        pathType: Prefix
-        hosts:
-          - &host prometheus.${SECRET_DOMAIN}
-        tls:
-          - hosts:
-              - *host
+        enabled: false
       prometheusSpec:
         scrapeInterval: 1m # Must match interval in Grafana Helm chart
         enableAdminAPI: true
