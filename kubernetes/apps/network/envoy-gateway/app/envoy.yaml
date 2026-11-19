@@ -96,7 +96,6 @@ spec:
   timeout:
     http:
       requestTimeout: 0s
-      streamIdleTimeout: 1h
   targetSelectors:
     - group: gateway.networking.k8s.io
       kind: Gateway
