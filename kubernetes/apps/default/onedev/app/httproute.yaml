@@ -19,5 +19,5 @@ spec:
       sessionPersistence:
         type: Cookie
         absoluteTimeout: 48h
-        cookie:
+        cookieConfig:
           lifetimeType: Permanent
