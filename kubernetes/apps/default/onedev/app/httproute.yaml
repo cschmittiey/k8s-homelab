@@ -15,9 +15,9 @@ spec:
   rules:
     - backendRefs:
         - name: onedev
-          port: 6610
+          port: 80
       sessionPersistence:
         type: Cookie
         absoluteTimeout: 48h
-        cookie:
+        cookieConfig:
           lifetimeType: Permanent

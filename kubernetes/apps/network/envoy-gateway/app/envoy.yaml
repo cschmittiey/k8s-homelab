@@ -45,7 +45,7 @@ spec:
   infrastructure:
     annotations:
       external-dns.kubernetes.io/hostname: external.${SECRET_DOMAIN}
-      lbipam.cilium.io/ips: 10.10.10.39
+      lbipam.cilium.io/ips: 10.10.10.28
   listeners:
     - name: http
       protocol: HTTP
@@ -68,7 +68,7 @@ spec:
   gatewayClassName: envoy
   infrastructure:
     annotations:
-      lbipam.cilium.io/ips: 10.10.10.38
+      lbipam.cilium.io/ips: 10.10.10.26
   listeners:
     - name: http
       protocol: HTTP
@@ -96,7 +96,6 @@ spec:
   timeout:
     http:
       requestTimeout: 0s
-      streamIdleTimeout: 1h
   targetSelectors:
     - group: gateway.networking.k8s.io
       kind: Gateway
