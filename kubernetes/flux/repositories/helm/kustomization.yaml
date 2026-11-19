@@ -6,7 +6,6 @@ resources:
   - ./backube.yaml
   - ./cilium.yaml
   - ./external-dns.yaml
-  - ./ingress-nginx.yaml
   - ./k8s-gateway.yaml
   - ./jetstack.yaml
   - ./metrics-server.yaml
