@@ -6,4 +6,3 @@ resources:
   - ./gateway-crds-ocirepository.yaml
   - ./gateway-crds-helmrelease.yaml
   - ./helmrelease.yaml
-  - ./envoy.yaml
