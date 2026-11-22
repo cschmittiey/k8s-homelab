@@ -62,20 +62,19 @@ spec:
         ports:
           http:
             port: 3000
-    ingress:
+    route:
       app:
-        enabled: true
-        className: internal
-        hosts:
-          - host: &host flood.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
+        kind: HTTPRoute
+        hostnames:
+          - "flood.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: flood
+                port: 3000
     persistence:
       config:
         enabled: true
