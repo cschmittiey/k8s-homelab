@@ -126,19 +126,19 @@ spec:
             enabled: true
             port: *bittorrentPort
             protocol: TCP
-    ingress:
+    route:
       app:
-        className: internal
-        hosts:
-          - host: &host qb.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
+        kind: HTTPRoute
+        hostnames:
+          - "qb.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: qbittorrent
+                port: *port
     persistence:
       config:
         existingClaim: qbittorrent
